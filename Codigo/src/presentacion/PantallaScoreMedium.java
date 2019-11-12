@@ -6,8 +6,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JDialog;
 
-public class Tablero extends JDialog {
-	public Tablero() {
+public class PantallaScoreMedium extends JDialog {
+	public PantallaScoreMedium() {
 		super();
 		prepareElementos();
 	}
@@ -19,5 +19,5 @@ public class Tablero extends JDialog {
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 		setSize(ancho/2,alto/2);
 		setLocationRelativeTo(null);
-	}
+}
 }

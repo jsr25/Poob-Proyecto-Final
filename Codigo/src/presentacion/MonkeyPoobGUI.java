@@ -51,11 +51,26 @@ public void prepareAcciones() {
 	play.addActionListener(
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					abra();
-				}
-
-				
-
+					abraPantallaPlay();
+				}	
+			});
+	scores.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					abraPantallaScore();
+				}	
+			});
+	options.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					abraPantallaOptions();
+				}	
+			});
+	exit.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					salga();
+				}	
 			});
 }
 	
@@ -133,8 +148,18 @@ public void salga() {
 	}
 }
 
-private void abra() {
-	Tablero p = new Tablero();
+private void abraPantallaPlay() {
+	PantallaPlay p = new PantallaPlay();
+	p.setVisible(true);
+	
+}
+private void abraPantallaScore() {
+	PantallaScore p = new PantallaScore();
+	p.setVisible(true);
+	
+}
+private void abraPantallaOptions() {
+	PantallaOptions p = new PantallaOptions();
 	p.setVisible(true);
 	
 }
