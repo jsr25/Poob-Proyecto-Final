@@ -25,7 +25,8 @@ public class PantallaPlay extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	JPanel dificultades,opciones;
-	JButton start,easy,medium,hard,back;
+	JButton start,pvp,pve,p,eve,back;
+	
 	
 	public PantallaPlay() {
 		super();
@@ -45,10 +46,31 @@ public class PantallaPlay extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						abra();
 					}
-
-					
-
 				});
+	pvp.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					select(pvp);
+				}
+			});
+	pve.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					select(pve);
+				}
+			});
+	eve.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					select(eve);
+				}
+			});
+	p.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					select(p);
+				}
+			});
 	}
 	public void prepararElementos(){
 		this.setLayout(new BorderLayout());
@@ -64,30 +86,35 @@ public class PantallaPlay extends JDialog {
 		dificultades=new JPanel();
 		opciones=new JPanel();
 		opciones.setLayout(new GridLayout(1,2));
-		dificultades.setLayout(new GridLayout(3,1));
-		easy= new JButton("easy");
-		medium= new JButton("medium");
-		hard= new JButton("hard");
+		dificultades.setLayout(new GridLayout(4,1));
+		pvp= new JButton("PVP");
+		pve= new JButton("PVE");
+		eve= new JButton("EVE");
+		p= new JButton("SINGLE");
 		start= new JButton("start");
 		back= new JButton("back");
-		easy.setBackground(Color.black);
-		medium.setBackground(Color.black);
-		hard.setBackground(Color.black);
+		pvp.setBackground(Color.black);
+		pve.setBackground(Color.black);
+		eve.setBackground(Color.black);
+		p.setBackground(Color.black);
 		back.setBackground(Color.black);
 		start.setBackground(Color.black);
-		easy.setForeground(Color.yellow);
-		medium.setForeground(Color.yellow);
-		hard.setForeground(Color.yellow);
+		pvp.setForeground(Color.yellow);
+		pve.setForeground(Color.yellow);
+		eve.setForeground(Color.yellow);
+		p.setForeground(Color.yellow);
 		start.setForeground(Color.yellow);
 		back.setForeground(Color.yellow);
-		easy.setBorder(blueLine);
-		medium.setBorder(blueLine);
-		hard.setBorder(blueLine);
+		pvp.setBorder(blueLine);
+		pve.setBorder(blueLine);
+		eve.setBorder(blueLine);
+		p.setBorder(blueLine);
 		start.setBorder(blueLine);
 		back.setBorder(blueLine);
-		dificultades.add(easy);
-		dificultades.add(medium);
-		dificultades.add(hard);
+		dificultades.add(p);
+		dificultades.add(pvp);
+		dificultades.add(pve);
+		dificultades.add(eve);
 		opciones.add(back);
 		opciones.add(start);
 		this.add(dificultades,BorderLayout.CENTER);
@@ -99,9 +126,44 @@ public void salga() {
 			System.exit(0);
 		}
 	}
-private void abra() {
-	Tablero p = new Tablero();
-	p.setVisible(true);
+private JButton opcion() {
+	JButton b=null;
+	if (pvp.getBackground().equals(Color.RED)) {
+		b=pvp;
+	}
+	else if (pve.getBackground().equals(Color.RED)){
+		b=pve;
+	}
+	else if (eve.getBackground().equals(Color.RED)){
+		b=eve;
+	}
+	else if (p.getBackground().equals(Color.RED)){
+		b=p;
+	}
+	else {
+		JOptionPane.showMessageDialog(this, "No tiene una opcion seleccionada");
+	}
+	return b;
 	
+}
+private void abra() {
+	JButton b=opcion();
+	if (b!=null) {
+		MonkeyPoob p = new MonkeyPoob(b.getText());
+		p.setVisible(true);
+	}
+	}	
+public void select(JButton b) {
+	if (pvp.getBackground().equals(Color.RED) || pve.getBackground().equals(Color.RED) || eve.getBackground().equals(Color.RED) || p.getBackground().equals(Color.RED)) {
+		if (b.getBackground().equals(Color.RED)) {
+			b.setBackground(Color.black);
+		}
+		else {
+			JOptionPane.showMessageDialog(this, "Ya tiene una opcion seleccionada");
+		}
+	}
+	else {
+		b.setBackground(Color.RED);
+	}
 }
 }

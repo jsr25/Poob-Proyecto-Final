@@ -19,6 +19,7 @@ import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,15 +27,15 @@ import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JOptionPane;
 
-public class MonkeyPoobGUI extends JFrame {
+public class menu extends JDialog {
 	JButton play,options,scores,exit;
 	JPanel principal,menu;
 	public static void main (String [] args){
-		MonkeyPoobGUI princi= new MonkeyPoobGUI();
+		menu princi= new menu();
 		princi.setVisible(true);
 
 	}
-public  MonkeyPoobGUI(){
+public  menu(){
 		super();
 		prepareElementos();
 		prepareElementosMenu();

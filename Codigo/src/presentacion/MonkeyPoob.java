@@ -5,9 +5,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Tablero extends JDialog {
-	public Tablero() {
+public class MonkeyPoob extends JFrame {
+	JPanel single,pvp,pve,eve;
+	public MonkeyPoob(String n) {
 		super();
 		prepareElementos();
 	}
