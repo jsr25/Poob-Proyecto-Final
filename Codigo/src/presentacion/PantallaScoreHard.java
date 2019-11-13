@@ -6,8 +6,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JDialog;
 
-public class Tablero extends JDialog {
-	public Tablero() {
+public class PantallaScoreHard extends JDialog {
+	public PantallaScoreHard() {
 		super();
 		prepareElementos();
 	}
