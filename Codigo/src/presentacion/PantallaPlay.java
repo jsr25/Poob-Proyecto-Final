@@ -149,7 +149,7 @@ private JButton opcion() {
 private void abra() {
 	JButton b=opcion();
 	if (b!=null) {
-		MonkeyPoob p = new MonkeyPoob(b.getText());
+		MonkeyPoob p = new MonkeyPoob();
 		p.setVisible(true);
 	}
 	}	

@@ -9,18 +9,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MonkeyPoob extends JFrame {
-	JPanel single,pvp,pve,eve;
-	public MonkeyPoob(String n) {
-		super();
+	public MonkeyPoob() {
 		prepareElementos();
 	}
 	public void prepareElementos() {
-		this.setLayout(new BorderLayout());
+		this.add(new Dibujar());
+		this.setTitle("DonkeyKong)");
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(ancho/2,alto/2);
-		setLocationRelativeTo(null);
+		this.setSize(ancho/2,alto/2);
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 }
