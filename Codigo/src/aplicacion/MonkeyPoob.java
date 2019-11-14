@@ -46,6 +46,7 @@ public class MonkeyPoob {
 	public void moverDerecha(int personaje) {
 		(jugadores.get(personaje-1)).avanzar();
 		beneficio(personaje);	
+		perderVida(personaje);
 		
 	}
 	public Jugador getJugador(int personaje) {
@@ -59,10 +60,13 @@ public class MonkeyPoob {
 	public void moverIzquieda(int personaje) {
 		(jugadores.get(personaje-1)).retroceder();
 		beneficio(personaje);
+		perderVida(personaje);
 	}
 	
 	public void  saltar(int personaje) {
 		(jugadores.get(personaje-1)).saltar();
+		beneficio(personaje);	
+		perderVida(personaje);
 	}
 	
 	public void beneficio(int personaje) {
@@ -79,12 +83,27 @@ public class MonkeyPoob {
 		
 	}
 	
-	public void estadoPersonaje() {
+	public boolean estadoPersonaje(int personaje) {
+				
+		return jugadores.get(personaje-1).getEstado();
 		
 	}
 	
 	public ArrayList<Plataforma> getPlataformas() {
 		return plataformas;
 	}
+	
+	private void perderVida(int personaje) {
+		for(Barril b :barriles) {
+			b.colision(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY());
+		}
+	}
+
+	public ArrayList<Jugador> getJugadores(){
+		
+		return jugadores;
+	}
+	
+	
 }
 

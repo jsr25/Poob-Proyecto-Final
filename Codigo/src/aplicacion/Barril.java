@@ -19,6 +19,12 @@ public class Barril {
 		while(y!=0) {
 			y-=1;
 			x=movimiento(x);
+			ArrayList<Jugador> jp = monkey.getJugadores();
+			for (Jugador j:jp) {
+				if(j.colision(x,y)) {
+					j.perdervida();
+				}
+			}
 			
 		}
 	}
@@ -42,5 +48,9 @@ public class Barril {
 	
 	public int getY() {
 		return y;
+	}
+
+	public boolean colision(int posX, int posY) {
+		return x==posX && y==posY;
 	}
 }

@@ -35,6 +35,26 @@ public class Real extends Jugador  {
 		posX=posX-10;
 		
 	}
+
+	@Override
+	protected boolean getEstado() {
+		
+		return vidas>0;
+	}
+
+	@Override
+	protected boolean colision(int x, int y) {
+		
+		return x==posX && y==posY ;
+	}
+
+	@Override
+	protected void perdervida() {
+		vidas=vidas-1;		
+	}
+	
+	
+	
 	
 
 }

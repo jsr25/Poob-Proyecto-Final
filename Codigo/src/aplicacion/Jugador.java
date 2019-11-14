@@ -28,6 +28,20 @@ public abstract class Jugador implements movimiento {
 	public int getPuntos() {
 		return puntos;
 	}
+
+
+	protected abstract boolean getEstado();
+
+
+	protected abstract boolean colision(int x, int y);
+
+
+	protected abstract void perdervida();
+
+
+
+	
+	
 	
 
 }
