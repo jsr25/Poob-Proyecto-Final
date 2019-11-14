@@ -1,6 +1,6 @@
 package aplicacion;
 
-public class Jugador {
+public abstract class Jugador implements movimiento {
 	protected int posX;
 	protected int posY;
 	protected int puntos;
@@ -10,20 +10,6 @@ public class Jugador {
 		puntos=0;
 			}
 
-	public void moverDerecha() {
-		posX+=10;
-		
-	}
-
-	public void moverIzquierda() {
-		posY-=10;
-		
-	}
-
-	public void saltar() {
-		posY+=10;
-				
-	}
 
 	public int getPosY() {
 		
@@ -34,7 +20,14 @@ public class Jugador {
 		
 		return posX;
 	}
-
+	
+	public void setPuntos(int t) {
+		puntos=puntos+t;
+	}
+	
+	public int getPuntos() {
+		return puntos;
+	}
 	
 
 }
