@@ -1,4 +1,5 @@
 package presentacion;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 public class MonkeyPoobGUI extends JFrame {
 	private JLabel mario;
 	private String nombre;
+	//private MonkeyPoob app;
 	int i;
 	public MonkeyPoobGUI() {
 		super("Monkey");		
@@ -21,6 +23,7 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararPersonajes();
 		prepareAcciones();
 		add(mario);
+		mario.setLocation(0,0);
 	}
 	public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI();
@@ -28,7 +31,7 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 	public void prepararElementos() {
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(d.width/2,d.height/2);
+		this.setSize(800,500);
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
@@ -36,6 +39,7 @@ public class MonkeyPoobGUI extends JFrame {
 	public void prepararPersonajes() {
 		mario=new JLabel();
 		mario.setSize(200, 200);
+		
 		mario.setIcon(new ImageIcon("data/marioDerecha.png"));
 		mario.setBounds(20, 20, 80, 110);
 	}
@@ -70,12 +74,12 @@ public class MonkeyPoobGUI extends JFrame {
 					
 				}
 				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					System.out.println(nombre);
+					//System.out.println(nombre);
 					if (nombre=="data/marioIzquierda.png") {
 						mario.setIcon(new ImageIcon("data/marioPasoIzquierda.png"));
 						nombre="data/marioPasoIzquierda.png";
 					}
-					else if(nombre=="data/marioPasoIzquierda") {
+					else if(nombre=="data/marioPasoIzquierda.png") {
 						mario.setIcon(new ImageIcon("data/marioPasoIzquierda2.png"));
 						nombre="data/marioPasoIzquierda2.png";
 					}
@@ -86,12 +90,12 @@ public class MonkeyPoobGUI extends JFrame {
 					mario.setLocation(mario.getX()-5,mario.getY());					
 				}
 				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					System.out.println(nombre);
+					//System.out.println(nombre);
 					if (nombre=="data/marioDerecha.png") {
 						mario.setIcon(new ImageIcon("data/marioPasoDerecha.png"));
 						nombre="data/marioPasoDerecha.png";
 					}
-					else if(nombre=="data/marioPasoDerecha") {
+					else if(nombre=="data/marioPasoDerecha.png") {
 						mario.setIcon(new ImageIcon("data/marioPasoDerecha2.png"));
 						nombre="data/marioPasoDerecha2.png";
 					}
@@ -106,6 +110,7 @@ public class MonkeyPoobGUI extends JFrame {
 					mario.setLocation(mario.getX(),mario.getY()+5);
 					mario.setIcon(new ImageIcon("data/marioDerecha.png"));
 				}
+				
 				
 			}
 			public void keyReleased(KeyEvent e) {

@@ -3,10 +3,13 @@ package aplicacion;
 public class Real extends Jugador  {
 	private int vidas;
 	private boolean estado;
-	public Real(int posX,int posY) {
-		super(posX,posY);
+	
+	public Real(int posX,int posY,String personaje) {
+		super(posX,posY,personaje);
 		vidas=3;
 		estado=true;
+		
+		
 		
 	}
 	
@@ -26,12 +29,34 @@ public class Real extends Jugador  {
 
 	@Override
 	public void avanzar() {
+		if(getForma().equals("data/marioDerecha.png")) {
+			cambiarforma(2);
+		}
+		
+		else if (getForma().equals("data/marioPasoDerecha.png")){
+			cambiarforma(3);
+		}
+		
+		else {
+			cambiarforma(1);
+		}
 		posX=posX+10;
 		
 	}
 
 	@Override
 	public void retroceder() {
+		if(getForma().equals("data/marioIzquierda.png")) {
+			cambiarforma(5);
+		}
+		
+		else if (getForma().equals("data/marioPasoIzquierda.png")){
+			cambiarforma(6);
+		}
+		
+		else {
+			cambiarforma(4);
+		}
 		posX=posX-10;
 		
 	}

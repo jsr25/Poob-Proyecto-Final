@@ -26,9 +26,8 @@ public class MonkeyPoob1 extends JFrame {
 		intf.setVisible(true);
 	}
 	public void prepararElementos() {
-
-		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(d.width/2,d.height/2);
+		//Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
+		this.setSize(800,500);
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.black);
