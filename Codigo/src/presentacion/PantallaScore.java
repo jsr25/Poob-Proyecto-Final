@@ -69,6 +69,12 @@ public class PantallaScore extends JDialog {
 					select(p);
 				}
 			});
+	back.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					abrirPantallaMenu();
+				}
+			});
 	}
 	public void prepararElementos(){
 		this.setLayout(new BorderLayout());
@@ -89,7 +95,7 @@ public class PantallaScore extends JDialog {
 		pve= new JButton("PVE");
 		eve= new JButton("EVE");
 		p= new JButton("SINGLE");
-		next= new JButton("start");
+		next= new JButton("next");
 		back= new JButton("back");
 		pvp.setBackground(Color.black);
 		pve.setBackground(Color.black);
@@ -137,4 +143,9 @@ public void select(JButton b) {
 		b.setBackground(Color.RED);
 	}
 }
+public void abrirPantallaMenu() {
+	Menu p = new Menu();
+	this.setVisible(false);
+	p.setVisible(true);
+	}
 }

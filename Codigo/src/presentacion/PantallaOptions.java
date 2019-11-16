@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -20,13 +23,12 @@ public class PantallaOptions extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	JButton music,controls,credits,back;
-	JSlider brigth;
 	JPanel options,eleccion;
-	JLabel brightess;
 	public PantallaOptions() {
 		super();
 		prepareElementos();
 		prepareElementosMenu();
+		prepareAcciones();
 	}
 	public void prepareElementos() {
 		this.setLayout(new BorderLayout());
@@ -37,22 +39,21 @@ public class PantallaOptions extends JDialog {
 		setSize(ancho/2,alto/2);
 		setLocationRelativeTo(null);
 	}
+	public void prepareAcciones() {
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		back.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						abrirPantallaMenu();
+					}
+				});
+	}
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		options= new JPanel();
-		options.setLayout(new GridLayout(5,1));
+		options.setLayout(new GridLayout(3,1));
 		eleccion=new JPanel();
 		eleccion.setLayout(new GridLayout(1,1));
-		brightess=new JLabel("bright");
-		brightess.setForeground(Color.yellow);
-		brightess.setHorizontalTextPosition(JLabel.CENTER);
-		brigth=new JSlider(100,200,150);
-		brigth.setMinorTickSpacing(5);
-	    brigth.setMajorTickSpacing(25);
-	    brigth.setPaintLabels(true);
-	    brigth.setOrientation(SwingConstants.HORIZONTAL);
-	    brigth.setPaintTicks(true);
-	    brigth.setBackground(Color.black);
 	    controls= new JButton("controls");
 	    music= new JButton("music");
 	    credits= new JButton("credits");
@@ -70,8 +71,6 @@ public class PantallaOptions extends JDialog {
 	    credits.setBorder(blueLine);
 	    back.setBorder(blueLine);
 	    eleccion.add(back);
-	    options.add(brightess);
-	    options.add(brigth);
 	    options.add(controls);
 	    options.add(music);
 	    options.add(credits);
@@ -80,4 +79,9 @@ public class PantallaOptions extends JDialog {
 		this.add(eleccion,BorderLayout.SOUTH);
 		
 	}
+	public void abrirPantallaMenu() {
+		Menu p = new Menu();
+		this.setVisible(false);
+		p.setVisible(true);
+		}
 }

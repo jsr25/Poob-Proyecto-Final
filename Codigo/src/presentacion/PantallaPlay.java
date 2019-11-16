@@ -71,6 +71,12 @@ public class PantallaPlay extends JDialog {
 					select(p);
 				}
 			});
+	back.addActionListener(
+			new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					abrirPantallaMenu();
+				}
+			});
 	}
 	public void prepararElementos(){
 		this.setLayout(new BorderLayout());
@@ -150,9 +156,15 @@ private void abra() {
 	JButton b=opcion();
 	if (b!=null) {
 		MonkeyPoobGUI p = new MonkeyPoobGUI();
+		this.setVisible(false);
 		p.setVisible(true);
 	}
-	}	
+	}
+public void abrirPantallaMenu() {
+	Menu p = new Menu();
+	this.setVisible(false);
+	p.setVisible(true);
+	}
 public void select(JButton b) {
 	if (pvp.getBackground().equals(Color.RED) || pve.getBackground().equals(Color.RED) || eve.getBackground().equals(Color.RED) || p.getBackground().equals(Color.RED)) {
 		if (b.getBackground().equals(Color.RED)) {
