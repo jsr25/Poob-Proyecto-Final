@@ -11,10 +11,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import aplicacion.MonkeyPoob;
+
 public class MonkeyPoobGUI extends JFrame {
 	private JLabel mario;
 	private String nombre;
-	//private MonkeyPoob app;
+	private MonkeyPoob app;
 	int i;
 	public MonkeyPoobGUI() {
 		super("Monkey");		
@@ -23,7 +25,7 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararPersonajes();
 		prepareAcciones();
 		add(mario);
-		mario.setLocation(0,0);
+		
 	}
 	public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI();
@@ -35,75 +37,40 @@ public class MonkeyPoobGUI extends JFrame {
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
+		app= new MonkeyPoob();
 	}
 	public void prepararPersonajes() {
-		mario=new JLabel();
-		mario.setSize(200, 200);
-		
-		mario.setIcon(new ImageIcon("data/marioDerecha.png"));
+		mario=new JLabel();		
+		mario.setSize(50, 50);
+		app.agregarJugadores(0, 350, "mario");		
+		mario.setIcon(new ImageIcon(app.getForma(1)));
 		mario.setBounds(20, 20, 80, 110);
+		mario.setLocation(0,350);
 	}
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
-					mario.setLocation(mario.getX(),mario.getY()-5);
-				}
-				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					mario.setLocation(mario.getX()-5,mario.getY());
-				}
-				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					mario.setLocation(mario.getX()+5,mario.getY());
-				}
-				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
-					mario.setLocation(mario.getX(),mario.getY()+5);
-				}
 				
 			}
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					mario.setIcon(new ImageIcon("data/marioSalto.png"));					
-					//for (int i=0;i<6;i++) {
-					//	mario.setLocation(mario.getX(),mario.getY()-5);
-					//}
-					//mario.setIcon(new ImageIcon("data/marioDerecha.png"));
-					//for (int i=0;i<6;i++) {
-					//	mario.setLocation(mario.getX(),mario.getY()+5);
-					//}
-					
 				}
 				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					//System.out.println(nombre);
-					if (nombre=="data/marioIzquierda.png") {
-						mario.setIcon(new ImageIcon("data/marioPasoIzquierda.png"));
-						nombre="data/marioPasoIzquierda.png";
-					}
-					else if(nombre=="data/marioPasoIzquierda.png") {
-						mario.setIcon(new ImageIcon("data/marioPasoIzquierda2.png"));
-						nombre="data/marioPasoIzquierda2.png";
-					}
-					else {
-						mario.setIcon(new ImageIcon("data/marioIzquierda.png"));
-						nombre="data/marioIzquierda.png";
-					}
-					mario.setLocation(mario.getX()-5,mario.getY());					
+					if (mario.getX()>0) {
+					app.moverIzquieda(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					}		
+						
 				}
 				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					//System.out.println(nombre);
-					if (nombre=="data/marioDerecha.png") {
-						mario.setIcon(new ImageIcon("data/marioPasoDerecha.png"));
-						nombre="data/marioPasoDerecha.png";
+					if(mario.getX()<770) {
+					app.moverDerecha(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));			
 					}
-					else if(nombre=="data/marioPasoDerecha.png") {
-						mario.setIcon(new ImageIcon("data/marioPasoDerecha2.png"));
-						nombre="data/marioPasoDerecha2.png";
-					}
-					else {
-						mario.setIcon(new ImageIcon("data/marioDerecha.png"));
-						nombre="data/marioDerecha.png";
-					}
-					mario.setLocation(mario.getX()+5,mario.getY());
 						
 				}
 				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
@@ -114,6 +81,21 @@ public class MonkeyPoobGUI extends JFrame {
 				
 			}
 			public void keyReleased(KeyEvent e) {
+				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
+					//mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
+				}
+				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
+					app.FormaEstaticaIz(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					
+				}
+				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
+					app.FormaEstaticaDer(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+				}
+				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
+					//mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
+				}
 				
 			}
 				

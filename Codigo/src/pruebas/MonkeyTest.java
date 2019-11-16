@@ -26,7 +26,7 @@ public class MonkeyTest {
 	@Test
 	public void deberiaMoverDerechaPersonaje() {
 		MonkeyPoob a= new MonkeyPoob();
-		a.agregarJugadores(0, 0);
+		a.agregarJugadores(0, 0,"mario");
 		a.moverDerecha(1);
 		a.moverDerecha(1);
 		a.moverDerecha(1);
@@ -36,7 +36,7 @@ public class MonkeyTest {
 	@Test
 	public void deberiaMoverIzquierdaPersonaje() {
 		MonkeyPoob a= new MonkeyPoob();
-		a.agregarJugadores(30, 0);
+		a.agregarJugadores(30, 0,"mario");
 		a.moverIzquieda(1);
 		a.moverIzquieda(1);
 		a.moverIzquieda(1);
@@ -46,7 +46,7 @@ public class MonkeyTest {
 	@Test
 	public void debreriaPersonajeTomaBeneficio() {
 		MonkeyPoob a= new MonkeyPoob();
-		a.agregarJugadores(0, 0);
+		a.agregarJugadores(0, 0,"mario");
 		a.generarSorpresa(40, 0);
 		a.moverDerecha(1);
 		a.moverDerecha(1);

@@ -39,8 +39,8 @@ public class MonkeyPoob {
 		escaleras.add(new Escalera(x,yIni,yFin));
 	}
 	
-	public void agregarJugadores(int posX, int posY) {
-		jugadores.add(new Real(posX,posY));
+	public void agregarJugadores(int posX, int posY, String name) {
+		jugadores.add(new Real(posX,posY,name));
 	}
 	
 	public void moverDerecha(int personaje) {
@@ -83,8 +83,7 @@ public class MonkeyPoob {
 		
 	}
 	
-	public boolean estadoPersonaje(int personaje) {
-				
+	public boolean estadoPersonaje(int personaje) {				
 		return jugadores.get(personaje-1).getEstado();
 		
 	}
@@ -102,6 +101,26 @@ public class MonkeyPoob {
 	public ArrayList<Jugador> getJugadores(){
 		
 		return jugadores;
+	}
+	
+	public String getForma(int personaje) {		
+		return jugadores.get(personaje-1).getForma();
+	}
+	
+	public int getJugadorPosX(int pesonaje) {
+		return jugadores.get(pesonaje-1).getPosX();
+	}
+	
+	public int getJugadorPosY(int pesonaje) {
+		return jugadores.get(pesonaje-1).getPosY();
+	}
+	
+	public void FormaEstaticaIz(int personaje) {
+		jugadores.get(personaje-1).cambiarforma(4);
+	}
+	
+	public void FormaEstaticaDer(int personaje) {
+		jugadores.get(personaje-1).cambiarforma(1);
 	}
 	
 	
