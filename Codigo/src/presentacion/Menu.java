@@ -91,11 +91,6 @@ public void prepareElementos() {
 public void prepareElementosMenu() {
 	//Bodoni MT Black
 	Border blackline = BorderFactory.createLineBorder(Color.BLUE);
-    Border raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
-    Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-    Border raisedbevel  = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-    Border loweredbevel = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-    Border empty = BorderFactory.createEmptyBorder();
 	
 	Font fuente= new Font("Gill Sans Ultra Bold",3,20);
 	menu=new JPanel();

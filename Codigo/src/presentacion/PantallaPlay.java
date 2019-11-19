@@ -80,11 +80,7 @@ public class PantallaPlay extends JDialog {
 	}
 	public void prepararElementos(){
 		this.setLayout(new BorderLayout());
-		Toolkit t = Toolkit.getDefaultToolkit();
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(ancho/2,alto/2);
+		setSize(1010,800);
 		setLocationRelativeTo(null);  
 	}
 	public void prepareElementosMenu() {
@@ -97,7 +93,7 @@ public class PantallaPlay extends JDialog {
 		pve= new JButton("PVE");
 		eve= new JButton("EVE");
 		p= new JButton("SINGLE");
-		start= new JButton("start");
+		start= new JButton("next");
 		back= new JButton("back");
 		pvp.setBackground(Color.black);
 		pve.setBackground(Color.black);
@@ -155,7 +151,7 @@ private JButton opcion() {
 private void abra() {
 	JButton b=opcion();
 	if (b!=null) {
-		MonkeyPoobGUI p = new MonkeyPoobGUI();
+		PantallaSingle p = new PantallaSingle();
 		this.setVisible(false);
 		p.setVisible(true);
 	}
