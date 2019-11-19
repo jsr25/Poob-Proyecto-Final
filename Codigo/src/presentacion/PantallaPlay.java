@@ -79,8 +79,11 @@ public class PantallaPlay extends JDialog {
 			});
 	}
 	public void prepararElementos(){
-		this.setLayout(new BorderLayout());
-		setSize(1010,800);
+		Toolkit t = Toolkit.getDefaultToolkit();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+		setSize(ancho/2,alto/2);
 		setLocationRelativeTo(null);  
 	}
 	public void prepareElementosMenu() {
