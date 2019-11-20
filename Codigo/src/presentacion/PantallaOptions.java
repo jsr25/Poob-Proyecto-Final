@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,7 +24,7 @@ public class PantallaOptions extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton music,controls,credits,back;
+	JButton music,controls,credits,back,next;
 	JPanel options,eleccion;
 	public PantallaOptions() {
 		super();
@@ -41,6 +43,11 @@ public class PantallaOptions extends JDialog {
 	}
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				salga();
+			}
+		});
 		back.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -53,24 +60,29 @@ public class PantallaOptions extends JDialog {
 		options= new JPanel();
 		options.setLayout(new GridLayout(3,1));
 		eleccion=new JPanel();
-		eleccion.setLayout(new GridLayout(1,1));
+		eleccion.setLayout(new GridLayout(1,2));
 	    controls= new JButton("controls");
 	    music= new JButton("music");
 	    credits= new JButton("credits");
 	    back= new JButton("back");
+	    next=new JButton("next");
 	    controls.setBackground(Color.black);
 	    music.setBackground(Color.black);
 	    credits.setBackground(Color.black);
 	    back.setBackground(Color.black);
+	    next.setBackground(Color.black);
 	    controls.setForeground(Color.yellow);
 	    credits.setForeground(Color.yellow);
 	    music.setForeground(Color.yellow);
 	    back.setForeground(Color.yellow);
+	    next.setForeground(Color.yellow);
 	    controls.setBorder(blueLine);
 	    music.setBorder(blueLine);
 	    credits.setBorder(blueLine);
 	    back.setBorder(blueLine);
+	    next.setBorder(blueLine);
 	    eleccion.add(back);
+	    eleccion.add(next);
 	    options.add(controls);
 	    options.add(music);
 	    options.add(credits);
@@ -84,4 +96,7 @@ public class PantallaOptions extends JDialog {
 		this.setVisible(false);
 		p.setVisible(true);
 		}
+	public void salga() {
+		System.exit(0);
+	}
 }

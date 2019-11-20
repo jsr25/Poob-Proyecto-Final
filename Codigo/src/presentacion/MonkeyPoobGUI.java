@@ -114,6 +114,9 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
+	public void añadirPlataforma(int x1,int x2, int y1,int y2) {
+		
+	}
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
