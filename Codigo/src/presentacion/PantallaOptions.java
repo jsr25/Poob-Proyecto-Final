@@ -54,6 +54,12 @@ public class PantallaOptions extends JDialog {
 						abrirPantallaMenu();
 					}
 				});
+		controls.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						abrirPantallaControls();
+					}
+				});
 	}
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
@@ -93,6 +99,11 @@ public class PantallaOptions extends JDialog {
 	}
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
+		this.setVisible(false);
+		p.setVisible(true);
+		}
+	public void abrirPantallaControls() {
+		PantallaControls p = new PantallaControls();
 		this.setVisible(false);
 		p.setVisible(true);
 		}

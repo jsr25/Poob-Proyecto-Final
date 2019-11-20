@@ -92,7 +92,7 @@ import javax.swing.JOptionPane;
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(1010,alto-40);
+		setSize(1010,alto-300);
 		setLocationRelativeTo(null);   
 		this .getContentPane().setBackground(new Color(0,0,0));
 		this.setLayout(null);
