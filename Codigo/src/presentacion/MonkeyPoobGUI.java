@@ -2,12 +2,17 @@ package presentacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.geom.AffineTransform;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,7 +27,7 @@ public class MonkeyPoobGUI extends JFrame {
 	public String monoN,barrilN;
 	private String nombre;
 	private MonkeyPoob app;
-	int i;
+	private int i;
 	public MonkeyPoobGUI() {
 		super("Monkey");		
 		setFocusable(true);
@@ -33,6 +38,11 @@ public class MonkeyPoobGUI extends JFrame {
 		add(mono);
 		add(barril);
 		add(plataforma);
+		añadirPlataforma( 0,300,100);
+		añadirPlataforma( 0,300,200);
+		añadirPlataforma( 0,300,300);
+		añadirPlataforma( 0,300,400);
+		
 		
 	}
 	public static void main(String[] args) {
@@ -41,6 +51,7 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 
 	public void prepararElementos() {
+		i=-1;
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(800,500);
 		setLayout(null);
@@ -51,10 +62,10 @@ public class MonkeyPoobGUI extends JFrame {
 	public void prepararPersonajes() {
 
 		mario=new JLabel();		
-		mario.setSize(50, 50);
+		mario.setSize(10, 10);
 		app.agregarJugadores(0, 350, "mario");		
 		mario.setIcon(new ImageIcon(app.getForma(1)));
-		mario.setBounds(20, 20, 80, 110);
+		mario.setBounds(0, 0, 80, 110);
 		mario.setLocation(0,350);
 		mono=new JLabel();		
 		mono.setSize(50, 50);		
@@ -114,9 +125,46 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
-	public void añadirPlataforma(int x1,int x2, int y1,int y2) {
+	public void añadirPlataforma(int x1,int x2,int y1) {
+		JLabel plataforma=new JLabel() {
+			protected void paintComponent(Graphics grafico) {
+
+                Graphics2D graficoNuevo = (Graphics2D) grafico;
+
+                graficoNuevo.setRenderingHint(
+                        RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON
+                );
+
+                AffineTransform at = graficoNuevo.getTransform();
+                Shape figura = graficoNuevo.getClip();
+
+                double X = getWidth() / 2.0;
+                double Y = getHeight() / 2.0;
+
+                at.rotate(Math.toRadians(2*i), X, Y);
+                i=i*-1;
+
+                graficoNuevo.setTransform(at);
+                graficoNuevo.setClip(figura);
+
+                super.paintComponent(grafico);
+            }
+
+        };
+        
+        ImageIcon imageIcon = new ImageIcon("data/plataforma.png"); 
+        Image image = imageIcon.getImage(); 
+        Image newimg = image.getScaledInstance(Math.abs(x1-x2), 15,  java.awt.Image.SCALE_SMOOTH);   
+        imageIcon = new ImageIcon(newimg);
+        plataforma.setIcon(imageIcon);
+        plataforma.setSize(500, 20);		
+		plataforma.setBounds(0, 0, 500, 20);
+		plataforma.setLocation((x1+x2)/2,y1);
+        plataforma.setVisible(true);
+        add(plataforma);
+		}
 		
-	}
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

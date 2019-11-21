@@ -1,6 +1,7 @@
 package presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Timer;
@@ -31,7 +32,7 @@ public class PantallaControls extends JDialog {
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 		setSize(ancho/2,alto/2);
 		setLocationRelativeTo(null);
-		
+		this .getContentPane().setBackground(new Color(0,0,0));
 	}
 	public void prepareControles() {
 		w=new JLabel();
