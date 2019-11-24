@@ -38,11 +38,12 @@ public class MonkeyPoobGUI extends JFrame {
 		//añadirPlataforma( 0,300,100);
 		//añadirPlataforma( 0,300,200);
 		//añadirPlataforma( 0,300,300);
-		añadirPlataforma( 0,300,350);
+		//a�adirPlataforma( 0,300,350);
+		add(mario);
 		add(mono);
 		add(barril);
 		add(escalera);
-		add(mario);
+
 		
 		
 		
@@ -144,7 +145,7 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
-	public void añadirPlataforma(int x1,int x2,int y1) {
+	public void a�adirPlataforma(int x1,int x2,int y1) {
 		JLabel plataforma=new JLabel() {
 			protected void paintComponent(Graphics grafico) {
 
