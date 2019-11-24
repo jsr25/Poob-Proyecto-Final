@@ -19,56 +19,67 @@ import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+
 
 import aplicacion.MonkeyPoob;
 
 public class MonkeyPoobGUI extends JFrame {
 	private JLabel mario,mono,barril,plataforma,sorpresa,escalera;
 	public String monoN,barrilN;
+	private single principal;
 	private String nombre;
 	private MonkeyPoob app;
 	private int i;
-	public MonkeyPoobGUI() {
+	public MonkeyPoobGUI(int j) {
 		super("Monkey");		
+		if (j==1) {
+			principal=new single();
+			this.setContentPane(principal);
+			principal.setVisible(true);
+		}
 		setFocusable(true);
 		prepararElementos();
 		prepararPersonajes();
 		prepareAcciones();
-		
-		//añadirPlataforma( 0,300,100);
-		//añadirPlataforma( 0,300,200);
-		//añadirPlataforma( 0,300,300);
-		//a�adirPlataforma( 0,300,350);
-		//agregrarplata(0,300,300);
-		add(mario);
+		/*add(mario);
 		add(plataforma);
 		add(mono);
 		add(barril);
-		add(escalera);
+		add(escalera);*/
 
 		
 		
 		
 	}
 	public static void main(String[] args) {
-		MonkeyPoobGUI intf=new MonkeyPoobGUI();
+		MonkeyPoobGUI intf=new MonkeyPoobGUI(1);
 		intf.setVisible(true);
 	}
 
 	public void prepararElementos() {
 		i=-1;
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(800,500);
+		this.setSize(800,550);
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
 		app= new MonkeyPoob();
 	}
 	public void prepararPersonajes() {
-
-		mario=new JLabel();		
-		mario.setSize(10, 10);
-		app.agregarJugadores(0, 350, "mario");
+		app.agregarJugadores(0, 400, "mario");
+		principal.addPersonaje(0,400,"data/marioDerecha.png");
+		principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
+		principal.addPlataformaArriba(0, 40, "data/plataforma.png");
+		principal.addPlataformaCentral(100, "data/plataforma.png");
+		principal.addPlataformaCentral(140, "data/plataforma.png");
+		principal.addPlataformaCentral(210, "data/plataforma.png");
+		principal.addPlataformaCentral(240, "data/plataforma.png");
+		principal.addPlataformaCentral(300, "data/plataforma.png");
+		principal.addPlataformaCentral(340, "data/plataforma.png");
+		principal.addEscalera(400, 380, 40);
+		repaint();
 		app.generarEscaleras(40, 350, 320);
 		
 		sorpresa=new JLabel();
@@ -87,10 +98,7 @@ public class MonkeyPoobGUI extends JFrame {
 		escalera.setLocation(40, (350+320)/2);
 		escalera.setSize(100, 100);		
 		
-		
-		mario.setIcon(new ImageIcon(app.getForma(1)));
-		mario.setBounds(0, 0, 80, 110);
-		mario.setLocation(0,350);
+
 		mono=new JLabel();		
 		mono.setSize(20, 20);
 		
@@ -104,11 +112,6 @@ public class MonkeyPoobGUI extends JFrame {
 		barrilN="data/barrilCayendo1.png";
 		barril.setBounds(20, 20, 80, 110);
 		barril.setLocation(12,15);
-		plataforma=new JLabel();		
-		plataforma.setSize(50, 50);		
-		plataforma.setIcon(new ImageIcon("data/plataforma.png"));
-		plataforma.setBounds(0, 320, 300, 200);
-		plataforma.setLocation(0,320);
 		//plataforma.
 		Timer timer=new Timer();
 		TimerTask tarea=new TimerTask(){
@@ -202,62 +205,58 @@ public class MonkeyPoobGUI extends JFrame {
 				
 			}
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
+				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					app.subirEscalera(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
-					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					
 										
 				}
-				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					if (mario.getX()>0) {
+				if( e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
+					if (app.getJugadorPosX(1)>0) {
 					app.moverIzquieda(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
-					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
-					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					
 					}		
 						
 				}
-				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					if(mario.getX()<770) {
+				if( e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
+					if(app.getJugadorPosX(1)<770) {
 					app.moverDerecha(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
-					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					if (app.cambioPuntos()) {
 						app.removerSorpresa(1);
 						remove(sorpresa);
 					}
 					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					}
-						
 				}
-				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
+						
+				
+				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					app.bajarEscalera(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
-					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				
 				
 			}
 			public void keyReleased(KeyEvent e) {
-				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
+				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					
 				}
-				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
+				if(e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
 					if(!app.getEnEscalera(1)) {
 					app.FormaEstaticaIz(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
+					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					}
 				}
-				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
+				if(e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
 					if(!app.getEnEscalera(1)) {
 					app.FormaEstaticaDer(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
+					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					}
 				}
-				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
+				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					
 				}
 				

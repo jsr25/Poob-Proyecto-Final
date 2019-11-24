@@ -154,7 +154,7 @@ private JButton opcion() {
 private void abra() {
 	JButton b=opcion();
 	if (b!=null) {
-		PantallaSingle p = new PantallaSingle();
+		PantallaSeleccion p = new PantallaSeleccion();
 		this.setVisible(false);
 		p.setVisible(true);
 	}
