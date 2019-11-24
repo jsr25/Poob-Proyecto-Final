@@ -71,16 +71,22 @@ public class MonkeyPoobGUI extends JFrame {
 		app.agregarJugadores(0, 400, "mario");
 		principal.addPersonaje(0,400,"data/marioDerecha.png");
 		principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
-		principal.addPlataformaArriba(0, 40, "data/plataforma.png");
-		principal.addPlataformaCentral(100, "data/plataforma.png");
-		principal.addPlataformaCentral(140, "data/plataforma.png");
-		principal.addPlataformaCentral(210, "data/plataforma.png");
-		principal.addPlataformaCentral(240, "data/plataforma.png");
-		principal.addPlataformaCentral(300, "data/plataforma.png");
 		principal.addPlataformaCentral(340, "data/plataforma.png");
-		principal.addEscalera(400, 380, 40);
+		/*principal.addPlataformaCentral(300, "data/plataforma.png");
+		principal.addPlataformaCentral(240, "data/plataforma.png");
+		principal.addPlataformaCentral(210, "data/plataforma.png");
+		principal.addPlataformaCentral(140, "data/plataforma.png");
+		principal.addPlataformaCentral(100, "data/plataforma.png");*/
+		principal.addPlataformaArriba(0, 40, "data/plataforma.png");
+		/*principal.addEscalera(1, 2, 40);
+		principal.addEscalera(2, 3, 120);
+		principal.addEscalera(3, 4, 50);
+		principal.addEscalera(4, 5, 120);
+		principal.addEscalera(5, 6, 60);
+		principal.addEscalera(6, 7, 120);
+		principal.addEscalera(7, 8, 50);*/
 		repaint();
-		app.generarEscaleras(40, 350, 320);
+		app.generarEscaleras(40, 400, 320);
 		
 		sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(100,350)));
@@ -154,42 +160,8 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
-	public void agregrarplata(int x1,int x2,int y1) {
-		JLabel plataforma=new JLabel() {
-			protected void paintComponent(Graphics grafico) {
-                Graphics2D graficoNuevo = (Graphics2D) grafico;
-                graficoNuevo.setRenderingHint(
-                        RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON
-                );
-
-                AffineTransform at = graficoNuevo.getTransform();
-                Shape figura = graficoNuevo.getClip();
-
-                double X = getWidth() / 2.0;
-                double Y = getHeight() / 2.0;
-
-                at.rotate(Math.toRadians(2*i), X, Y);
-                i=i*-1;
-
-                graficoNuevo.setTransform(at);
-                graficoNuevo.setClip(figura);
-
-                super.paintComponent(grafico);
-            }
-
-        };
-        
-        ImageIcon imageIcon = new ImageIcon("data/plataforma.png"); 
-        Image image = imageIcon.getImage(); 
-        Image newimg = image.getScaledInstance(Math.abs(x1-x2), 15,  java.awt.Image.SCALE_SMOOTH);   
-        imageIcon = new ImageIcon(newimg);
-        plataforma.setIcon(imageIcon);
-        plataforma.setSize(500, 20);		
-		plataforma.setBounds(100, 350, 500, 20);
-		plataforma.setLocation((x1+x2)/2,y1);
-        plataforma.setVisible(true);
-        add(plataforma);
+	public void agregrarplata(int x,int y) {
+		app.crearPlataforma(x, y, x+16, y);
 		}
 		
 	public void prepareAcciones() {
@@ -208,7 +180,7 @@ public class MonkeyPoobGUI extends JFrame {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					app.subirEscalera(1);
 					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
+					//System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					
 										
 				}
@@ -228,13 +200,21 @@ public class MonkeyPoobGUI extends JFrame {
 						app.removerSorpresa(1);
 						remove(sorpresa);
 					}
-					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
+					//System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					}
 				}
 						
 				
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					app.bajarEscalera(1);
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+				}
+				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
+					app.saltar(1);
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					app.saltar(1);
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					app.saltar(1);
 					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				
@@ -258,6 +238,10 @@ public class MonkeyPoobGUI extends JFrame {
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					
+				}
+				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
+					app.dejarsaltar(1);
+					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				
 			}

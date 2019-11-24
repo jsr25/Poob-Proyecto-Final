@@ -25,8 +25,30 @@ public class Real extends Jugador  {
 
 	@Override
 	public void saltar() {
-		posY=posY+10;
-		
+			if(getForma().equals("data/marioDerecha.png")) {
+				posX=posX+20;
+				cambiarforma(11);
+				posY=posY-10;
+			}
+			else if (getForma().equals("data/marioIzquierda.png")) {
+				posX=posX-20;
+				cambiarforma(12);
+				posY=posY-10;
+			}
+			else {
+				if(getForma().equals("data/marioSalto.png")) {
+					posX=posX+20;
+					cambiarforma(11);
+					posY=posY-5;
+				}
+				else if (getForma().equals("data/marioSaltoIz.png")) {
+					posX=posX-20;
+					cambiarforma(12);
+					posY=posY-5;
+				}
+				
+			}
+				
 	}
 
 	@Override
@@ -136,6 +158,19 @@ public class Real extends Jugador  {
 	protected boolean getInEscalera() {
 		
 		return inEscalera;
+	}
+
+	@Override
+	public void dejarSaltar() {
+		if (getForma().equals("data/marioSalto.png")) {
+			posY=posY+20;
+			cambiarforma(1);
+		}
+		if (getForma().equals("data/marioSaltoIz.png")) {
+			posY=posY+20;
+			cambiarforma(4);
+		}
+		
 	}
 	
 	

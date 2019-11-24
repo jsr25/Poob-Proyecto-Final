@@ -125,6 +125,14 @@ public class MonkeyPoob {
 		perderVida(personaje);
 	}
 	/**
+	
+	*/
+	public void  dejarsaltar(int personaje) {
+		(jugadores.get(personaje-1)).dejarSaltar();
+		beneficio(personaje);	
+		perderVida(personaje);
+	}
+	/**
 	 * 
 	 * @param personaje
 	 */

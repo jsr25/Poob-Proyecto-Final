@@ -27,7 +27,7 @@ public class single extends JPanel{
 	ArrayList plataformas=new ArrayList<ArrayList>();
 	public  single(){
 		setFocusable(true);
-		k=-1;
+		k=1;
 		this.setSize(800,500);
 		
 	}
@@ -46,10 +46,12 @@ public class single extends JPanel{
 	}
 	public void addPlataformaAbajo(int x,int y, String img) {
 		ArrayList<JLabel> pAb=new ArrayList<JLabel>();
+		
 		int pos=x;
 		int pos2=y;
 		int j=1;
 		for (int i=0;i<25;i++) {
+			
 			JLabel plataforma=new JLabel();
 			plataforma.setSize(10, 10);
 			plataforma.setIcon(new ImageIcon(img));
@@ -100,26 +102,48 @@ public class single extends JPanel{
 		}
 		int pos2=y;
 		for (int i=0;i<15;i++) {
+			System.out.println(pos+(i*16));
+			System.out.println(pos2+(i*k));
 			JLabel plataforma=new JLabel();
 			plataforma.setSize(10, 10);
 			plataforma.setIcon(new ImageIcon(img));
 			plataforma.setBounds(0, 0, 80, 110);
-			//pos=pos+(i*15);
 			plataforma.setLocation(pos+(i*16),pos2+(i*k));
 			add(plataforma);
 			pC.add(plataforma);
+			
 		}
 		k=k*-1;
 		plataformas.add(pC);
 	}
-	public void addEscalera(int y1, int y2, int x) {
-		for (int i=0; i<4;i++) {
+	public void addEscalera(int plataforma1, int plataforma2, int x) {
+		ArrayList<JLabel> plaF1=(ArrayList<JLabel>)plataformas.get(plataforma1-1);
+		ArrayList<JLabel> plaF2=(ArrayList<JLabel>)plataformas.get(plataforma2-1);
+		int y1=-1;
+		int y2=-1;
+		for (int i=0;i<plaF1.size()&& y1==-1;i++) {
+			if(plaF1.get(i).getX()>x) {
+				y1=plaF1.get(i).getY();
+			}
+			
+		}
+		for (int i=0;i<plaF2.size()&& y2==-1;i++) {
+			if(plaF2.get(i).getX()>x) {
+				y2=plaF2.get(i).getY();
+			}
+			
+		}	
+		//System.out.println((y1-y2)/19);
+		//System.out.println(y1);
+		//System.out.println(y2);
+		for (int i=0; i<((y1-y2)/19);i++) {
 			escalera=new JLabel();
 			escalera.setIcon(new ImageIcon("data/escalera.png"));
 			escalera.setSize(9, 19);		
 			escalera.setBounds(0, 0, 80, 110);
-			escalera.setLocation(x,y1+(-i*19));
+			escalera.setLocation(x,(y1-17)+(-i*19));
 			add(escalera);
+		
 	}
 	}
 	

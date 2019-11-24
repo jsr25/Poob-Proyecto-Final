@@ -34,6 +34,8 @@ public abstract class Jugador implements movimiento {
 		mario.add("data/marioEscalera2.png");//8
 		mario.add("data/marioEscalera3.png");//9
 		mario.add("data/marioEscalera4.png");//10
+		mario.add("data/marioSalto.png");//11
+		mario.add("data/marioSaltoIz.png");//12
 		forma=mario.get(0);}
 		
 	}
