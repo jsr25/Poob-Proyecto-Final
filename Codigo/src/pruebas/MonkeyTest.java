@@ -54,4 +54,27 @@ public class MonkeyTest {
 		a.moverDerecha(1);
 		assertTrue((a.getJugador(1)).getPosX()==40 && a.getJugador(1).getPuntos()==10 );
 	}
+	
+	@Test
+	public void deberiaSubirEscalera() {
+		MonkeyPoob a= new MonkeyPoob();
+		a.agregarJugadores(0, 0,"mario");
+		a.generarEscaleras(0,0,30);
+		a.subirEscalera(1);
+		a.subirEscalera(1);		
+		a.subirEscalera(1);		
+		assertTrue((a.getJugador(1)).getPosY()==30);
+	}
+
+	@Test
+	public void deberiaBajarEscalera() {
+		MonkeyPoob a= new MonkeyPoob();
+		a.agregarJugadores(0, 30,"mario");
+		a.generarEscaleras(0,0,30);
+		a.bajarEscalera(1);
+		a.bajarEscalera(1);	
+		a.bajarEscalera(1);	
+		assertTrue((a.getJugador(1)).getPosY()==0);
+	}
+	
 }

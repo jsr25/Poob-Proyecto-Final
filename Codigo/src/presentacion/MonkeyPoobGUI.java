@@ -34,14 +34,15 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararElementos();
 		prepararPersonajes();
 		prepareAcciones();
-		add(mario);
+		add(plataforma);
+		aÃ±adirPlataforma( 0,300,100);
+		aÃ±adirPlataforma( 0,300,200);
+		aÃ±adirPlataforma( 0,300,300);
+		aÃ±adirPlataforma( 0,300,400);
 		add(mono);
 		add(barril);
-		add(plataforma);
-		añadirPlataforma( 0,300,100);
-		añadirPlataforma( 0,300,200);
-		añadirPlataforma( 0,300,300);
-		añadirPlataforma( 0,300,400);
+		add(mario);
+		
 		
 		
 	}
@@ -63,7 +64,8 @@ public class MonkeyPoobGUI extends JFrame {
 
 		mario=new JLabel();		
 		mario.setSize(10, 10);
-		app.agregarJugadores(0, 350, "mario");		
+		app.agregarJugadores(0, 350, "mario");
+		app.generarEscaleras(40, 350, 320);
 		mario.setIcon(new ImageIcon(app.getForma(1)));
 		mario.setBounds(0, 0, 80, 110);
 		mario.setLocation(0,350);
@@ -125,7 +127,7 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
-	public void añadirPlataforma(int x1,int x2,int y1) {
+	public void aÃ±adirPlataforma(int x1,int x2,int y1) {
 		JLabel plataforma=new JLabel() {
 			protected void paintComponent(Graphics grafico) {
 
@@ -179,13 +181,18 @@ public class MonkeyPoobGUI extends JFrame {
 			}
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
-					mario.setIcon(new ImageIcon("data/marioSalto.png"));					
+					app.subirEscalera(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					System.out.println(app.getForma(1));
+										
 				}
 				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
 					if (mario.getX()>0) {
 					app.moverIzquieda(1);
 					mario.setIcon(new ImageIcon(app.getForma(1)));
 					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					System.out.println(app.getJugadorPosX(1));
 					}		
 						
 				}
@@ -193,29 +200,34 @@ public class MonkeyPoobGUI extends JFrame {
 					if(mario.getX()<770) {
 					app.moverDerecha(1);
 					mario.setIcon(new ImageIcon(app.getForma(1)));
-					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));			
+					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
+					System.out.println(app.getJugadorPosX(1));
 					}
 						
 				}
 				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
-					mario.setLocation(mario.getX(),mario.getY()+5);
-					mario.setIcon(new ImageIcon("data/marioDerecha.png"));
+					app.bajarEscalera(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
 				}
 				
 				
 			}
 			public void keyReleased(KeyEvent e) {
 				if(e.getKeyChar()=='w' || e.getExtendedKeyCode()== KeyEvent.VK_UP) {
-					//mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));
-				}
-				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					app.FormaEstaticaIz(1);
-					mario.setIcon(new ImageIcon(app.getForma(1)));
 					
 				}
+				if(e.getKeyChar()=='a' || e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
+					if(!app.getEnEscalera(1)) {
+					app.FormaEstaticaIz(1);
+					mario.setIcon(new ImageIcon(app.getForma(1)));
+					}
+				}
 				if(e.getKeyChar()=='d' || e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
+					if(!app.getEnEscalera(1)) {
 					app.FormaEstaticaDer(1);
 					mario.setIcon(new ImageIcon(app.getForma(1)));
+					}
 				}
 				if(e.getKeyChar()=='s' || e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					//mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));

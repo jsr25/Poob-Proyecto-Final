@@ -24,13 +24,16 @@ public abstract class Jugador implements movimiento {
 	private void prepararArrays() {
 		if(personaje.equals("mario")) {
 		mario=new ArrayList<String>();
-		mario.add("data/marioDerecha.png");
-		mario.add("data/marioPasoDerecha.png");
-		mario.add("data/marioPasoDerecha2.png");
-		mario.add("data/marioIzquierda.png");
-		mario.add("data/marioPasoIzquierda.png");
-		mario.add("data/marioPasoIzquierda2.png");
-		
+		mario.add("data/marioDerecha.png");//1
+		mario.add("data/marioPasoDerecha.png");//2
+		mario.add("data/marioPasoDerecha2.png");//3
+		mario.add("data/marioIzquierda.png");//4
+		mario.add("data/marioPasoIzquierda.png");//5
+		mario.add("data/marioPasoIzquierda2.png");//6
+		mario.add("data/marioEscalera1.png");//7
+		mario.add("data/marioEscalera2.png");//8
+		mario.add("data/marioEscalera3.png");//9
+		mario.add("data/marioEscalera4.png");//10
 		forma=mario.get(0);}
 		
 	}
@@ -76,10 +79,14 @@ public abstract class Jugador implements movimiento {
 
 	protected abstract void perdervida();
 
+	protected abstract void subir(boolean posible,int yFin);
+	
+	protected abstract void bajar(boolean posible,int yFin);
+	
+	protected abstract void setInEscalera(boolean s);
 
 
-	
-	
+	protected abstract boolean getInEscalera();
 	
 
 }

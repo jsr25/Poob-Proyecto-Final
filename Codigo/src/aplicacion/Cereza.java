@@ -14,4 +14,6 @@ public class Cereza extends Sorpresa {
 	public int beneficio() {
 		return puntos;
 	}
+	
+	
 }

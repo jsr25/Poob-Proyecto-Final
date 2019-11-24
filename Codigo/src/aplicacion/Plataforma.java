@@ -9,7 +9,7 @@ public class Plataforma {
 	private int x2;
 	private int y1;
 	private int y2;
-	private int pendiente;
+	private final int pendiente;
 	private int factoB;
 	
 	public Plataforma(int x1, int y1, int x2, int y2) {
