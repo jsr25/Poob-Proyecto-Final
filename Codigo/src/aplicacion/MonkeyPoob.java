@@ -7,11 +7,12 @@ import java.util.ArrayList;
  *
  */
 public class MonkeyPoob {
-	ArrayList<Plataforma> plataformas;
-	ArrayList<Jugador> jugadores;
-	ArrayList<Escalera> escaleras;
-	ArrayList<Sorpresa> sorpresas;
-	ArrayList<Barril> barriles;
+	private ArrayList<Plataforma> plataformas;
+	private ArrayList<Jugador> jugadores;
+	private	ArrayList<Escalera> escaleras;
+	private ArrayList<Sorpresa> sorpresas;
+	private ArrayList<Barril> barriles;
+	private boolean cambioP;
 	/**
 	 * Constructor de la capa de 
 	 * aplicacion para un solo jugador
@@ -22,6 +23,7 @@ public class MonkeyPoob {
 		jugadores = new ArrayList<Jugador>();
 		sorpresas = new ArrayList<Sorpresa>();
 		escaleras = new ArrayList<Escalera>();
+		cambioP=false;
 	}
 	
 	
@@ -51,8 +53,10 @@ public class MonkeyPoob {
 	 * @param posX
 	 * @param posY
 	 */
-	public void generarSorpresa(int posX, int posY) {
-		sorpresas.add(new Cereza(posX,posY));
+	public String generarSorpresa(int posX, int posY) {
+		Cereza cs = new Cereza(posX,posY);
+		sorpresas.add(cs);
+		return cs.getImagen();
 	}
 	/**
 	 * Genra un escalera el la capa 
@@ -83,6 +87,7 @@ public class MonkeyPoob {
 		(jugadores.get(personaje-1)).avanzar();
 		beneficio(personaje);	
 		perderVida(personaje);
+		System.out.println(jugadores.get(personaje-1).getPuntos());
 		
 	}
 	/**
@@ -108,6 +113,7 @@ public class MonkeyPoob {
 		(jugadores.get(personaje-1)).retroceder();
 		beneficio(personaje);
 		perderVida(personaje);
+		System.out.println(jugadores.get(personaje-1).getPuntos());
 	}
 	/**
 	 * 
@@ -129,10 +135,12 @@ public class MonkeyPoob {
 			{
 				if (s.getTipo().equals("puntos")) {
 					jugadores.get(personaje-1).setPuntos(s.beneficio());
+					cambioP=true;
 				
 				}
 			}
 		}
+		
 		
 	}
 	/**
@@ -234,5 +242,25 @@ public class MonkeyPoob {
 		return jugadores.get(personaje-1).getInEscalera();
 	}
 	
+	public boolean cambioPuntos() {
+		return cambioP;
+	}
+	
+	public void removerSorpresa(int personaje) 
+	{
+		int index=0;
+		for(Sorpresa s:sorpresas) {
+			if ((s.getPosX()==jugadores.get(personaje-1).getPosX())&&(s.getPosY()==jugadores.get(personaje-1).getPosY())) 
+			{
+				index=sorpresas.indexOf(s);
+			}
+		}
+		sorpresas.remove(index);
+		cambioP=false;
+	}
+	
+	public String getEscaleraIm() {
+		return escaleras.get(0).getImagen();
+	}
 }
 

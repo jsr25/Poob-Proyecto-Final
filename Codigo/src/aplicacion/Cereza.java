@@ -7,6 +7,7 @@ public class Cereza extends Sorpresa {
 		super(posX,posY);
 		puntos=10;
 		super.setTipo("puntos");
+		imagen="data/cereza.png";
 		
 	}
 

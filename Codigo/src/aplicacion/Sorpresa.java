@@ -4,6 +4,7 @@ public abstract class Sorpresa {
 	private int posX;
 	private int posY;
 	private String tipo;
+	protected String imagen;
 
 	public Sorpresa(int posX, int posY) {
 		this.posX=posX;
@@ -28,5 +29,9 @@ public abstract class Sorpresa {
 	
 	public String getTipo() {
 		return tipo;
+	}
+	
+	public String getImagen() {
+		return imagen;
 	}
 }

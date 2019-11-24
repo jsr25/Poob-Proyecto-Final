@@ -4,6 +4,7 @@ public class Escalera {
 	private int x;
 	private int yIni;
 	private int yFin;
+	private String imagen;
 	
 	
 
@@ -11,6 +12,7 @@ public class Escalera {
 		this.x=x;
 		this.yIni=yIni;
 		this.yFin=yFin;
+		imagen="data/escalera.png";
 	}
 	
 	public int getX() {
@@ -33,5 +35,8 @@ public class Escalera {
 		return (x==posX) && (yFin==posY || posY<=yIni);
 	}
 	
+	public String getImagen() {
+		return imagen;
+	}
 	
 }
