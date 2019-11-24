@@ -87,7 +87,7 @@ public class MonkeyPoob {
 		(jugadores.get(personaje-1)).avanzar();
 		beneficio(personaje);	
 		perderVida(personaje);
-		System.out.println(jugadores.get(personaje-1).getPuntos());
+		//System.out.println(jugadores.get(personaje-1).getPuntos());
 		
 	}
 	/**
@@ -113,7 +113,7 @@ public class MonkeyPoob {
 		(jugadores.get(personaje-1)).retroceder();
 		beneficio(personaje);
 		perderVida(personaje);
-		System.out.println(jugadores.get(personaje-1).getPuntos());
+		//System.out.println(jugadores.get(personaje-1).getPuntos());
 	}
 	/**
 	 * 
@@ -223,7 +223,7 @@ public class MonkeyPoob {
 			if(posible) {y=(es.getY2()-es.getY1())/3;}
 		}
 		jugadores.get(personaje-1).subir(posible, y);
-		System.out.println("hola"+ posible);
+		//System.out.println("hola"+ posible);
 		
 	}
 	

@@ -34,12 +34,14 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararElementos();
 		prepararPersonajes();
 		prepareAcciones();
-		//add(plataforma);
+		
 		//aÃ±adirPlataforma( 0,300,100);
 		//aÃ±adirPlataforma( 0,300,200);
 		//aÃ±adirPlataforma( 0,300,300);
-		//añadirPlataforma( 0,300,350);
+		//aï¿½adirPlataforma( 0,300,350);
+		//agregrarplata(0,300,300);
 		add(mario);
+		add(plataforma);
 		add(mono);
 		add(barril);
 		add(escalera);
@@ -75,6 +77,8 @@ public class MonkeyPoobGUI extends JFrame {
 		sorpresa.setLocation(100, 350);
 		sorpresa.setSize(100, 100);	
 		add(sorpresa);
+		app.crearPlataforma(0, 0, 100, 40);
+		
 		
 		escalera=new JLabel();
 		
@@ -88,7 +92,8 @@ public class MonkeyPoobGUI extends JFrame {
 		mario.setBounds(0, 0, 80, 110);
 		mario.setLocation(0,350);
 		mono=new JLabel();		
-		mono.setSize(50, 50);		
+		mono.setSize(20, 20);
+		
 		mono.setIcon(new ImageIcon("data/monoBaile1.png"));
 		monoN="data/monoBaile1.png";
 		mono.setBounds(20, 20, 80, 110);
@@ -102,8 +107,9 @@ public class MonkeyPoobGUI extends JFrame {
 		plataforma=new JLabel();		
 		plataforma.setSize(50, 50);		
 		plataforma.setIcon(new ImageIcon("data/plataforma.png"));
-		plataforma.setBounds(20, 20, 80, 110);
-		plataforma.setLocation(0,20);
+		plataforma.setBounds(0, 320, 300, 200);
+		plataforma.setLocation(0,320);
+		//plataforma.
 		Timer timer=new Timer();
 		TimerTask tarea=new TimerTask(){
 			@Override
@@ -145,12 +151,10 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		timer2.schedule(tarea2, 0, 50);
 	}
-	public void añadirPlataforma(int x1,int x2,int y1) {
+	public void agregrarplata(int x1,int x2,int y1) {
 		JLabel plataforma=new JLabel() {
 			protected void paintComponent(Graphics grafico) {
-
                 Graphics2D graficoNuevo = (Graphics2D) grafico;
-
                 graficoNuevo.setRenderingHint(
                         RenderingHints.KEY_ANTIALIASING,
                         RenderingHints.VALUE_ANTIALIAS_ON
@@ -202,6 +206,7 @@ public class MonkeyPoobGUI extends JFrame {
 					app.subirEscalera(1);
 					mario.setIcon(new ImageIcon(app.getForma(1)));
 					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					
 										
 				}
@@ -210,6 +215,7 @@ public class MonkeyPoobGUI extends JFrame {
 					app.moverIzquieda(1);
 					mario.setIcon(new ImageIcon(app.getForma(1)));
 					mario.setLocation(app.getJugadorPosX(1),app.getJugadorPosY(1));	
+					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					
 					}		
 						
@@ -223,7 +229,7 @@ public class MonkeyPoobGUI extends JFrame {
 						app.removerSorpresa(1);
 						remove(sorpresa);
 					}
-					
+					System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
 					}
 						
 				}

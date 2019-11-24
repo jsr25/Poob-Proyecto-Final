@@ -28,11 +28,11 @@ public class Escalera {
 	}
 
 	public boolean posibleSubir(int posX,int posY) {
-		return (x==posX) && (yIni==posY || posY>=yFin);
+		return (x==posX) && (yIni==posY || posY>yFin);
 	}
 	
 	public boolean posibleBajar(int posX,int posY) {
-		return (x==posX) && (yFin==posY || posY<=yIni);
+		return (x==posX) && (yFin==posY || posY<yIni);
 	}
 	
 	public String getImagen() {
