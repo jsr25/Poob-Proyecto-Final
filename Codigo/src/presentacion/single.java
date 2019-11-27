@@ -50,13 +50,13 @@ public class single extends JPanel{
 		int pos=x;
 		int pos2=y;
 		int j=1;
-		for (int i=0;i<25;i++) {
+		for (int i=0;i<20;i++) {
 			
 			JLabel plataforma=new JLabel();
 			plataforma.setSize(10, 10);
 			plataforma.setIcon(new ImageIcon(img));
 			plataforma.setBounds(0, 0, 80, 110);
-			if (i<12) {
+			if (i<10) {
 			plataforma.setLocation(pos+(i*16),pos2);
 			}
 			else {
@@ -136,12 +136,12 @@ public class single extends JPanel{
 		//System.out.println((y1-y2)/19);
 		//System.out.println(y1);
 		//System.out.println(y2);
-		for (int i=0; i<((y1-y2)/19);i++) {
+		for (int i=0; i<((y1-y2)/7);i++) {
 			escalera=new JLabel();
 			escalera.setIcon(new ImageIcon("data/escalera.png"));
-			escalera.setSize(9, 19);		
+			escalera.setSize(8, 7);		
 			escalera.setBounds(0, 0, 80, 110);
-			escalera.setLocation(x,(y1-17)+(-i*19));
+			escalera.setLocation(x,(y1-8)+(-i*7));
 			add(escalera);
 		
 	}

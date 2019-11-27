@@ -8,6 +8,8 @@ public abstract class Jugador implements movimiento {
 	protected int posX;
 	protected int posY;
 	protected int puntos;
+	protected int plataforma;
+	protected int subPlataforma;
 	private String personaje;
 	private String forma;
 	public Jugador(int posX, int posY,String personaje) {
@@ -89,6 +91,30 @@ public abstract class Jugador implements movimiento {
 
 
 	protected abstract boolean getInEscalera();
+
+
+	protected abstract int getPlat();
+
+
+	protected abstract int getSubPlat();
+
+
+	protected abstract void sumSub();
+
+
+	protected abstract void sumY();
+
+
+	protected abstract void sumY(int tipo);
+
+
+	protected abstract void resSub();
+
+
+	protected abstract void resY(int tipo);
+
+
+	protected abstract void resY(int tipo, int tipo2);
 	
 
 }

@@ -10,11 +10,19 @@ public class Real extends Jugador  {
 		vidas=3;
 		estado=true;
 		inEscalera=false;
+		plataforma=0;
+		subPlataforma=0;
 		
 		
 		
 	}
-	
+	public int getPlat() {
+		return plataforma;
+		
+	}
+	public int getSubPlat() {
+		return subPlataforma;
+	}
 	public boolean estoyVivo() {
 		if(vidas==0) {
 			estado=false;
@@ -65,7 +73,7 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(1);
 			}
-			posX=posX+10;
+			posX=posX+8;
 		}
 	}
 
@@ -83,7 +91,7 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(4);
 			}
-			posX=posX-10;
+			posX=posX-8;
 		}
 	}
 
@@ -169,6 +177,41 @@ public class Real extends Jugador  {
 		if (getForma().equals("data/marioSaltoIz.png")) {
 			posY=posY+20;
 			cambiarforma(4);
+		}
+		
+	}
+	@Override
+	protected void sumSub() {
+		subPlataforma++;
+	}
+	@Override
+	protected void sumY(int tipo) {
+		posY+=tipo;
+		
+	}
+	
+	@Override
+	protected void resSub() {
+		subPlataforma--;
+		
+	}
+	@Override
+	protected void resY(int tipo) {
+		posY-=tipo;
+		
+	}
+	@Override
+	protected void sumY() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	protected void resY(int tipo, int tipo2) {
+		if (tipo2==-5) {
+			posY-=tipo;
+		}
+		else {
+			posY-=tipo2;
 		}
 		
 	}
