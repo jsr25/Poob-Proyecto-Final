@@ -29,7 +29,7 @@ public class Plataforma {
 		return ((x1<=x && x2>x)&&(y==y1-12));
 	}
 	public boolean estaSobre2(int x,int y) {		
-		return ((x>x2 && x1<=x)&&(y==y1-12));
+		return ((x>=x2 && x1<=x)&&(y==y1-12));
 	}
 	public int getTipo() {
 		return tipo;

@@ -76,8 +76,8 @@ public class MonkeyPoobGUI extends JFrame {
 		
 	}
 	public void prepararPersonajes() {
-		app.agregarJugadores(0, 400, "mario");
-		principal.addPersonaje(0,400,"data/marioDerecha.png");
+		app.agregarJugadores(16, 400, "mario");
+		principal.addPersonaje(16,400,"data/marioDerecha.png");
 		app.crearPlataformaBaja(0, 412);
 		crearPlataformaBaja();
 		/*principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
@@ -99,9 +99,9 @@ public class MonkeyPoobGUI extends JFrame {
 		app.generarEscaleras(40, 400, 350);*/
 		
 		sorpresa=new JLabel();
-		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(100,350)));
+		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));
 		sorpresa.setBounds(0, 0, 80, 110);
-		sorpresa.setLocation(100, 350);
+		sorpresa.setLocation(48, 400);
 		sorpresa.setSize(100, 100);	
 		add(sorpresa);
 		//app.crearPlataforma(0, 0, 100, 40);
