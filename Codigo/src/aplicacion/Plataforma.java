@@ -26,7 +26,7 @@ public class Plataforma {
 	}
 
 	public boolean estaSobre(int x,int y) {		
-		return ((x1<=x && x2>x)&&(y==y1-12));
+		return ((x1<=x && x2>x-1)&&(y==y1-12));
 	}
 	public boolean estaSobre2(int x,int y) {		
 		return ((x>=x2 && x1<=x)&&(y==y1-12));
@@ -45,6 +45,10 @@ public class Plataforma {
 	public int getTipo2() {
 		
 		return tipo2;
+	}
+	public int getX2() {
+		
+		return x2;
 	}
 	
 	

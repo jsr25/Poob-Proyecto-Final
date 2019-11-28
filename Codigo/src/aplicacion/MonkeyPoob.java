@@ -13,6 +13,7 @@ public class MonkeyPoob {
 	private ArrayList<Sorpresa> sorpresas;
 	private ArrayList<Barril> barriles;
 	private boolean cambioP;
+	private int k;
 	/**
 	 * Constructor de la capa de 
 	 * aplicacion para un solo jugador
@@ -24,6 +25,7 @@ public class MonkeyPoob {
 		sorpresas = new ArrayList<Sorpresa>();
 		escaleras = new ArrayList<Escalera>();
 		cambioP=false;
+		k=1;
 	}
 	
 	
@@ -64,10 +66,25 @@ public class MonkeyPoob {
 		}
 		plataformas.add(plat);
 	}
-/*	public void crearPlataformaCentral(int x1, int y1 , int x2) {
-		plataformas.add(new Plataforma(x1,y1,x2));
+	public void crearPlataformaCentral(int y1) {
+		ArrayList<Plataforma> plat=new ArrayList<Plataforma>();
+		int pos;
+		int pos2;
+		if (k==1) pos=0;
+		else pos=32;
+		int y=y1;
+		pos2=pos+16;
+		for (int i =0;i<15;i++) {			
+			plat.add(new Plataforma(pos,y,pos2,k));
+			pos=pos2;
+			pos2=pos2+16;
+			y++;
+			
+		}
+		k=k*-1;
+		plataformas.add(plat);
 	}
-	
+	/*
 	public void crearPlataformaAlta(int x1, int y1 , int x2) {
 		plataformas.add(new Plataforma(x1,y1,x2));
 	}*/
@@ -115,27 +132,45 @@ public class MonkeyPoob {
 	 * derecha en la capa de aplicacion
 	 * @param personaje
 	 */
+	public void mostrarPlat() {
+		int p=3;
+		ArrayList<Plataforma>AS=plataformas.get(p);
+		for (Plataforma pas:AS) 
+		{
+			
+			System.out.println(pas.getX());
+			System.out.println(pas.getX2());
+			System.out.println(pas.getY());
+			System.out.println(pas.getTipo());
+			
+		}
+	}
 	public void moverDerecha(int personaje) {
-		if (plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY())) {
-			(jugadores.get(personaje-1)).avanzar();
-		
-		beneficio(personaje);	
-		perderVida(personaje);
-		//System.out.println(jugadores.get(personaje-1).getPuntos());
+		//System.out.println(jugadores.get(personaje-1).getSubPlat());
+		mostrarPlat();
+		//System.out.println((jugadores.get(personaje-1)).getPosX());
+		if (plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY())&& (jugadores.get(personaje-1).getPosX()!=plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getX2())) {
+			(jugadores.get(personaje-1)).avanzar();		
+			beneficio(personaje);	
+			perderVida(personaje);
+			
+			//System.out.println("??????????????????????????''");
+			//System.out.println((jugadores.get(personaje-1)).getPosY());
+			//System.out.println((jugadores.get(personaje-1)).getPosX());
 		}
 		else {
 			
-			if (  (jugadores.get(personaje-1)).getSubPlat()+1<plataformas.get(jugadores.get(personaje-1).getPlat()).size()-1){
+			if (((jugadores.get(personaje-1)).getSubPlat()+1<plataformas.get(jugadores.get(personaje-1).getPlat()).size()-1)){
+				(jugadores.get(personaje-1)).avanzar();
 				(jugadores.get(personaje-1)).sumSub();
 				jugadores.get(personaje-1).sumY(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo());
-				(jugadores.get(personaje-1)).avanzar();
-			}
-			else {
-				
+				//System.out.println((jugadores.get(personaje-1)).getPosY());
+				//System.out.println((jugadores.get(personaje-1)).getPosX());
 			}
 			
+			
 		}
-		System.out.println((jugadores.get(personaje-1)).getPosX());
+		//System.out.println((jugadores.get(personaje-1)).getPosX());
 	}
 	
 	/**
@@ -158,9 +193,9 @@ public class MonkeyPoob {
 	 * @param personaje
 	 */
 	public void moverIzquieda(int personaje) {
-		System.out.println(jugadores.get(personaje-1).getPosY());
-		System.out.println(jugadores.get(personaje-1).getPosX());
-		System.out.println(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre2(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY()));
+		//System.out.println(jugadores.get(personaje-1).getPosY());
+		//System.out.println(jugadores.get(personaje-1).getPosX());
+		//System.out.println(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre2(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY()));
 		
 		if (plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre2(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY())) {
 			(jugadores.get(personaje-1)).retroceder();		
@@ -170,9 +205,9 @@ public class MonkeyPoob {
 		}
 		else {		
 			if ((jugadores.get(personaje-1)).getSubPlat()-1>-1){
-				System.out.println("*************************");
+				//System.out.println("*************************");
 				(jugadores.get(personaje-1)).resSub();	
-				System.out.println(jugadores.get(personaje-1).getSubPlat());
+				//System.out.println(jugadores.get(personaje-1).getSubPlat());
 				jugadores.get(personaje-1).resY(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo(),plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo2());
 				
 				(jugadores.get(personaje-1)).retroceder();

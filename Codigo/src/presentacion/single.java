@@ -98,12 +98,10 @@ public class single extends JPanel{
 			pos=0;
 		}
 		else {
-			pos=50;
+			pos=32;
 		}
 		int pos2=y;
 		for (int i=0;i<15;i++) {
-			System.out.println(pos+(i*16));
-			System.out.println(pos2+(i*k));
 			JLabel plataforma=new JLabel();
 			plataforma.setSize(10, 10);
 			plataforma.setIcon(new ImageIcon(img));

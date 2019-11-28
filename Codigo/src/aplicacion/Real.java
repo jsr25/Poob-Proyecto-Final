@@ -10,7 +10,7 @@ public class Real extends Jugador  {
 		vidas=3;
 		estado=true;
 		inEscalera=false;
-		plataforma=0;
+		plataforma=2;
 		subPlataforma=0;
 		
 		
@@ -73,7 +73,7 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(1);
 			}
-			posX=posX+8;
+			posX=posX+4;
 		}
 	}
 
@@ -91,7 +91,7 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(4);
 			}
-			posX=posX-8;
+			posX=posX-4;
 		}
 	}
 
