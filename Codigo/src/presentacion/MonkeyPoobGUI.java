@@ -76,9 +76,13 @@ public class MonkeyPoobGUI extends JFrame {
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataformaCentral( pl[1], "data/plataforma.png");
 	}
+	public void crearPlataformaAlta(int i) {
+		int[] pl=app.getPlataformas(i);		
+		principal.addPlataformaArriba(pl[0], pl[1], "data/plataforma.png");
+	}
 	public void prepararPersonajes() {
-		app.agregarJugadores(32, 288, "mario");
-		principal.addPersonaje(32,288,"data/marioDerecha.png");
+		app.agregarJugadores(0, 228, "mario");
+		principal.addPersonaje(0,228,"data/marioDerecha.png");
 		app.crearPlataformaBaja(0, 412);
 		crearPlataformaBaja();
 		app.crearPlataformaCentral(340);
@@ -87,6 +91,8 @@ public class MonkeyPoobGUI extends JFrame {
 		crearPataformaCentral(3);
 		app.crearPlataformaCentral(240);
 		crearPataformaCentral(4);
+		app.crearPlataformaAlta(0,40);
+		crearPlataformaAlta(5);
 		
 		/*principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
 		principal.addPlataformaCentral(340, "data/plataforma.png");

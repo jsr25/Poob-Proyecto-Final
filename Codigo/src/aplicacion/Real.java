@@ -10,7 +10,7 @@ public class Real extends Jugador  {
 		vidas=3;
 		estado=true;
 		inEscalera=false;
-		plataforma=2;
+		plataforma=3;
 		subPlataforma=0;
 		
 		

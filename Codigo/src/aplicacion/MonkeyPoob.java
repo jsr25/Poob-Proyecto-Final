@@ -78,16 +78,40 @@ public class MonkeyPoob {
 			plat.add(new Plataforma(pos,y,pos2,k));
 			pos=pos2;
 			pos2=pos2+16;
-			y++;
+			y+=k;
 			
 		}
 		k=k*-1;
 		plataformas.add(plat);
 	}
-	/*
-	public void crearPlataformaAlta(int x1, int y1 , int x2) {
-		plataformas.add(new Plataforma(x1,y1,x2));
-	}*/
+	public void crearPlataformaAlta(int x1, int y1 ) {
+		ArrayList<Plataforma> plat=new ArrayList<Plataforma>();
+		//plat.add(new Plataforma(x2,y,x,0,-1));
+		int x=16;
+		int x2=x1;
+		int y=y1;
+		for (int i=0;i<15;i++ ) {
+			if(i<7) {
+				if (i==6) {
+					plat.add(new Plataforma(x2,y,x,0,1));
+				}
+				else {
+				plat.add(new Plataforma(x2,y,x,0));
+				}
+				x2=x;
+				x=x+16;
+				
+			}
+			else {
+				y=y+1;
+				plat.add(new Plataforma(x2,y,x,1));
+				x2=x;
+				x=x+16;
+				
+			}
+		}
+		plataformas.add(plat);
+	}
 	
 	/**
 	 * Genera un barril en la capa 
