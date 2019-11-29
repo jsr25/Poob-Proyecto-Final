@@ -61,7 +61,7 @@ public class MonkeyPoobGUI extends JFrame {
 	public void prepararElementos() {
 		i=-1;
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(800,550);
+		this.setSize(500,550);
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
@@ -80,9 +80,13 @@ public class MonkeyPoobGUI extends JFrame {
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataformaArriba(pl[0], pl[1], "data/plataforma.png");
 	}
+	public void crearEscalera(){
+		int[]esc=principal.getEscalera(1);
+		app.generarEscaleras(esc[0], esc[1], esc[2]);
+	}
 	public void prepararPersonajes() {
-		app.agregarJugadores(0, 228, "mario");
-		principal.addPersonaje(0,228,"data/marioDerecha.png");
+		app.agregarJugadores(0, 400, "mario");
+		principal.addPersonaje(0,400,"data/marioDerecha.png");
 		app.crearPlataformaBaja(0, 412);
 		crearPlataformaBaja();
 		app.crearPlataformaCentral(340);
@@ -102,15 +106,15 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.addPlataformaCentral(140, "data/plataforma.png");
 		principal.addPlataformaCentral(100, "data/plataforma.png");
 		principal.addPlataformaArriba(0, 40, "data/plataforma.png");*/
-		/*principal.addEscalera(1, 2, 40);
-		principal.addEscalera(2, 3, 120);
-		principal.addEscalera(3, 4, 50);
-		principal.addEscalera(4, 5, 120);
-		principal.addEscalera(5, 6, 60);
-		principal.addEscalera(6, 7, 120);
-		principal.addEscalera(7, 8, 50);
+		principal.addEscalera(1, 2, 32);
+		//principal.addEscalera(2, 3, 120);
+		//principal.addEscalera(3, 4, 50);
+		//principal.addEscalera(4, 5, 120);
+		//principal.addEscalera(5, 6, 60);
+		//principal.addEscalera(6, 7, 120);
+		//principal.addEscalera(7, 8, 50);
 		repaint();
-		app.generarEscaleras(40, 400, 350);*/
+		crearEscalera();
 		
 		sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));

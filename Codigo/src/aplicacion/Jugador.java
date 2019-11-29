@@ -115,6 +115,8 @@ public abstract class Jugador implements movimiento {
 
 
 	protected abstract void resY(int tipo, int tipo2);
+	protected abstract void setPlat(int i);
+	protected abstract void setSubPlat(int i);
 	
 
 }

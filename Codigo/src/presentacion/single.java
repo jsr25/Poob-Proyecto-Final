@@ -22,11 +22,13 @@ import aplicacion.MonkeyPoob;
 public class single extends JPanel{
 	private JLabel mario,mono,barril,plataforma,sorpresa,escalera;
 	public String monoN,barrilN;
+	private ArrayList<int[]> esca;
 	private String nombre;
 	private int k;
 	ArrayList plataformas=new ArrayList<ArrayList>();
 	public  single(){
 		setFocusable(true);
+		esca=new ArrayList<int[]>();
 		k=1;
 		this.setSize(800,500);
 		
@@ -128,12 +130,13 @@ public class single extends JPanel{
 		for (int i=0;i<plaF2.size()&& y2==-1;i++) {
 			if(plaF2.get(i).getX()>x) {
 				y2=plaF2.get(i).getY();
-			}
-			
+		}
+		
+		System.out.println(y1+"  "+y2);
+		
 		}	
-		//System.out.println((y1-y2)/19);
-		//System.out.println(y1);
-		//System.out.println(y2);
+		int[] esc= {x,y1,y2};
+		esca.add(esc);
 		for (int i=0; i<((y1-y2)/7);i++) {
 			escalera=new JLabel();
 			escalera.setIcon(new ImageIcon("data/escalera.png"));
@@ -144,5 +147,9 @@ public class single extends JPanel{
 		
 	}
 	}
-	
+	public int [] getEscalera(int i) {
+		int[] esc= esca.get(i-1);
+		return esc;
+		
+	}
 }

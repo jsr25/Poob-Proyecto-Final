@@ -10,7 +10,7 @@ public class Real extends Jugador  {
 		vidas=3;
 		estado=true;
 		inEscalera=false;
-		plataforma=3;
+		plataforma=0;
 		subPlataforma=0;
 		
 		
@@ -117,7 +117,10 @@ public class Real extends Jugador  {
 		//cambiarforma(7);
 		setInEscalera(posible);
 		if(posible) {
+			System.out.println("······"+posY);
 			posY+=y;
+			System.out.println("······"+posY);
+			
 			if (getForma().equals("data/marioEscalera1.png") ) {
 				cambiarforma(8);
 			}
@@ -213,6 +216,13 @@ public class Real extends Jugador  {
 		else {
 			posY-=tipo2;
 		}
+		
+	}
+	@Override
+	protected void setPlat(int i) {		
+	}
+	@Override
+	protected void setSubPlat(int i) {
 		
 	}
 	

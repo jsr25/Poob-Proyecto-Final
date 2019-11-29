@@ -358,13 +358,32 @@ public class MonkeyPoob {
 		int y=0;
 		for (Escalera es: escaleras) {
 			posible=es.posibleSubir(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY());
-			if(posible) {y=(es.getY2()-es.getY1())/3;}
+			
+			if(posible) 
+			{
+				y=(es.getY2()-es.getY1())/3;
+				System.out.println(y+"---"+es.getY2()+"---"+es.getY1());
+			}
+			else if(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getY()>jugadores.get(personaje-1).getPosY()) {
+				jugadores.get(personaje-1).setPlat(jugadores.get(personaje-1).getPlat()+1);
+				System.out.println("---");
+				System.out.println(jugadores.get(personaje-1).getPosY());
+				System.out.println("---");
+							
+			}
 		}
 		jugadores.get(personaje-1).subir(posible, y);
+		//System.out.println(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getY());
 		//System.out.println("hola"+ posible);
 		
 	}
 	
+	/*private void busSubPlat(int personaje) {
+		int x=jugadores
+		for (int i=0;i<plataforma)
+	}*/
+
+
 	public void bajarEscalera(int personaje) {
 		boolean posible=false;
 		int y=0;

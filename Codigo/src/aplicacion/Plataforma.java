@@ -50,6 +50,11 @@ public class Plataforma {
 		
 		return x2;
 	}
-	
+	public boolean rangoX(int i) {
+		return (i>=x2 && x1<=i);
+	}
+	public boolean rangoCercaY(int i) {
+		return (i>=x2 && x1<=i);
+	}
 	
 }
