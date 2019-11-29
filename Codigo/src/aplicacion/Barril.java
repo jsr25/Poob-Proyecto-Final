@@ -18,7 +18,7 @@ public class Barril {
 		
 		while(y!=0) {
 			y-=1;
-			x=movimiento(x);
+			//x=movimiento(x);
 			ArrayList<Jugador> jp = monkey.getJugadores();
 			for (Jugador j:jp) {
 				if(j.colision(x,y)) {
@@ -29,7 +29,7 @@ public class Barril {
 		}
 	}
 	
-	public int movimiento(int x) {
+	/*public int movimiento(int x) {
 		ArrayList<Plataforma> plataformas= monkey.getPlataformas();
 		for (Plataforma p: plataformas) {
 			if(p.estaEnRango(x)) {
@@ -44,7 +44,7 @@ public class Barril {
 			}
 		}
 		return x;
-	}
+	}*/
 	
 	public int getY() {
 		return y;

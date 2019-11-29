@@ -8,17 +8,24 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 
@@ -30,6 +37,10 @@ public class MonkeyPoobGUI extends JFrame {
 	public String monoN,barrilN;
 	private single principal;
 	private String nombre;
+	private JMenuBar barra;
+	private JMenu menu;
+	private JMenuItem salvar,abrir;
+	
 	private MonkeyPoob app;
 	private int i;
 	public MonkeyPoobGUI(int j) {
@@ -38,11 +49,14 @@ public class MonkeyPoobGUI extends JFrame {
 			principal=new single();
 			this.setContentPane(principal);
 			principal.setVisible(true);
+			
 		}
 		setFocusable(true);
 		prepararElementos();
 		prepararPersonajes();
 		prepareAcciones();
+		prepararMenu();
+		prepararAccionesMenu();
 		/*add(mario);
 		add(plataforma);
 		add(mono);
@@ -50,6 +64,21 @@ public class MonkeyPoobGUI extends JFrame {
 		add(escalera);*/
 
 		
+		
+		
+	}
+	private void prepararMenu() {
+		barra=new JMenuBar();
+		menu = new JMenu("Menu");
+		salvar=new JMenuItem("salvar");
+		abrir=new JMenuItem("abrir");
+		
+		menu.add(salvar);
+		menu.add(abrir);
+		
+		barra.add(menu);
+		
+		this.setJMenuBar(barra);
 		
 		
 	}
@@ -65,7 +94,7 @@ public class MonkeyPoobGUI extends JFrame {
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
-		app= new MonkeyPoob();
+		app= MonkeyPoob.getMonkey();
 	}
 	public void crearPlataformaBaja() {		
 		int[] pl=app.getPlataformas(1);		
@@ -282,5 +311,21 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setVisible(false);
 		p.setVisible(true);
 		}
+	
+	private void prepararAccionesMenu() {
+		salvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				opcioSalvar();
+			}	
+		} );
+	}
 
+	private void opcioSalvar() {
+		JFileChooser fc = new JFileChooser();
+		int res=fc.showSaveDialog(this);
+		if (fc.APPROVE_OPTION==res) {
+		File f = new File(fc.getSelectedFile()+".dat");
+		app.salvar(f);
+		}
+	}
 }

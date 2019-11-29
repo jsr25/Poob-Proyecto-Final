@@ -1,5 +1,9 @@
 package aplicacion;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 /**
  * 
@@ -14,11 +18,19 @@ public class MonkeyPoob {
 	private ArrayList<Barril> barriles;
 	private boolean cambioP;
 	private int k;
+	//singleton
+	public static MonkeyPoob monkey;
+	public static MonkeyPoob getMonkey() {
+		if(monkey==null) {
+			monkey= new MonkeyPoob();
+		}
+		return monkey;
+	}
 	/**
 	 * Constructor de la capa de 
 	 * aplicacion para un solo jugador
 	 */
-	public MonkeyPoob() {
+	private MonkeyPoob() {
 		plataformas=new ArrayList<ArrayList<Plataforma>>();
 		barriles= new ArrayList<Barril>();
 		jugadores = new ArrayList<Jugador>();
@@ -420,5 +432,16 @@ public class MonkeyPoob {
 		return escaleras.get(0).getImagen();
 	}
 	
+	public void salvar(File f) {
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream(f));
+			out.writeObject(monkey);
+			out.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+	}
 }
 
