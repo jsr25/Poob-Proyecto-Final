@@ -8,11 +8,12 @@ public class Escalera {
 	
 	
 
-	public Escalera(int x, int yIni, int yFin) {
+	public Escalera(int x,Plataforma uno, Plataforma dos) {
 		this.x=x;
-		this.yIni=yIni;
-		this.yFin=yFin;
 		imagen="data/escalera.png";
+		//this.yIni=yIni;
+		//this.yFin=yFin;
+		
 	}
 	
 	public int getX() {

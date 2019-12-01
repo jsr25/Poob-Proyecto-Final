@@ -28,8 +28,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-
-
+import aplicacion.MonkeyException;
 import aplicacion.MonkeyPoob;
 
 public class MonkeyPoobGUI extends JFrame {
@@ -254,13 +253,12 @@ public class MonkeyPoobGUI extends JFrame {
 				}
 				if( e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
 					if(app.getJugadorPosX(1)<770) {
-					app.moverDerecha(1);
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					if (app.cambioPuntos()) {
-						app.removerSorpresa(1);
-						remove(sorpresa);
-					}
-					//System.out.println(app.getJugadorPosX(1)+"  "+app.getJugadorPosY(1));
+						app.moverDerecha(1);
+						( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+						if (app.cambioPuntos()) {
+							app.removerSorpresa(1);
+							remove(sorpresa);
+						}
 					}
 				}
 						
@@ -328,7 +326,11 @@ public class MonkeyPoobGUI extends JFrame {
 		int res=fc.showSaveDialog(this);
 		if (fc.APPROVE_OPTION==res) {
 		File f = new File(fc.getSelectedFile()+".dat");
-		app.salvar(f);
+		try {
+			app.salvar(f);
+		} catch (MonkeyException e) {
+			//jpanel diciendo ErrorIO
+		}
 		}
 	}
 }

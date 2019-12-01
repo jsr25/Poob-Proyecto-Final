@@ -56,13 +56,11 @@ public abstract class Jugador implements movimiento {
 		return mario;
 	}
 	
-	public int getPosY() {
-		
+	public int getPosY() {		
 		return posY;
 	}
 
-	public int getPosX() {
-		
+	public int getPosX() {		
 		return posX;
 	}
 	
@@ -89,9 +87,7 @@ public abstract class Jugador implements movimiento {
 	
 	protected abstract void setInEscalera(boolean s);
 
-
 	protected abstract boolean getInEscalera();
-
 
 	protected abstract int getPlat();
 
@@ -107,15 +103,12 @@ public abstract class Jugador implements movimiento {
 
 	protected abstract void sumY(int tipo);
 
-
 	protected abstract void resSub();
 
-
 	protected abstract void resY(int tipo);
-
-
-	protected abstract void resY(int tipo, int tipo2);
+	
 	protected abstract void setPlat(int i);
+	
 	protected abstract void setSubPlat(int i);
 	
 

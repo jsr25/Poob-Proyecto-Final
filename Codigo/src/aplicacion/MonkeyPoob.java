@@ -26,6 +26,7 @@ public class MonkeyPoob {
 		}
 		return monkey;
 	}
+	
 	/**
 	 * Constructor de la capa de 
 	 * aplicacion para un solo jugador
@@ -40,33 +41,41 @@ public class MonkeyPoob {
 		k=1;
 	}
 	
+	/**
+	 * Metodo que permite salvar el proceso
+	 * que se lleva en el juego
+	 * @param f
+	 * @throws MonkeyException
+	 */
+	public void salvar(File f)throws MonkeyException {
+		ObjectOutputStream out;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream(f));
+			out.writeObject(monkey);
+			out.close();
+		} catch (IOException e) {
+			throw new MonkeyException(MonkeyException.ERROR_IO);
+		}
+		
+	}
+	
 	
 	/**
-	 * Genera las plataformas en la capa de aplicacion
-	 *  a partir de los valores de los puntos de los 
-	 *  extremos de la plataforma 
-	 * @param x1 la x inicial 
-	 * @param y1 la y inicial
-	 * @param x2 la x final 
-	 * @param y2 la y final 
+	 * Se genera la plataforma en donde
+	 * inicia el jugador
+	 * @param x1
+	 * @param y1
 	 */
 	public void crearPlataformaBaja(int x1, int y1) {
 		ArrayList<Plataforma> plat=new ArrayList<Plataforma>();
-		//plat.add(new Plataforma(x2,y,x,0,-1));
 		int x=16;
 		int x2=x1;
 		int y=y1;
 		for (int i=0;i<20;i++ ) {
 			if(i<10) {
-				if (i==9) {
-					plat.add(new Plataforma(x2,y,x,0,-1));
-				}
-				else {
 				plat.add(new Plataforma(x2,y,x,0));
-				}
 				x2=x;
-				x=x+16;
-				
+				x=x+16;				
 			}
 			else {
 				y=y-1;
@@ -78,6 +87,11 @@ public class MonkeyPoob {
 		}
 		plataformas.add(plat);
 	}
+	/**
+	 * Se generan las plataformas donde el jugador
+	 * puede moverse
+	 * @param y1
+	 */
 	public void crearPlataformaCentral(int y1) {
 		ArrayList<Plataforma> plat=new ArrayList<Plataforma>();
 		int pos;
@@ -96,34 +110,112 @@ public class MonkeyPoob {
 		k=k*-1;
 		plataformas.add(plat);
 	}
+	/**
+	 * se genera la plataforma donde esta donkey 
+	 * @param x1
+	 * @param y1
+	 */
 	public void crearPlataformaAlta(int x1, int y1 ) {
 		ArrayList<Plataforma> plat=new ArrayList<Plataforma>();
-		//plat.add(new Plataforma(x2,y,x,0,-1));
 		int x=16;
 		int x2=x1;
 		int y=y1;
 		for (int i=0;i<15;i++ ) {
 			if(i<7) {
-				if (i==6) {
-					plat.add(new Plataforma(x2,y,x,0,1));
-				}
-				else {
 				plat.add(new Plataforma(x2,y,x,0));
-				}
 				x2=x;
 				x=x+16;
-				
 			}
 			else {
 				y=y+1;
 				plat.add(new Plataforma(x2,y,x,1));
 				x2=x;
 				x=x+16;
-				
 			}
 		}
 		plataformas.add(plat);
 	}
+	/**
+	 * mueve al personaje a la derecha
+	 * que envia la señal dependiendo 
+	 * de en que plataforma y 
+	 * subplataforma este
+	 * @param personaje
+	 */
+	public void moverDerecha(int personaje) {
+		//mostrarPlat();//borrar metodo  despues
+		Jugador temp=jugadores.get(personaje-1);
+		if (plataformas.get(temp.getPlat()).get(temp.getSubPlat()).estaSobre(temp.getPosX(),temp.getPosY())&& (temp.getPosX()!=plataformas.get(temp.getPlat()).get(temp.getSubPlat()).getX2())) {
+			temp.avanzar();		
+			beneficio(personaje);	
+			perderVida(personaje);
+		}
+		else {
+			
+			if ((temp.getSubPlat()+1<plataformas.get(temp.getPlat()).size()-1)){
+				temp.avanzar();
+				temp.sumSub();
+				temp.sumY(plataformas.get(temp.getPlat()).get(temp.getSubPlat()).getTipo());
+			}
+		}
+	}
+	/**
+	 * mueve al personaje a la izquierda
+	 * que envia la señal dependiendo 
+	 * de en que plataforma y 
+	 * subplataforma este
+	 * @param personaje
+	 */
+	public void moverIzquieda(int personaje) {
+		Jugador temp=jugadores.get(personaje-1);
+		if (plataformas.get(temp.getPlat()).get(temp.getSubPlat()).estaSobre2(temp.getPosX(),temp.getPosY())) {
+			temp.retroceder();		
+			beneficio(personaje);	
+			perderVida(personaje);
+		}
+		else {		
+			if (temp.getSubPlat()-1>-1){
+				temp.resY(plataformas.get(temp.getPlat()).get(temp.getSubPlat()).getTipo());
+				temp.retroceder();
+				temp.resSub();
+			}
+			
+		}
+	}
+	/**
+	 * Genra un escalera el la capa 
+	 * de aplicacion
+	 * @param x
+	 * @param yIni
+	 * @param yFin
+	 */
+	public void generarEscaleras(int x, int plataforma1 , int plataforma2) {
+		ArrayList<Plataforma> plat1=plataformas.get(plataforma1-1);
+		ArrayList<Plataforma> plat2=plataformas.get(plataforma2-1);
+		//escaleras.add(new Escalera(x,plat1,plat2));
+		
+	}
+	
+	private Plataforma buscarPlataforma(ArrayList<Plataforma> plat,int x) {
+		Plataforma f=null;
+		for(int i=0;i<plat.size();i++) {
+			if (plat.get(i).rangoX(x)) {
+				f=plat.get(i);
+			}
+		}
+		return f;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Genera un barril en la capa 
@@ -143,16 +235,7 @@ public class MonkeyPoob {
 		sorpresas.add(cs);
 		return cs.getImagen();
 	}
-	/**
-	 * Genra un escalera el la capa 
-	 * de aplicacion
-	 * @param x
-	 * @param yIni
-	 * @param yFin
-	 */
-	public void generarEscaleras(int x, int yIni , int yFin) {
-		escaleras.add(new Escalera(x,yIni,yFin));
-	}
+	
 	/**
 	 * Genera un jugador Real para en 
 	 * la capa de aplicacion
@@ -181,33 +264,7 @@ public class MonkeyPoob {
 			
 		}
 	}
-	public void moverDerecha(int personaje) {
-		//System.out.println(jugadores.get(personaje-1).getSubPlat());
-		mostrarPlat();
-		//System.out.println((jugadores.get(personaje-1)).getPosX());
-		if (plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY())&& (jugadores.get(personaje-1).getPosX()!=plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getX2())) {
-			(jugadores.get(personaje-1)).avanzar();		
-			beneficio(personaje);	
-			perderVida(personaje);
-			
-			//System.out.println("??????????????????????????''");
-			//System.out.println((jugadores.get(personaje-1)).getPosY());
-			//System.out.println((jugadores.get(personaje-1)).getPosX());
-		}
-		else {
-			
-			if (((jugadores.get(personaje-1)).getSubPlat()+1<plataformas.get(jugadores.get(personaje-1).getPlat()).size()-1)){
-				(jugadores.get(personaje-1)).avanzar();
-				(jugadores.get(personaje-1)).sumSub();
-				jugadores.get(personaje-1).sumY(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo());
-				//System.out.println((jugadores.get(personaje-1)).getPosY());
-				//System.out.println((jugadores.get(personaje-1)).getPosX());
-			}
-			
-			
-		}
-		//System.out.println((jugadores.get(personaje-1)).getPosX());
-	}
+	
 	
 	/**
 	 * Dado un  jugador retorna el personaje
@@ -228,32 +285,7 @@ public class MonkeyPoob {
 	 * 
 	 * @param personaje
 	 */
-	public void moverIzquieda(int personaje) {
-		//System.out.println(jugadores.get(personaje-1).getPosY());
-		//System.out.println(jugadores.get(personaje-1).getPosX());
-		//System.out.println(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre2(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY()));
-		
-		if (plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).estaSobre2(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY())) {
-			(jugadores.get(personaje-1)).retroceder();		
-		beneficio(personaje);	
-		perderVida(personaje);
-		//System.out.println(jugadores.get(personaje-1).getPuntos());
-		}
-		else {		
-			if ((jugadores.get(personaje-1)).getSubPlat()-1>-1){
-				//System.out.println("*************************");
-				(jugadores.get(personaje-1)).resSub();	
-				//System.out.println(jugadores.get(personaje-1).getSubPlat());
-				jugadores.get(personaje-1).resY(plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo(),plataformas.get(jugadores.get(personaje-1).getPlat()).get(jugadores.get(personaje-1).getSubPlat()).getTipo2());
-				
-				(jugadores.get(personaje-1)).retroceder();
-			}
-			else {
-				
-			}
-		}
-		//System.out.println((jugadores.get(personaje-1)).getPosX());
-	}
+	
 	/**
 	 * 
 	 * @param personaje
@@ -432,16 +464,6 @@ public class MonkeyPoob {
 		return escaleras.get(0).getImagen();
 	}
 	
-	public void salvar(File f) {
-		ObjectOutputStream out;
-		try {
-			out = new ObjectOutputStream(new FileOutputStream(f));
-			out.writeObject(monkey);
-			out.close();
-		} catch (IOException e) {
-			//e.printStackTrace();
-		}
-		
-	}
+	
 }
 

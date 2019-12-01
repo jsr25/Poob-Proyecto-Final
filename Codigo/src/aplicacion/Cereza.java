@@ -10,6 +10,7 @@ public class Cereza extends Sorpresa {
 		imagen="data/cereza.png";
 		
 	}
+	
 
 	@Override
 	public int beneficio() {

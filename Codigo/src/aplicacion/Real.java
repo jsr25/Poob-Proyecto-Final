@@ -117,9 +117,9 @@ public class Real extends Jugador  {
 		//cambiarforma(7);
 		setInEscalera(posible);
 		if(posible) {
-			System.out.println("······"+posY);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+posY);
 			posY+=y;
-			System.out.println("······"+posY);
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"+posY);
 			
 			if (getForma().equals("data/marioEscalera1.png") ) {
 				cambiarforma(8);
@@ -208,16 +208,7 @@ public class Real extends Jugador  {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
-	protected void resY(int tipo, int tipo2) {
-		if (tipo2==-5) {
-			posY-=tipo;
-		}
-		else {
-			posY-=tipo2;
-		}
-		
-	}
+
 	@Override
 	protected void setPlat(int i) {		
 	}
