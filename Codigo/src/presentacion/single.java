@@ -30,7 +30,9 @@ public class single extends JPanel{
 		setFocusable(true);
 		esca=new ArrayList<int[]>();
 		k=1;
-		this.setSize(800,500);
+		this.setSize(600,600);
+		this.setBackground(Color.black);
+		
 		
 	}
 	public void addPersonaje(int x, int y, String img) {

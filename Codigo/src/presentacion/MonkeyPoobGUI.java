@@ -57,11 +57,13 @@ public class MonkeyPoobGUI extends JFrame {
 		prepareAcciones();
 		prepararMenu();
 		prepararAccionesMenu();
-		/*add(mario);
-		add(plataforma);
-		add(mono);
-		add(barril);
-		add(escalera);*/
+		this.setResizable(false);
+		this .getContentPane().setBackground(new Color(0,0,0));
+		//add(mario);
+		//add(plataforma);
+		//add(mono);
+		//add(barril);
+		//add(escalera);
 
 		
 		
@@ -95,6 +97,7 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
 		app= MonkeyPoob.getMonkey();
+		
 	}
 	public void crearPlataformaBaja() {		
 		int[] pl=app.getPlataformas(1);		

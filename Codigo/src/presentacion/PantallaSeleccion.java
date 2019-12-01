@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -20,18 +21,20 @@ import javax.swing.Timer;
 import javax.swing.border.Border;
 
 public class PantallaSeleccion extends JDialog {
-	JLabel mario,luigi;
+	JLabel mario,luigi,items,characters;
+	JButton cereza,corazon,soga,hongo;
 	JButton select1,select2,next,back;
 	Boolean c1,c2;
 	String monoN,marioN;
 	Timer timer1,timer2;
+	Boolean cerezaB,corazonB,sogaB,hongoB;
+	Color n,b;
 	public PantallaSeleccion() {
 		super();
 		prepareElementos();
 		prepareElementosMenu();
 		prepareAcciones();
-		add(mario);
-		add(luigi);
+
 	}	
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -74,57 +77,170 @@ public class PantallaSeleccion extends JDialog {
 						abraMonkeyPoobGUI();
 					}
 				});
+		cereza.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (cerezaB==true) {
+							cambiarFondo(cereza,b);
+							cerezaB=false;
+						}
+						else {
+							cambiarFondo(cereza,n);
+							cerezaB=true;
+						}
+					}
+				});
+		hongo.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (hongoB==true) {
+							cambiarFondo(hongo,b);
+							hongoB=false;
+						}
+						else {
+							cambiarFondo(hongo,n);
+							hongoB=true;
+						}
+					}
+				});
+		soga.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (sogaB==true) {
+							cambiarFondo(soga,b);
+							sogaB=false;
+						}
+						else {
+							cambiarFondo(soga,n);
+							sogaB=true;
+						}
+					}
+				});
+		corazon.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (corazonB==true) {
+							cambiarFondo(corazon,b);
+							corazonB=false;
+						}
+						else {
+							cambiarFondo(corazon,n);
+							corazonB=true;
+						}
+					}
+				});
 		
 		
 	}
+	public void  cambiarFondo(JButton boton,Color color) {
+		boton.setBackground(color);
+	}
 	public void prepareElementos() {
+		n=Color.black;
+		b=Color.white;
+		cerezaB=true;
+		corazonB=true;
+		sogaB=true;
+		hongoB=true;
 		this.setLayout(null);
-		setSize(200,250);
+		setSize(600,600);
 		this .getContentPane().setBackground(new Color(0,0,0));
 		setLocationRelativeTo(null);
+		this.setResizable(false);
 		
 	}
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		c1=true;
 		c2=true;
-		select1=new JButton("SELECT");
-		select2=new JButton("SELECT");
+		
 		next=new JButton("next");
 		back=new JButton("back");
 		mario= new JLabel();
 		mario.setIcon(new ImageIcon("data/marioDerecha.png"));
-		mario.setBounds(0, 0, 80, 110);
-		mario.setLocation(0,0);
+		mario.setBounds(0, 0, 30, 30);
+		mario.setLocation(200,50);
+		cereza=new JButton();
+		ImageIcon img1=new ImageIcon("data/cereza.png");
+		cereza.setIcon(img1);
+		cereza.setBounds(0, 0, 20, 20);
+		cereza.setLocation(75,200);
+		corazon=new JButton();
+		ImageIcon img2=new ImageIcon("data/corazon.png");
+		corazon.setIcon(img2);
+		corazon.setBounds(0, 0, 20, 20);
+		corazon.setLocation(175,200);
+		soga=new JButton();
+		ImageIcon img3=new ImageIcon("data/soga.png");
+		soga.setIcon(img3);
+		soga.setBounds(0, 0, 20, 30);
+		soga.setLocation(275,200);
+		hongo=new JButton();
+		ImageIcon img4=new ImageIcon("data/hongo.png");
+		hongo.setIcon(img4);
+		hongo.setBounds(0, 0, 20, 20);
+		hongo.setLocation(375,200);
 		luigi=new JLabel();
 		luigi.setIcon(new ImageIcon("data/luigi.png"));
 		monoN="data/luigi.png";
-		luigi.setBounds(0, 0, 80, 110);
-		luigi.setLocation(100,0);
+		luigi.setBounds(0, 0, 30, 30);
+		luigi.setLocation(300,50);
+		items=new JLabel("Items");
+		items.setBounds(0, 0, 150, 20);
+		items.setLocation(225,150);
+		items.setFont(new Font("Gill Sans Ultra Bold",1,25));
+		items.setForeground(Color.red);
+		characters=new JLabel("Characters");
+		characters.setBounds(0, 0, 200, 20);
+		characters.setFont(new Font("Gill Sans Ultra Bold",1,25));
+		characters.setLocation(185,0);
+		characters.setForeground(Color.red);
 		next.setBounds(0, 0, 80, 15);
-		next.setLocation(100,150);
+		next.setLocation(300,250);
 		back.setBounds(0, 0, 80, 15);
-		back.setLocation(0,150);
-		select1.setBounds(0, 0, 80, 15);
-		select1.setLocation(0,100);
-		select2.setBounds(0, 0, 80, 15);
-		select2.setLocation(100,100);
-		select1.setBackground(Color.BLACK);
-		select2.setBackground(Color.black);
+		back.setLocation(50,250);
+		select1=new JButton();
+		select2=new JButton();
+		select1.setBounds(0, 0, 30, 30);
+		select1.setLocation(200,50);
+		select2.setBounds(0, 0, 30, 30);
+		select2.setLocation(300,50);
+		select1.setBackground(null);
+		select2.setBackground(null);
+		select1.setOpaque(false);
+		select1.setContentAreaFilled(false);
+		select1.setBorderPainted(false);
+		select2.setOpaque(false);
+		select2.setContentAreaFilled(false);
+		select2.setBorderPainted(false);
+		cereza.setBackground(n);
+		soga.setBackground(n);
+		corazon.setBackground(n);
+		hongo.setBackground(n);
 		select1.setBorder(null);
 		select2.setBorder(null);
-		select1.setForeground(Color.white);
-		select2.setForeground(Color.white);
-		next.setBackground(Color.BLACK);
-		back.setBackground(Color.black);
+		cereza.setBorder(null);
+		corazon.setBorder(null);
+		soga.setBorder(null);
+		hongo.setBorder(null);
+		next.setBackground(n);
+		back.setBackground(n);
 		next.setBorder(blueLine);
 		back.setBorder(blueLine);
 		next.setForeground(Color.yellow);
 		back.setForeground(Color.yellow);
+		add(mario);
+		add(luigi);
 		add(select1);
 		add(select2);
 		add(next);
 		add(back);
+		add(corazon);
+		add(soga);
+		add(hongo);
+		add(cereza);
+		add(items);
+		add(characters);
 		generarTimer1();
 		generarTimer2();
 		

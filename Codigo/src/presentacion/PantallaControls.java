@@ -17,7 +17,7 @@ public class PantallaControls extends JDialog {
 	private static final long serialVersionUID = 1L;
 	JButton back;
 	JLabel w,a,s,d,p,space,up,left,right,down,salto,der,izq;
-	String upN,leftN,rightN,downN,saltoN,derN,izqN ;
+	String upN,leftN,rightN,downN,saltoN,derN,izqN,spaceN ;
 	public PantallaControls() {
 		super();
 		prepareElementos();
@@ -30,9 +30,11 @@ public class PantallaControls extends JDialog {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(ancho/2,alto/2);
+		setSize(600,600);
 		setLocationRelativeTo(null);
 		this .getContentPane().setBackground(new Color(0,0,0));
+		this.setResizable(false);
+		
 	}
 	public void prepareControles() {
 		w=new JLabel();
@@ -54,16 +56,20 @@ public class PantallaControls extends JDialog {
 		upN="data/teclaArriba1.png";
 		left.setIcon(new ImageIcon("data/teclaIzquierda1.png"));
 		left.setBounds(0, 0, 200, 200);
-		left.setLocation(200,0);
+		left.setLocation(100,0);
 		leftN="data/teclaIzquierda1.png";
 		right.setIcon(new ImageIcon("data/teclaDerecha1.png"));
 		right.setBounds(0, 0, 200, 200);
-		right.setLocation(400,0);
+		right.setLocation(200,0);
 		rightN="data/teclaDerecha1.png";
 		down.setIcon(new ImageIcon("data/teclaAbajo1.png"));
 		down.setBounds(0, 0, 200, 200);
-		down.setLocation(600,0);
+		down.setLocation(300,0);
 		downN="data/teclaAbajo1.png";
+		space.setIcon(new ImageIcon("data/space.png"));
+		space.setBounds(0, 0, 200, 200);
+		space.setLocation(400,0);
+		spaceN="data/space.png";
 		salto.setIcon(new ImageIcon("data/salto1.png"));
 		salto.setBounds(0, 0, 400, 400);
 		salto.setLocation(0,200);
@@ -80,9 +86,11 @@ public class PantallaControls extends JDialog {
 		add(left);
 		add(right);
 		add(down);
+		add(space);
+		/*
 		add(salto);
 		add(der);
-		add(izq);
+		add(izq);*/
 		
 	}
 	public void moverTeclas() {
@@ -218,6 +226,22 @@ public class PantallaControls extends JDialog {
 			}
 		};
 		timer7.schedule(tarea7, 0, 500);
+		Timer timer8=new Timer();
+		TimerTask tarea8=new TimerTask(){
+			@Override
+			public void run() {	
+				if (spaceN=="data/space.png") {
+					space.setIcon(new ImageIcon("data/space2.png"));
+					spaceN="data/space2.png";
+				}
+
+				else {
+					space.setIcon(new ImageIcon("data/space.png"));
+					spaceN="data/space.png";
+				}
+			}
+		};
+		timer8.schedule(tarea8, 0, 500);
 	}
 
 }

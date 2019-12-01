@@ -83,8 +83,9 @@ public class PantallaPlay extends JDialog {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(ancho/2,alto/2);
+		setSize(600,600);
 		setLocationRelativeTo(null);  
+		this.setResizable(false);
 	}
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);

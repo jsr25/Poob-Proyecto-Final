@@ -40,6 +40,7 @@ public class PantallaOptions extends JDialog {
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 		setSize(ancho/2,alto/2);
 		setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
