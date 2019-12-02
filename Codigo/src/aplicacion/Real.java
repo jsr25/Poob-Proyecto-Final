@@ -3,7 +3,7 @@ package aplicacion;
 public class Real extends Jugador  {
 	private int vidas;
 	private boolean estado;
-	private boolean inEscalera;
+	
 	
 	public Real(int posX,int posY,String personaje) {
 		super(posX,posY,personaje);
@@ -61,7 +61,6 @@ public class Real extends Jugador  {
 
 	@Override
 	public void avanzar() {
-		if(!inEscalera) {
 			if(getForma().equals("data/marioDerecha.png")) {
 				cambiarforma(2);
 			}
@@ -75,11 +74,10 @@ public class Real extends Jugador  {
 			}
 			posX=posX+4;
 		}
-	}
+
 
 	@Override
 	public void retroceder() {
-		if(!inEscalera) {
 			if(getForma().equals("data/marioIzquierda.png")) {
 				cambiarforma(5);
 			}
@@ -93,7 +91,6 @@ public class Real extends Jugador  {
 			}
 			posX=posX-4;
 		}
-	}
 
 	@Override
 	protected boolean getEstado() {
@@ -114,13 +111,8 @@ public class Real extends Jugador  {
 
 	@Override
 	protected void subir(boolean posible,int y) {
-		//cambiarforma(7);
-		setInEscalera(posible);
 		if(posible) {
-			System.out.println("������"+posY);
 			posY+=y;
-			System.out.println("������"+posY);
-			
 			if (getForma().equals("data/marioEscalera1.png") ) {
 				cambiarforma(8);
 			}
@@ -141,7 +133,6 @@ public class Real extends Jugador  {
 
 	@Override
 	protected void bajar(boolean posible, int y) {
-		setInEscalera(posible);
 		if(posible) {
 			posY-=y;
 			if (getForma().equals("data/marioEscalera1.png") || getForma().equals("data/marioEscalera3.png") ) {
@@ -161,9 +152,7 @@ public class Real extends Jugador  {
 	
 	}
 	
-	public void setInEscalera(boolean s) {
-		inEscalera=s;
-	}
+
 
 	@Override
 	protected boolean getInEscalera() {
@@ -211,9 +200,15 @@ public class Real extends Jugador  {
 
 	@Override
 	protected void setPlat(int i) {		
+		plataforma=i;	
 	}
 	@Override
 	protected void setSubPlat(int i) {
+		subPlataforma=i;
+	}
+	@Override
+	protected void setInEscalera(boolean s) {
+		inEscalera=s;
 		
 	}
 	

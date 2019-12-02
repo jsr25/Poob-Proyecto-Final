@@ -111,8 +111,8 @@ public class MonkeyPoobGUI extends JFrame {
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataformaArriba(pl[0], pl[1], "data/plataforma.png");
 	}
-	public void crearEscalera(){
-		int[]esc=principal.getEscalera(1);
+	public void crearEscalera(int i){
+		int[]esc=principal.getEscalera(i);
 		app.generarEscaleras(esc[0], esc[1], esc[2]);
 	}
 	public void prepararPersonajes() {
@@ -138,14 +138,17 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.addPlataformaCentral(100, "data/plataforma.png");
 		principal.addPlataformaArriba(0, 40, "data/plataforma.png");*/
 		principal.addEscalera(1, 2, 32);
-		//principal.addEscalera(2, 3, 120);
-		//principal.addEscalera(3, 4, 50);
-		//principal.addEscalera(4, 5, 120);
+		principal.addEscalera(2, 3, 120);
+		principal.addEscalera(3, 4, 56);
+		principal.addEscalera(4, 5, 120);
 		//principal.addEscalera(5, 6, 60);
 		//principal.addEscalera(6, 7, 120);
 		//principal.addEscalera(7, 8, 50);
-		repaint();
-		crearEscalera();
+		//repaint();
+		crearEscalera(1);
+		crearEscalera(2);
+		crearEscalera(3);
+		crearEscalera(4);
 		
 		sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));

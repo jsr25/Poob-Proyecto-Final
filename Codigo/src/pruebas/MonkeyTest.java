@@ -77,4 +77,14 @@ public class MonkeyTest {
 		assertTrue((a.getJugadorPosY(1)==0));
 	}
 	
+	@Test
+	public void deberiaCrearEsacalera() {
+		MonkeyPoob a= MonkeyPoob.getMonkey();
+		a.agregarJugadores(0, 30,"mario");
+		a.crearPlataformaBaja(0, 400);
+		a.crearPlataformaCentral(340);
+		a.generarEscaleras(40, 1, 2);
+	}
+	
+	
 }

@@ -5,16 +5,20 @@ public class Escalera {
 	private int yIni;
 	private int yFin;
 	private String imagen;
+	private Plataforma plat1;
+	private Plataforma plat2;
 	
 	
 
 	public Escalera(int x,Plataforma uno, Plataforma dos) {
 		this.x=x;
 		imagen="data/escalera.png";
-		//this.yIni=yIni;
-		//this.yFin=yFin;
-		
-	}
+		plat1=uno;
+		plat2=dos;
+		yIni=plat1.getY();
+		yFin=plat2.getY();
+			}
+	
 	
 	public int getX() {
 		return x;
@@ -38,6 +42,10 @@ public class Escalera {
 	
 	public String getImagen() {
 		return imagen;
+	}
+	
+	public Plataforma getPlat2() {
+		return plat2;
 	}
 	
 }

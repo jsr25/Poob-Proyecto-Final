@@ -134,10 +134,10 @@ public class single extends JPanel{
 				y2=plaF2.get(i).getY();
 		}
 		
-		System.out.println(y1+"  "+y2);
+		//System.out.println(y1+"  "+y2);
 		
 		}	
-		int[] esc= {x,y1,y2};
+		int[] esc= {x,plataforma1,plataforma2};
 		esca.add(esc);
 		for (int i=0; i<((y1-y2)/7);i++) {
 			escalera=new JLabel();
