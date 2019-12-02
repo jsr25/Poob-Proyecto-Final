@@ -25,7 +25,7 @@ public class single extends JPanel{
 	private ArrayList<int[]> esca;
 	private String nombre;
 	private int k;
-	ArrayList plataformas=new ArrayList<ArrayList>();
+	ArrayList<ArrayList<JLabel>> plataformas=new ArrayList<ArrayList<JLabel>>();
 	public  single(){
 		setFocusable(true);
 		esca=new ArrayList<int[]>();
@@ -118,27 +118,25 @@ public class single extends JPanel{
 		k=k*-1;
 		plataformas.add(pC);
 	}
-	public void addEscalera(int plataforma1, int plataforma2, int x) {
-		ArrayList<JLabel> plaF1=(ArrayList<JLabel>)plataformas.get(plataforma1-1);
-		ArrayList<JLabel> plaF2=(ArrayList<JLabel>)plataformas.get(plataforma2-1);
-		int y1=-1;
-		int y2=-1;
-		for (int i=0;i<plaF1.size()&& y1==-1;i++) {
-			if(plaF1.get(i).getX()>x) {
-				y1=plaF1.get(i).getY();
-			}
-			
-		}
-		for (int i=0;i<plaF2.size()&& y2==-1;i++) {
-			if(plaF2.get(i).getX()>x) {
-				y2=plaF2.get(i).getY();
-		}
+	public int [] getEscalera(int i) {
+		int[] esc= esca.get(i-1);
+		return esc;
 		
-		//System.out.println(y1+"  "+y2);
-		
-		}	
-		int[] esc= {x,plataforma1,plataforma2};
-		esca.add(esc);
+	}
+	public void addPlataforma(int x, int y, int x2, String string) {
+		ArrayList<JLabel> pC=new ArrayList<JLabel>();
+		for(int i=0;i<x2/16;i++) {
+			JLabel plataforma=new JLabel();
+			plataforma.setSize(10, 10);
+			plataforma.setIcon(new ImageIcon(string));
+			plataforma.setBounds(0, 0, 80, 110);
+			plataforma.setLocation(x+(i*16),y);
+			add(plataforma);
+			pC.add(plataforma);
+		}
+		plataformas.add(pC);
+	}
+	public void crearEscalera(int x, int y1, int y2) {
 		for (int i=0; i<((y1-y2)/7);i++) {
 			escalera=new JLabel();
 			escalera.setIcon(new ImageIcon("data/escalera.png"));
@@ -147,11 +145,33 @@ public class single extends JPanel{
 			escalera.setLocation(x,(y1-8)+(-i*7));
 			add(escalera);
 		
+		}
 	}
+	
+	public void crearBarril(int x , int y) {
+		barril=new JLabel();
+		barril.setIcon(new ImageIcon("data/barrilGirando1.png"));
+		barrilN="data/barrilGirando1.png";
+		barril.setSize(20,20);
+		barril.setBounds(0, 0, 80, 110);
+		barril.setLocation(x,y);
+		add(barril);
 	}
-	public int [] getEscalera(int i) {
-		int[] esc= esca.get(i-1);
-		return esc;
+	public void actualizarbar(int j, int getbarx, int getbary) {
+		barril.setLocation(getbarx, getbary);
 		
+		if(barrilN.equals("data/barrilGirando1.png")) {
+			barril.setIcon(new ImageIcon("data/barrilgirando2.png"));
+			barrilN="data/barrilgirando2.png";
+		}
+		else {
+			barril.setIcon(new ImageIcon("data/barrilGirando1.png"));
+			barrilN="data/barrilGirando1.png";
+		}
+		repaint();
+		
+	}
+	public void removebar(int j) {
+		remove(barril);
 	}
 }

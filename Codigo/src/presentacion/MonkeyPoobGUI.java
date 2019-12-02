@@ -16,7 +16,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
 import java.io.File;
-import java.util.Timer;
+import javax.swing.Timer;
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
@@ -32,7 +32,7 @@ import aplicacion.MonkeyException;
 import aplicacion.MonkeyPoob;
 
 public class MonkeyPoobGUI extends JFrame {
-	private JLabel mario,mono,barril,plataforma,sorpresa,escalera;
+	private JLabel mario,mono,barril,plataforma,sorpresa,escalera,puntos;
 	public String monoN,barrilN;
 	private single principal;
 	private String nombre;
@@ -98,36 +98,116 @@ public class MonkeyPoobGUI extends JFrame {
 		app= MonkeyPoob.getMonkey();
 		
 	}
-	public void crearPlataformaBaja() {		
-		int[] pl=app.getPlataformas(1);		
-		principal.addPlataformaAbajo(pl[0], pl[1], "data/plataforma.png");		
+	public void crearPlataforma(int i) {		
+		int[] pl=app.getPlataformas(i);		
+		principal.addPlataforma(pl[0], pl[1],pl[2], "data/plataforma.png");		
 	}
 	
 	public void crearPataformaCentral(int i) {
 		int[] pl=app.getPlataformas(i);		
-		principal.addPlataformaCentral( pl[1], "data/plataforma.png");
+		principal.addPlataformaCentral(pl[1], "data/plataforma.png");
 	}
 	public void crearPlataformaAlta(int i) {
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataformaArriba(pl[0], pl[1], "data/plataforma.png");
 	}
 	public void crearEscalera(int i){
-		int[]esc=principal.getEscalera(i);
-		app.generarEscaleras(esc[0], esc[1], esc[2]);
+		int[]esc=app.getEscalera(i);
+		principal.crearEscalera(esc[0], esc[1], esc[2]);
+	}
+	private void crearBarril(int j) {
+		int [] barr=app.getBarril(j);
+		principal.crearBarril(barr[0],barr[1]);
+	}
+	private void moverBarril(int j) {		
+		Timer tim=new Timer(100, null);		
+		tim.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						if (app.getbary(j)==400 && app.getbarx(j)==10) {
+							principal.removebar(j);
+							tim.stop();
+						}
+						else if(app.jugadoresMuertos()) {
+							(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+							//tim.stop();
+							//principal.removebar(j);
+						}
+						app.moverBarril(j);
+						principal.actualizarbar(j,app.getbarx(j),app.getbary(j));
+					}	
+				});		
+		tim.start();
+		
+		
 	}
 	public void prepararPersonajes() {
 		app.agregarJugadores(0, 400, "mario");
+		//puntos= new JLabel();
+		//puntos.setText(app.getPuntos(1)+"");
+		//puntos.setForeground(Color.white);
+		//puntos.setLocation(0,0);
+		//puntos.setVisible(true);
+		//principal.add(puntos);
+		//principal.repaint();
+		
 		principal.addPersonaje(0,400,"data/marioDerecha.png");
-		app.crearPlataformaBaja(0, 412);
-		crearPlataformaBaja();
-		app.crearPlataformaCentral(340);
+		app.crearPlataforma(0, 412,480,-1);
+		crearPlataforma(1);
+		app.crearPlataforma(0, 362, 400, 1);
+		crearPlataforma(2);
+		app.crearPlataforma(80, 312, 400, -1);
+		crearPlataforma(3);
+		app.crearPlataforma(0, 262, 400, 1);
+		crearPlataforma(4);
+		app.crearPlataforma(80, 212, 400, -1);
+		crearPlataforma(5);
+		app.crearPlataforma(0, 162, 400, 1);
+		crearPlataforma(6);
+		app.crearPlataforma(80,112 , 400, -1);
+		crearPlataforma(7);
+		app.crearPlataforma(0, 62, 400, 1);
+		crearPlataforma(8);
+		app.crearPlataforma(90, 0, 160, 1);
+		crearPlataforma(9);
+		
+		app.generarEscaleras(40, 1, 2);
+		crearEscalera(1);
+		app.generarEscaleras(80, 2, 3);
+		crearEscalera(2);
+		app.generarEscaleras(100, 3, 4);
+		crearEscalera(3);
+		app.generarEscaleras(120, 4, 5);
+		crearEscalera(3);
+		app.generarEscaleras(300, 5, 6);
+		crearEscalera(4);
+		app.generarEscaleras(200, 6, 7);
+		crearEscalera(5);
+		app.generarEscaleras(380, 7, 8);
+		crearEscalera(6);
+		app.generarEscaleras(120, 8, 9);
+		crearEscalera(7);
+		app.generarEscaleras(140, 8, 9);
+		crearEscalera(8);
+		app.generarEscaleras(200, 8, 9);
+		crearEscalera(9);
+		
+		app.generarBarriles();
+		crearBarril(1);
+		moverBarril(1);
+		
+		
+		
+		/*app.crearPlataformaCentral(340);
 		crearPataformaCentral(2);
 		app.crearPlataformaCentral(300);
 		crearPataformaCentral(3);
 		app.crearPlataformaCentral(240);
 		crearPataformaCentral(4);
-		app.crearPlataformaAlta(0,40);
+		app.crearPlataformaCentral(100);
 		crearPlataformaAlta(5);
+		app.crearPlataformaAlta(0,40);
+		crearPlataformaAlta(6);*/
 		
 		/*principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
 		principal.addPlataformaCentral(340, "data/plataforma.png");
@@ -137,25 +217,27 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.addPlataformaCentral(140, "data/plataforma.png");
 		principal.addPlataformaCentral(100, "data/plataforma.png");
 		principal.addPlataformaArriba(0, 40, "data/plataforma.png");*/
-		principal.addEscalera(1, 2, 32);
-		principal.addEscalera(2, 3, 120);
+		//principal.addEscalera(1, 2, 40);
+		/*principal.addEscalera(2, 3, 72);
 		principal.addEscalera(3, 4, 56);
-		principal.addEscalera(4, 5, 120);
-		//principal.addEscalera(5, 6, 60);
+		principal.addEscalera(4, 5, 88);
+		principal.addEscalera(5, 6, 104);*/
 		//principal.addEscalera(6, 7, 120);
 		//principal.addEscalera(7, 8, 50);
-		//repaint();
-		crearEscalera(1);
+		
+	/*	crearEscalera(1);
 		crearEscalera(2);
 		crearEscalera(3);
 		crearEscalera(4);
+		crearEscalera(5);*/
 		
 		sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));
 		sorpresa.setBounds(0, 0, 80, 110);
-		sorpresa.setLocation(48, 400);
+		sorpresa.setLocation(50, 400);
 		sorpresa.setSize(100, 100);	
 		add(sorpresa);
+		app.generarSorpresa(50, 400);
 		//app.crearPlataforma(0, 0, 100, 40);
 		
 		
@@ -181,7 +263,7 @@ public class MonkeyPoobGUI extends JFrame {
 		barril.setBounds(20, 20, 80, 110);
 		barril.setLocation(12,15);
 		//plataforma.
-		Timer timer=new Timer();
+		//Timer timer=new Timer();
 		TimerTask tarea=new TimerTask(){
 			@Override
 			public void run() {
@@ -199,8 +281,8 @@ public class MonkeyPoobGUI extends JFrame {
 				}
 			}
 		};
-		timer.schedule(tarea, 0, 500);
-		Timer timer2=new Timer();
+		//timer.schedule(tarea, 0, 500);
+		//Timer timer2=new Timer();
 		TimerTask tarea2=new TimerTask(){
 			@Override
 			public void run() {	
@@ -220,8 +302,10 @@ public class MonkeyPoobGUI extends JFrame {
 				}
 			}
 		};
-		timer2.schedule(tarea2, 0, 50);
+		//timer2.schedule(tarea2, 0, 50);
 	}
+	
+	
 	public void agregrarplata(int x,int y) {
 		//app.crearPlataforma(x, y, x+16, y);
 		}
@@ -279,23 +363,22 @@ public class MonkeyPoobGUI extends JFrame {
 					(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				
-				
+				repaint();	
 			}
 			public void keyReleased(KeyEvent e) {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					if(!app.getEnEscalera(1)) {
+					
 					app.FormaEstaticaIz(1);
 					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					}
+				
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					if(!app.getEnEscalera(1)) {
+					
 					app.FormaEstaticaDer(1);
 					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					}
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					
@@ -304,12 +387,14 @@ public class MonkeyPoobGUI extends JFrame {
 					app.dejarsaltar(1);
 					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
-				
+				repaint();	
 			}
 				
 			
 		});
+		
 	}
+	
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
 		this.setVisible(false);
@@ -323,7 +408,7 @@ public class MonkeyPoobGUI extends JFrame {
 			}	
 		} );
 	}
-
+	
 	private void opcioSalvar() {
 		JFileChooser fc = new JFileChooser();
 		int res=fc.showSaveDialog(this);

@@ -10,7 +10,7 @@ public abstract class Jugador implements movimiento {
 	protected int puntos;
 	protected int plataforma;
 	protected int subPlataforma;
-	protected   boolean inEscalera;
+	protected   boolean muerto;
 	private String personaje;
 	private String forma;
 	public Jugador(int posX, int posY,String personaje) {
@@ -39,6 +39,7 @@ public abstract class Jugador implements movimiento {
 		mario.add("data/marioEscalera4.png");//10
 		mario.add("data/marioSalto.png");//11
 		mario.add("data/marioSaltoIz.png");//12
+		mario.add("data/marioMuertoDerecha.png");//13
 		forma=mario.get(0);}
 		
 	}
@@ -111,7 +112,14 @@ public abstract class Jugador implements movimiento {
 	protected abstract void setPlat(int i);
 	
 	protected abstract void setSubPlat(int i);
+
+
+	protected abstract void resVidas();
+
+
+	protected abstract int getVidas();
 	
+	protected abstract boolean getMuerto();
 	
 	
 

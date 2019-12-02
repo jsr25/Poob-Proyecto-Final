@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class MonkeyTest {
-
+	private MonkeyPoob a;
+	public MonkeyTest(){
+		a= MonkeyPoob.getMonkey();
+	}
 	//@Test
 	/*public void deberiaHacebarril() {
 		MonkeyPoob a= new MonkeyPoob();
@@ -25,24 +28,34 @@ public class MonkeyTest {
 	
 	@Test
 	public void deberiaMoverDerechaPersonaje() {
-		MonkeyPoob a= MonkeyPoob.getMonkey();
-		a.agregarJugadores(0, 0,"mario");
+		
+		a.agregarJugadores(0,-12,"mario");
+		a.crearPlataforma(0, 0, 100, -1);
+		
 		a.moverDerecha(1);
+		a.moverDerecha(1);	
 		a.moverDerecha(1);
-		a.moverDerecha(1);
+		
 		assertTrue((a.getJugadorPosX(1))==30);
 	}
 	
+	
+	
 	@Test
 	public void deberiaMoverIzquierdaPersonaje() {
-		MonkeyPoob a= MonkeyPoob.getMonkey();
-		a.agregarJugadores(30, 0,"mario");
+		a.agregarJugadores(30,-12,"mario");
+		a.crearPlataforma(0, 0, 100, -1);
+	
+		
+		System.out.println(a.getJugadorPosX(1)+" "+a.getJugadorPosY(1));
+		
 		a.moverIzquieda(1);
 		a.moverIzquieda(1);
 		a.moverIzquieda(1);
+		
 		assertTrue((a.getJugadorPosX(1))==0);
 	}
-	
+	/*
 	@Test
 	public void debreriaPersonajeTomaBeneficio() {
 		MonkeyPoob a= MonkeyPoob.getMonkey();
@@ -85,6 +98,16 @@ public class MonkeyTest {
 		a.crearPlataformaCentral(340);
 		a.generarEscaleras(40, 1, 2);
 	}
+	
+	@Test
+	public void  subirEscalera() {
+		MonkeyPoob a= MonkeyPoob.getMonkey();
+		a.agregarJugadores(0, 16,"mario");
+		a.crearPlataformaBaja(0, 400);
+		a.crearPlataformaCentral(340);
+		a.generarEscaleras(40, 1, 2);
+		
+	}*/
 	
 	
 }

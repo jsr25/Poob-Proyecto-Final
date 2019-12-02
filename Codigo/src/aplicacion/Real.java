@@ -9,7 +9,7 @@ public class Real extends Jugador  {
 		super(posX,posY,personaje);
 		vidas=3;
 		estado=true;
-		inEscalera=false;
+		muerto=false;
 		plataforma=0;
 		subPlataforma=0;
 		
@@ -33,7 +33,7 @@ public class Real extends Jugador  {
 
 	@Override
 	public void saltar() {
-			if(getForma().equals("data/marioDerecha.png")) {
+			/*if(getForma().equals("data/marioDerecha.png")) {
 				posX=posX+20;
 				cambiarforma(11);
 				posY=posY-10;
@@ -54,13 +54,14 @@ public class Real extends Jugador  {
 					cambiarforma(12);
 					posY=posY-5;
 				}
-				
-			}
+				*/
+			//}
 				
 	}
 
 	@Override
 	public void avanzar() {
+			posX=posX+10;
 			if(getForma().equals("data/marioDerecha.png")) {
 				cambiarforma(2);
 			}
@@ -72,12 +73,13 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(1);
 			}
-			posX=posX+4;
+			
 		}
 
 
 	@Override
 	public void retroceder() {
+			posX=posX-10;
 			if(getForma().equals("data/marioIzquierda.png")) {
 				cambiarforma(5);
 			}
@@ -89,7 +91,7 @@ public class Real extends Jugador  {
 			else {
 				cambiarforma(4);
 			}
-			posX=posX-4;
+			
 		}
 
 	@Override
@@ -157,7 +159,7 @@ public class Real extends Jugador  {
 	@Override
 	protected boolean getInEscalera() {
 		
-		return inEscalera;
+		return false;
 	}
 
 	@Override
@@ -208,8 +210,21 @@ public class Real extends Jugador  {
 	}
 	@Override
 	protected void setInEscalera(boolean s) {
-		inEscalera=s;
+	//	inEscalera=s;
 		
+	}
+	@Override
+	protected void resVidas() {
+		muerto=true;
+		vidas-=1;
+		cambiarforma(13);
+	}
+	@Override
+	protected int getVidas() {		
+		return vidas;
+	}
+	protected boolean getMuerto() {
+		return muerto;
 	}
 	
 	

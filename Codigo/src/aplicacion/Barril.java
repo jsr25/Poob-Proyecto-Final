@@ -8,26 +8,40 @@ public class Barril {
 	private MonkeyPoob monkey;
 	
 	public Barril(MonkeyPoob monkey) {
-		this.x=15;
+		this.x=0;
 		this.y=50;
-		this.monkey=monkey;
-		move();
+		this.monkey=MonkeyPoob.getMonkey();
 	}
 	
-	public void move() {
-		
-		while(y!=0) {
-			y-=1;
-			//x=movimiento(x);
-			ArrayList<Jugador> jp = monkey.getJugadores();
-			for (Jugador j:jp) {
-				if(j.colision(x,y)) {
-					j.perdervida();
+	public void move() {		
+			ArrayList<Plataforma> pT= monkey.getplata();
+			boolean posible=false;
+			int tipo=0;
+			for (int i=0;i<pT.size() && posible==false;i++) {
+				 
+				if (pT.get(i).estaSobre(x, y) && pT.get(i).getTipo()==1) {
+					posible=true;
+					tipo=1;
+				}
+				else if (pT.get(i).estaSobre2(x, y) && pT.get(i).getTipo()==-1) {
+					posible=true;
+					tipo=-1;
 				}
 			}
+			if (posible) {
+				x+=(10*tipo);
+			}
+			else {
+				y+=10;
+			}
 			
-		}
+				
+		
+			
+			
+		
 	}
+	
 	
 	/*public int movimiento(int x) {
 		ArrayList<Plataforma> plataformas= monkey.getPlataformas();
@@ -52,5 +66,10 @@ public class Barril {
 
 	public boolean colision(int posX, int posY) {
 		return x==posX && y==posY;
+	}
+
+	public int getX() {
+		
+		return x;
 	}
 }
