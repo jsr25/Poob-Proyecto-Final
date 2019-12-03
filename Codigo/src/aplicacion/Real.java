@@ -30,32 +30,34 @@ public class Real extends Jugador  {
 		
 		return estado;
 	}
-
+    public void setMuerto(boolean v) {
+    	muerto=v;
+    	//System.out.println("------");
+    }
 	@Override
 	public void saltar() {
-			/*if(getForma().equals("data/marioDerecha.png")) {
-				posX=posX+20;
+		
+			if(getForma().equals("data/marioDerecha.png")) {
 				cambiarforma(11);
-				posY=posY-10;
+				posY=posY-20;
+				posX=posX+10;
 			}
 			else if (getForma().equals("data/marioIzquierda.png")) {
-				posX=posX-20;
 				cambiarforma(12);
-				posY=posY-10;
+				posX=posX-10;
+				posY=posY-20;
 			}
-			else {
-				if(getForma().equals("data/marioSalto.png")) {
-					posX=posX+20;
-					cambiarforma(11);
-					posY=posY-5;
+			else if (getForma().equals("data/marioSalto.png")) {
+					cambiarforma(1);
+					posY=posY+20;
+					posX=posX+10;
 				}
 				else if (getForma().equals("data/marioSaltoIz.png")) {
-					posX=posX-20;
-					cambiarforma(12);
-					posY=posY-5;
+					posX=posX-10;
+					cambiarforma(4);
+					posY=posY+20;
 				}
-				*/
-			//}
+				
 				
 	}
 
@@ -215,6 +217,7 @@ public class Real extends Jugador  {
 	}
 	@Override
 	protected void resVidas() {
+		System.out.println("------");
 		muerto=true;
 		vidas-=1;
 		cambiarforma(13);
@@ -225,6 +228,22 @@ public class Real extends Jugador  {
 	}
 	protected boolean getMuerto() {
 		return muerto;
+	}
+	@Override
+	protected void setX() {
+		posX=16;
+		
+	}
+	@Override
+	protected void setY() {
+		posY=400;
+		
+	}
+	@Override
+	protected void reiniciar() {
+		posX=16;
+		posY=400;
+		cambiarforma(1);		
 	}
 	
 	

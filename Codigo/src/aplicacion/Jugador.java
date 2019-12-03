@@ -120,6 +120,18 @@ public abstract class Jugador implements movimiento {
 	protected abstract int getVidas();
 	
 	protected abstract boolean getMuerto();
+
+
+	protected abstract void setMuerto(boolean b);
+
+
+	protected abstract void setX();
+
+
+	protected abstract void setY();
+
+
+	protected abstract void reiniciar();
 	
 	
 

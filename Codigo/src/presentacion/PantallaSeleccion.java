@@ -181,8 +181,8 @@ public class PantallaSeleccion extends JDialog {
 		hongo.setBounds(0, 0, 20, 20);
 		hongo.setLocation(375,200);
 		luigi=new JLabel();
-		luigi.setIcon(new ImageIcon("data/luigi.png"));
-		monoN="data/luigi.png";
+		luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
+		monoN="data/luigiderecha.png";
 		luigi.setBounds(0, 0, 30, 30);
 		luigi.setLocation(300,50);
 		items=new JLabel("Items");
@@ -266,8 +266,8 @@ public class PantallaSeleccion extends JDialog {
 	}
 	public void detener2() {
 		c2=true;
-		luigi.setIcon(new ImageIcon("data/luigi.png"));
-		monoN="data/monoBaile1.png";
+		luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
+		monoN="data/luigiderecha.png";
 		timer2.stop();
 	}
 	public void mover2() {
@@ -314,17 +314,17 @@ public class PantallaSeleccion extends JDialog {
 			timer2=new Timer(300,new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 								
-							if (monoN=="data/luigi.png") {
-								luigi.setIcon(new ImageIcon("data/luigi2.png"));
-								monoN="data/luigi2.png";
+							if (monoN=="data/luigiderecha.png") {
+								luigi.setIcon(new ImageIcon("data/luigiPasoDerecha.png"));
+								monoN="data/luigiPasoDerecha.png";
 							} 
-							else if (monoN=="data/luigi2.png") {
-								luigi.setIcon(new ImageIcon("data/luigi3.png"));
-								monoN="data/monoBaila3.png";
+							else if (monoN=="data/luigiPasoDerecha.png") {
+								luigi.setIcon(new ImageIcon("data/luigiPasoDerecha2.png"));
+								monoN="data/luigiPasoDerecha2.png";
 							}
 							else {
-								luigi.setIcon(new ImageIcon("data/luigi.png"));
-								monoN="data/luigi.png";
+								luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
+								monoN="data/luigiderecha.png";
 								}
 						}
 				

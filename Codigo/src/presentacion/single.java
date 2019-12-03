@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import aplicacion.MonkeyPoob;
 
 public class single extends JPanel{
-	private JLabel mario,mono,barril,plataforma,sorpresa,escalera;
+	private JLabel mario,mono,barril,plataforma,sorpresa,escalera,puntos,vidas;
 	public String monoN,barrilN;
 	private ArrayList<int[]> esca;
 	private String nombre;
@@ -32,8 +32,33 @@ public class single extends JPanel{
 		k=1;
 		this.setSize(600,600);
 		this.setBackground(Color.black);
+		puntajeYVidas();
 		
 		
+	}
+	public void puntajeYVidas() {
+		puntos =new JLabel("--");
+		puntos.setSize(50,0);
+		puntos.setBounds(0, 0, 50, 10);
+		puntos.setLocation(0,0);
+		puntos.setForeground(Color.white);
+		puntos.setBackground(Color.white);
+		
+		vidas=new JLabel();
+		vidas.setSize(50, 10);
+		vidas.setBounds(0, 0, 50, 10);
+		vidas.setLocation(50,0);
+		vidas.setForeground(Color.white);
+		vidas.setBackground(Color.white);
+		
+		add(puntos);
+		add(vidas);
+	}
+	public void setVidas(String v) {
+		vidas.setText(v);
+	}
+	public void setPuntos(String v) {
+		puntos.setText(v);
 	}
 	public void addPersonaje(int x, int y, String img) {
 		mario=new JLabel();

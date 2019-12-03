@@ -17,6 +17,9 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import javax.swing.Timer;
+
+import org.junit.rules.Timeout;
+
 import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
@@ -39,6 +42,7 @@ public class MonkeyPoobGUI extends JFrame {
 	private JMenuBar barra;
 	private JMenu menu;
 	private JMenuItem salvar,abrir;
+	private Timer timer1,timer2;
 	
 	private MonkeyPoob app;
 	private int i;
@@ -68,6 +72,7 @@ public class MonkeyPoobGUI extends JFrame {
 		
 		
 	}
+	
 	private void prepararMenu() {
 		barra=new JMenuBar();
 		menu = new JMenu("Menu");
@@ -125,20 +130,32 @@ public class MonkeyPoobGUI extends JFrame {
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (app.getbary(j)==400 && app.getbarx(j)==10) {
+							
 							principal.removebar(j);
 							tim.stop();
 						}
-						else if(app.jugadoresMuertos()) {
+						else if(app.jugadorMuerto(1)) {
 							(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 							//tim.stop();
 							//principal.removebar(j);
+							reiniciar();
+							//app.resetJugador(1);
 						}
+						
 						app.moverBarril(j);
+						principal.setVidas(app.getVidas(1));
+						//System.out.println(app.jugadorMuerto(1));
 						principal.actualizarbar(j,app.getbarx(j),app.getbary(j));
 					}	
 				});		
 		tim.start();
 		
+		
+	}
+	public void reiniciar() {
+		app.resetJugador(1);
+		principal.moverPersonaje(16, 400, app.getForma(1));
+
 		
 	}
 	public void prepararPersonajes() {
@@ -152,6 +169,8 @@ public class MonkeyPoobGUI extends JFrame {
 		//principal.repaint();
 		
 		principal.addPersonaje(0,400,"data/marioDerecha.png");
+		principal.setVidas(app.getVidas(1));
+		principal.setPuntos(app.getPuntos(1));
 		app.crearPlataforma(0, 412,480,-1);
 		crearPlataforma(1);
 		app.crearPlataforma(0, 362, 400, 1);
@@ -333,21 +352,21 @@ public class MonkeyPoobGUI extends JFrame {
 				if( e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
 					if (app.getJugadorPosX(1)>0) {
 					app.moverIzquieda(1);
+					principal.setPuntos(app.getPuntos(1));
 					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 					
 					}		
 						
 				}
 				if( e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					if(app.getJugadorPosX(1)<770) {
 						app.moverDerecha(1);
+						principal.setPuntos(app.getPuntos(1));
 						( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 						if (app.cambioPuntos()) {
 							app.removerSorpresa(1);
 							remove(sorpresa);
 						}
 					}
-				}
 						
 				
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
@@ -355,16 +374,12 @@ public class MonkeyPoobGUI extends JFrame {
 					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
-					app.saltar(1);
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					app.saltar(1);
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					app.saltar(1);
-					(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					saltar(app.getJugadorPosY(1));
 				}
 				
 				repaint();	
 			}
+			
 			public void keyReleased(KeyEvent e) {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					
@@ -384,7 +399,7 @@ public class MonkeyPoobGUI extends JFrame {
 					
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
-					app.dejarsaltar(1);
+					//app.dejarsaltar(1);
 					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				repaint();	
@@ -394,7 +409,19 @@ public class MonkeyPoobGUI extends JFrame {
 		});
 		
 	}
-	
+	public void saltar(int y) {
+					timer1=new Timer(300,new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							app.saltar(1);
+							( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+							if (app.getJugadorPosY(1)==y) {
+								timer1.stop();
+							}
+						}
+						});
+					timer1.start();
+				
+		       }	
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
 		this.setVisible(false);

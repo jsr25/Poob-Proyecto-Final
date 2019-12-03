@@ -52,7 +52,9 @@ public class MonkeyPoob {
 	public void agregarJugadores(int posX, int posY, String name) {
 		jugadores.add(new Real(posX,posY,name));
 	}
-	
+	public String getVidas(int j) {
+		return jugadores.get(j-1).getVidas()+"";
+	}	
 	/**
 	 * Metodo que permite salvar el proceso
 	 * que se lleva en el juego
@@ -108,7 +110,9 @@ public class MonkeyPoob {
 		
 	}
 	//}
-	
+	public boolean jugadorMuerto(int i) {
+		return jugadores.get(i-1).getMuerto();
+	}
 	/**
 	 * mueve al personaje a la izquierda
 	 * que envia la señal dependiendo 
@@ -431,6 +435,9 @@ public class MonkeyPoob {
 			jugadores.get(personaje-1).resVidas();
 			System.out.println(jugadores.get(personaje-1).getVidas());
 		}
+		else {
+			jugadores.get(personaje-1).setMuerto(false);
+		}
 	}
 	/**
 	 * 
@@ -556,6 +563,11 @@ public class MonkeyPoob {
 			estado=true;
 		}
 		return estado;
+	}
+
+	public void resetJugador(int i) {
+		jugadores.get(i-1).reiniciar();
+		jugadores.get(i-1).setMuerto(false);
 	}
 
 	
