@@ -35,14 +35,14 @@ import aplicacion.MonkeyException;
 import aplicacion.MonkeyPoob;
 
 public class MonkeyPoobGUI extends JFrame {
-	private JLabel mario,mono,barril,plataforma,sorpresa,escalera,puntos;
+	private JLabel mario,mono,barril,plataforma,sorpresa,escalera,puntos,pauline;
 	public String monoN,barrilN;
 	private single principal;
 	private String nombre;
 	private JMenuBar barra;
 	private JMenu menu;
 	private JMenuItem salvar,abrir;
-	private Timer timer1,timer2;
+	private Timer timer1,timer2,timer3;
 	
 	private MonkeyPoob app;
 	private int i;
@@ -62,11 +62,7 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararAccionesMenu();
 		this.setResizable(false);
 		this .getContentPane().setBackground(new Color(0,0,0));
-		//add(mario);
-		//add(plataforma);
-		//add(mono);
-		//add(barril);
-		//add(escalera);
+		
 
 		
 		
@@ -128,23 +124,23 @@ public class MonkeyPoobGUI extends JFrame {
 		Timer tim=new Timer(100, null);		
 		tim.addActionListener(
 				new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+					public void actionPerformed(ActionEvent e) {				
 						if (app.getbary(j)==400 && app.getbarx(j)==10) {
-							
 							principal.removebar(j);
+							crearBarril2(j+1);
 							tim.stop();
 						}
 						else if(app.jugadorMuerto(1)) {
 							(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+							reiniciar();
 							//tim.stop();
 							//principal.removebar(j);
-							reiniciar();
+							
 							//app.resetJugador(1);
 						}
 						
 						app.moverBarril(j);
 						principal.setVidas(app.getVidas(1));
-						//System.out.println(app.jugadorMuerto(1));
 						principal.actualizarbar(j,app.getbarx(j),app.getbary(j));
 					}	
 				});		
@@ -154,23 +150,23 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 	public void reiniciar() {
 		app.resetJugador(1);
-		principal.moverPersonaje(16, 400, app.getForma(1));
+		principal.moverPersonaje(10, 400, app.getForma(1));
 
 		
 	}
+	public void crearBarril2(int j) {		
+			app.generarBarriles();
+			crearBarril(j);
+			moverBarril(j);
+	}
 	public void prepararPersonajes() {
 		app.agregarJugadores(0, 400, "mario");
-		//puntos= new JLabel();
-		//puntos.setText(app.getPuntos(1)+"");
-		//puntos.setForeground(Color.white);
-		//puntos.setLocation(0,0);
-		//puntos.setVisible(true);
-		//principal.add(puntos);
-		//principal.repaint();
-		
 		principal.addPersonaje(0,400,"data/marioDerecha.png");
+		
 		principal.setVidas(app.getVidas(1));
 		principal.setPuntos(app.getPuntos(1));
+		
+		
 		app.crearPlataforma(0, 412,480,-1);
 		crearPlataforma(1);
 		app.crearPlataforma(0, 362, 400, 1);
@@ -187,9 +183,8 @@ public class MonkeyPoobGUI extends JFrame {
 		crearPlataforma(7);
 		app.crearPlataforma(0, 62, 400, 1);
 		crearPlataforma(8);
-		app.crearPlataforma(90, 0, 160, 1);
+		app.crearPlataforma(60, 0, 160, 1);
 		crearPlataforma(9);
-		
 		app.generarEscaleras(40, 1, 2);
 		crearEscalera(1);
 		app.generarEscaleras(80, 2, 3);
@@ -214,42 +209,6 @@ public class MonkeyPoobGUI extends JFrame {
 		app.generarBarriles();
 		crearBarril(1);
 		moverBarril(1);
-		
-		
-		
-		/*app.crearPlataformaCentral(340);
-		crearPataformaCentral(2);
-		app.crearPlataformaCentral(300);
-		crearPataformaCentral(3);
-		app.crearPlataformaCentral(240);
-		crearPataformaCentral(4);
-		app.crearPlataformaCentral(100);
-		crearPlataformaAlta(5);
-		app.crearPlataformaAlta(0,40);
-		crearPlataformaAlta(6);*/
-		
-		/*principal.addPlataformaAbajo(0, 412, "data/plataforma.png");
-		principal.addPlataformaCentral(340, "data/plataforma.png");
-		principal.addPlataformaCentral(300, "data/plataforma.png");
-		principal.addPlataformaCentral(240, "data/plataforma.png");
-		principal.addPlataformaCentral(210, "data/plataforma.png");
-		principal.addPlataformaCentral(140, "data/plataforma.png");
-		principal.addPlataformaCentral(100, "data/plataforma.png");
-		principal.addPlataformaArriba(0, 40, "data/plataforma.png");*/
-		//principal.addEscalera(1, 2, 40);
-		/*principal.addEscalera(2, 3, 72);
-		principal.addEscalera(3, 4, 56);
-		principal.addEscalera(4, 5, 88);
-		principal.addEscalera(5, 6, 104);*/
-		//principal.addEscalera(6, 7, 120);
-		//principal.addEscalera(7, 8, 50);
-		
-	/*	crearEscalera(1);
-		crearEscalera(2);
-		crearEscalera(3);
-		crearEscalera(4);
-		crearEscalera(5);*/
-		
 		sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));
 		sorpresa.setBounds(0, 0, 80, 110);
@@ -257,33 +216,14 @@ public class MonkeyPoobGUI extends JFrame {
 		sorpresa.setSize(100, 100);	
 		add(sorpresa);
 		app.generarSorpresa(50, 400);
-		//app.crearPlataforma(0, 0, 100, 40);
-		
-		
-		/*escalera=new JLabel();
-		
-		escalera.setIcon(new ImageIcon(app.getEscaleraIm()));
-		escalera.setBounds(0, 0, 80, 110);
-		escalera.setLocation(40, (350+320)/2);
-		escalera.setSize(100, 100);	*/	
-		
-
-		mono=new JLabel();		
-		mono.setSize(20, 20);
-		
-		mono.setIcon(new ImageIcon("data/monoBaile1.png"));
-		monoN="data/monoBaile1.png";
-		mono.setBounds(20, 20, 80, 110);
-		mono.setLocation(0,0);
 		barril=new JLabel();		
 		barril.setSize(50, 50);	
 		barril.setIcon(new ImageIcon("data/barrilCayendo1.png"));
 		barrilN="data/barrilCayendo1.png";
 		barril.setBounds(20, 20, 80, 110);
 		barril.setLocation(12,15);
-		//plataforma.
-		//Timer timer=new Timer();
-		TimerTask tarea=new TimerTask(){
+		//timer2=new Timer();
+		TimerTask tarea4=new TimerTask(){
 			@Override
 			public void run() {
 				if (monoN=="data/monoBaile1.png") {
@@ -300,7 +240,7 @@ public class MonkeyPoobGUI extends JFrame {
 				}
 			}
 		};
-		//timer.schedule(tarea, 0, 500);
+		//timer2.schedule(tarea4, 0, 500);
 		//Timer timer2=new Timer();
 		TimerTask tarea2=new TimerTask(){
 			@Override
@@ -323,8 +263,27 @@ public class MonkeyPoobGUI extends JFrame {
 		};
 		//timer2.schedule(tarea2, 0, 50);
 	}
-	
-	
+	public void  preparaPrincesa() {
+		timer2=new Timer(1000,new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+							
+						if (monoN=="data/monoBaile1.png") {
+							mono.setIcon(new ImageIcon("data/monoBaile2.png"));
+							monoN="data/monoBaile2.png";
+						}
+						else if (monoN=="data/monoBaile2.png") {
+							mono.setIcon(new ImageIcon("data/monoBaila3.png"));
+							monoN="data/monoBaila3.png";
+						}
+						else {
+							mono.setIcon(new ImageIcon("data/monoBaile1.png"));
+							monoN="data/monoBaile1.png";
+							}
+					}
+			
+		});
+		timer2.start();
+}
 	public void agregrarplata(int x,int y) {
 		//app.crearPlataforma(x, y, x+16, y);
 		}

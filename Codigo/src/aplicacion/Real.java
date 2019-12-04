@@ -241,7 +241,7 @@ public class Real extends Jugador  {
 	}
 	@Override
 	protected void reiniciar() {
-		posX=16;
+		posX=10;
 		posY=400;
 		cambiarforma(1);		
 	}

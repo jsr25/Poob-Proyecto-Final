@@ -72,4 +72,10 @@ public class Barril {
 		
 		return x;
 	}
+
+	public void reiniciar() {
+		x=0;
+		y=50;
+		
+	}
 }

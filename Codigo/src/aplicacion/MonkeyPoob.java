@@ -568,6 +568,9 @@ public class MonkeyPoob {
 	public void resetJugador(int i) {
 		jugadores.get(i-1).reiniciar();
 		jugadores.get(i-1).setMuerto(false);
+		for(Barril b : barriles) {
+			b.reiniciar();
+		}
 	}
 
 	
