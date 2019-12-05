@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.lang.Math;
 /**
  * 
- * @author Juan Ramos 
+ * @author Juan Ramos-Brayan Jimenez
  *
  */
 public class MonkeyPoob {
@@ -25,7 +25,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return el MonkeyPoob
 	 */
 	public static MonkeyPoob getMonkey() {
 		if(monkey==null) {
@@ -51,17 +51,17 @@ public class MonkeyPoob {
 	/**
 	 * Genera un jugador Real para en 
 	 * la capa de aplicacion
-	 * @param posX
-	 * @param posY
-	 * @param name
+	 * @param posX valor en x
+	 * @param posY valor en y
+	 * @param name tipo de muñeco
 	 */
 	public void agregarJugadores(int posX, int posY, String name) {
 		jugadores.add(new Real(posX,posY,name));
 	}
 	/**
 	 * 
-	 * @param j
-	 * @return
+	 * @param j numero de jugador
+	 * @return catidad de las vidas
 	 */
 	public String getVidas(int j) {
 		return jugadores.get(j-1).getVidas()+"";
@@ -70,7 +70,7 @@ public class MonkeyPoob {
 	/**
 	 * Metodo que permite salvar el proceso
 	 * que se lleva en el juego
-	 * @param f
+	 * @param f archivo
 	 * @throws MonkeyException
 	 */
 	public void salvar(File f)throws MonkeyException {
@@ -86,10 +86,11 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * Se genera la plataforma en donde
-	 * inicia el jugador
-	 * @param x1
-	 * @param y1
+	 * se genera la plataforma donde inicia el jugador
+	 * @param x1 valor en x
+	 * @param y1 valor inicial en y
+	 * @param x2 valor final en y
+	 * @param tipo tipo de plataforma
 	 */
 	public void crearPlataforma(int x1, int y1,int x2,int tipo) {
 		plataformas.add(new Plataforma(x1,y1,x2,tipo));
@@ -120,8 +121,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param i
-	 * @return
+	 * @param i numero del jugador 
+	 * @return si esta muerto
 	 */
 	public boolean jugadorMuerto(int i) {
 		return jugadores.get(i-1).getMuerto();
@@ -129,7 +130,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * mueve al personaje a la izquierda
-	 * que envia la seÃ±al dependiendo 
+	 * que envia la señal dependiendo 
 	 * de en que plataforma y 
 	 * subplataforma este
 	 * @param personaje
@@ -152,17 +153,17 @@ public class MonkeyPoob {
 	/**
 	 * Genra un escalera el la capa 
 	 * de aplicacion
-	 * @param x
-	 * @param yIni
-	 * @param yFin
+	 * @param x valor en x
+	 * @param yIni y inicial de la escalera 
+	 * @param yFin y final de la escalera
 	 */
 	public void generarEscaleras(int x, int plataforma1 , int plataforma2) {
 		escaleras.add(new Escalera(x,plataformas.get(plataforma1-1),plataformas.get(plataforma2-1)));
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * permite a un jugador subir la escalera 
+	 * @param personaje numero del jugador
 	 */
 	public void subirEscalera(int personaje) {
 		boolean posible=false;
@@ -181,9 +182,9 @@ public class MonkeyPoob {
 		}
 		
 	/**
-	 * 
-	 * @param s
-	 * @return
+	 * busca el minim divisor
+	 * @param s distancia
+	 * @return valor de los movimientos necesarios 
 	 */
 	private int mindiv(int s) {
 		int res=0;
@@ -196,6 +197,7 @@ public class MonkeyPoob {
 	/**
 	 * Genera un barril en la capa 
 	 * de aplicacion 
+	 * @param bar tipo del barril a generar
 	 */
 	public void generarBarriles(String bar) {
 		if (bar.equals("Amarillo")) {barriles.add(new Amarillo());}
@@ -203,8 +205,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * permite bajar las escaleras a un jugador 
+	 * @param personaje numero del jugador
 	 */
 	public void bajarEscalera(int personaje) {
 		Jugador temp=jugadores.get(personaje-1);
@@ -224,8 +226,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param j
+	 * mueve el barril
+	 * @param j numero del barril
 	 */
 	public void moverBarril(int j) {
 		Barril b=barriles.get(j-1);
@@ -242,8 +244,9 @@ public class MonkeyPoob {
 	/**
 	 * Genera un sorpresa en la capa 
 	 * de aplicacion
-	 * @param posX
-	 * @param posY
+	 * @param posX valor en x
+	 * @param posY valor en y
+	 * @param tipo tipo de la sorpresa
 	 */
 	public void generarSorpresa(int posX, int posY,String tipo) {
 		if(tipo.equals("Cereza")) {sorpresas.add(new Cereza(posX,posY));}
@@ -252,8 +255,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * permite saltar a un jugador
+	 * @param personaje numero del jugador 
 	 */
 	public void  saltar(int personaje) {
 		(jugadores.get(personaje-1)).saltar();
@@ -262,8 +265,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * da el beneficio segun los tipos de sorpresas
+	 * @param personaje numero del jugador
 	 */
 	public void beneficio(int personaje) {
 		
@@ -284,8 +287,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @param cont numero de la plataforma
+	 * @return coordenadas de la plataforma dada
 	 */
 	public int[] getPlataformas(int cont) {
 		int[] vals=new int[3];
@@ -296,8 +299,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * evalua si se colisiona contra algo y pierde la vidas
+	 * @param personaje numero de jugador 
 	 */
 	private void perderVida(int personaje) {
 		boolean herido=false;
@@ -314,8 +317,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param personaje
-	 * @return
+	 * @param personaje numero el jugador
+	 * @return  ruta de la imagen actual del jugador
 	 */
 	public String getForma(int personaje) {		
 		return jugadores.get(personaje-1).getForma();
@@ -323,8 +326,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param pesonaje
-	 * @return
+	 * @param pesonaje numero del jugador 
+	 * @return posicion en x
 	 */
 	public int getJugadorPosX(int pesonaje) {
 		return jugadores.get(pesonaje-1).getPosX();
@@ -332,8 +335,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param pesonaje
-	 * @return
+	 * @param pesonaje numero del jugador
+	 * @return posicion en y
 	 */
 	public int getJugadorPosY(int pesonaje) {
 		return jugadores.get(pesonaje-1).getPosY();
@@ -348,8 +351,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * imagen de mario a la derecha
+	 * @param personaje numero del jugador 
 	 */
 	public void FormaEstaticaDer(int personaje) {
 		jugadores.get(personaje-1).cambiarforma(1);
@@ -357,15 +360,15 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return si hubo un cabio enn los puntos
 	 */
 	public boolean cambioPuntos() {
 		return cambioP;
 	}
 	
 	/**
-	 * 
-	 * @param personaje
+	 * remueve la sorpresa
+	 * @param personaje numero del jugador 
 	 */
 	public void removerSorpresa(int personaje) 
 	{
@@ -382,7 +385,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return la ruta de la imagen de la escalera
 	 */
 	public String getEscaleraIm() {
 		return escaleras.get(0).getImagen();
@@ -390,8 +393,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param i
-	 * @return
+	 * @param i  numero de la escalera
+	 * @return coordenadas de la una escalera dada
 	 */
 	public int[] getEscalera(int i) {
 		Escalera esc= escaleras.get(i-1);
@@ -405,8 +408,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param j
-	 * @return
+	 * @param j numero el barril
+	 * @return coordenadas de un barril dada
 	 */
 	public int[] getBarril(int j) {
 		System.out.println(barriles.size());
@@ -420,8 +423,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param j
-	 * @return
+	 * @param j numero del barril
+	 * @return valor en x de un barril dado
 	 */
 	public int getbarx(int j) {
 		return barriles.get(j-1).getX();
@@ -429,8 +432,8 @@ public class MonkeyPoob {
 
 	/**
 	 * 
-	 * @param j
-	 * @return
+	 * @param j numero del barril
+	 * @return valor en y de un barril dado
 	 */
 	public int getbary(int j) {
 		return barriles.get(j-1).getY();
@@ -438,8 +441,8 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @param j
-	 * @return
+	 * @param j numero dl jugador 
+	 * @return cantidad de puntos
 	 */
 	public String getPuntos(int j) {		
 		return jugadores.get(j-1).getPuntos()+"";
@@ -447,7 +450,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return si esta muerto
 	 */
 	public boolean jugadoresMuertos() {
 		boolean estado=false;
@@ -459,8 +462,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param j
+	 * reinicia un barril dado
+	 * @param j numero del barril
 	 */
 	public void resetBarril(int j) {
 		barriles.get(j-1).reiniciar();
