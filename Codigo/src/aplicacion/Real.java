@@ -4,7 +4,12 @@ public class Real extends Jugador  {
 	private int vidas;
 	private boolean estado;
 	
-	
+	/**
+	 * 
+	 * @param posX
+	 * @param posY
+	 * @param personaje
+	 */
 	public Real(int posX,int posY,String personaje) {
 		super(posX,posY,personaje);
 		vidas=3;
@@ -16,13 +21,11 @@ public class Real extends Jugador  {
 		
 		
 	}
-	public int getPlat() {
-		return plataforma;
-		
-	}
-	public int getSubPlat() {
-		return subPlataforma;
-	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean estoyVivo() {
 		if(vidas==0) {
 			estado=false;
@@ -30,9 +33,12 @@ public class Real extends Jugador  {
 		
 		return estado;
 	}
+	
+	/**
+	 * 
+	 */
     public void setMuerto(boolean v) {
     	muerto=v;
-    	//System.out.println("------");
     }
 	@Override
 	public void saltar() {
@@ -97,8 +103,7 @@ public class Real extends Jugador  {
 		}
 
 	@Override
-	protected boolean getEstado() {
-		
+	protected boolean getEstado() {		
 		return vidas>0;
 	}
 
@@ -244,6 +249,11 @@ public class Real extends Jugador  {
 		posX=10;
 		posY=400;
 		cambiarforma(1);		
+	}
+
+	@Override
+	protected void setVida() {
+		vidas+=1;
 	}
 	
 	

@@ -43,10 +43,10 @@ public class MonkeyPoobGUI extends JFrame {
 	private JMenuBar barra;
 	private JMenu menu;
 	private JMenuItem salvar,abrir;
-	private Timer timer1,timer2,timer3;
-	
+	private Timer timer1,timer2,timer3;	
 	private MonkeyPoob app;
 	private int i;
+	
 	public MonkeyPoobGUI(int j) {
 		super("Monkey");		
 		if (j==1) {
@@ -64,29 +64,20 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setResizable(false);
 		this .getContentPane().setBackground(new Color(0,0,0));
 		prepararEstructura();
-		generarEstructura();
-		
-
-		
-		
-		
+		generarEstructura();		
 	}
 	
 	private void prepararMenu() {
 		barra=new JMenuBar();
 		menu = new JMenu("Menu");
 		salvar=new JMenuItem("salvar");
-		abrir=new JMenuItem("abrir");
-		
+		abrir=new JMenuItem("abrir");		
 		menu.add(salvar);
-		menu.add(abrir);
-		
-		barra.add(menu);
-		
-		this.setJMenuBar(barra);
-		
-		
+		menu.add(abrir);		
+		barra.add(menu);		
+		this.setJMenuBar(barra);	
 	}
+	
 	public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI(1);
 		intf.setVisible(true);
@@ -102,20 +93,22 @@ public class MonkeyPoobGUI extends JFrame {
 		app= MonkeyPoob.getMonkey();
 		
 	}
+	
 	public void crearPlataforma(int i) {		
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataforma(pl[0], pl[1],pl[2], "data/plataforma.png");		
 	}
 	
-	
 	public void crearEscalera(int i){
 		int[]esc=app.getEscalera(i);
 		principal.crearEscalera(esc[0], esc[1], esc[2]);
 	}
+	
 	private void crearBarril(int j) {
 		int [] barr=app.getBarril(j);
 		principal.crearBarril(barr[0],barr[1]);
 	}
+	
 	private void moverBarril(int j) {	
 		Timer tim=new Timer(100, null);		
 		tim.addActionListener(
@@ -123,18 +116,12 @@ public class MonkeyPoobGUI extends JFrame {
 					public void actionPerformed(ActionEvent e) {				
 						if (app.getbary(j)==400 && app.getbarx(j)==10) {
 							principal.removebar(j);
-							crearBarril2(j+1);
 							tim.stop();
 						}
 						else if(app.jugadorMuerto(1)) {
 							(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 							reiniciar();
-							//tim.stop();
-							//principal.removebar(j);
-							
-							//app.resetJugador(1);
 						}
-						
 						app.moverBarril(j);
 						principal.setVidas(app.getVidas(1));
 						principal.actualizarbar(j,app.getbarx(j),app.getbary(j));
@@ -142,17 +129,14 @@ public class MonkeyPoobGUI extends JFrame {
 				});		
 		tim.start();
 	}
+	
 	public void reiniciar() {
 		app.resetJugador(1);
 		principal.moverPersonaje(10, 400, app.getForma(1));
 
-		
 	}
-	public void crearBarril2(int j) {		
-			app.generarBarriles();
-			crearBarril(j);
-			moverBarril(j);
-	}
+	
+
 	public void prepararPersonajes() {
 		app.agregarJugadores(0, 400, "mario");
 		principal.addPersonaje(0,400,"data/marioDerecha.png");		
@@ -160,9 +144,9 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.setPuntos(app.getPuntos(1));
 		
 	}
+	
 	public void prepararEstructura() {
-		app.crearPlataforma(0, 412,480,-1);	
-		
+		app.crearPlataforma(0, 412,480,-1);			
 		Random r = new Random();
 		int valor =r.nextInt(3)+2;
 		if(valor%2!=0) {valor+=1;}
@@ -176,10 +160,9 @@ public class MonkeyPoobGUI extends JFrame {
 			k=k*-1;
 			h=h-60;
 		}
+		
 		app.crearPlataforma(0, 62, 400, 1);	
-		app.crearPlataforma(60, 0, 160, 1);
-	
-		System.out.println(app.getPlatSize());
+		app.crearPlataforma(60, 0, 160, 1);	
 		app.generarEscaleras(120, app.getPlatSize()-1,app.getPlatSize());	
 		app.generarEscaleras(140, app.getPlatSize()-1, app.getPlatSize());
 		int lo=100;
@@ -190,18 +173,18 @@ public class MonkeyPoobGUI extends JFrame {
 			
 		}
 		
-		
 	
-		app.generarBarriles();		
-		app.generarSorpresa(50, 400);
+		app.generarBarriles("Rojo");		
+		app.generarBarriles("Amarillo");	
+		//app.generarSorpresa(50, 400,Cereza);
 	
 		
-		sorpresa=new JLabel();
+		/*sorpresa=new JLabel();
 		sorpresa.setIcon(new ImageIcon(app.generarSorpresa(48,400)));
 		sorpresa.setBounds(0, 0, 80, 110);
 		sorpresa.setLocation(50, 400);
 		sorpresa.setSize(100, 100);	
-		add(sorpresa);
+		add(sorpresa);*/
 		
 		
 		
@@ -216,15 +199,10 @@ public class MonkeyPoobGUI extends JFrame {
 		for (int i=0;i<app.getEscSize();i++) {
 			crearEscalera(i+1);
 		}	
-		crearBarril(1);
-		moverBarril(1);
-			
-			
-		
-					
-		
-		
-		
+		crearBarril(1);	
+		crearBarril(2);
+		moverBarril(1);	
+		moverBarril(2);	
 	}
 		
 	public void prepareAcciones() {
@@ -242,53 +220,43 @@ public class MonkeyPoobGUI extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					app.subirEscalera(1);
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-				
-										
+					 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));			
 				}
 				if( e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
 					if (app.getJugadorPosX(1)>0) {
-					app.moverIzquieda(1);
-					principal.setPuntos(app.getPuntos(1));
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
-					
-					}		
-						
+						app.moverIzquieda(1);
+						principal.setPuntos(app.getPuntos(1));
+						 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					}			
 				}
 				if( e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
 						app.moverDerecha(1);
 						principal.setPuntos(app.getPuntos(1));
-						( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+						principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 						if (app.cambioPuntos()) {
 							app.removerSorpresa(1);
 							remove(sorpresa);
 						}
-					}
-						
-				
+					}					
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
 					app.bajarEscalera(1);
-					( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
-					saltar(app.getJugadorPosY(1));
+					
 				}
-				
-				repaint();	
 			}
 			
 			public void keyReleased(KeyEvent e) {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
 					
 				}
-				if(e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
-					
+				if(e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {					
 					app.FormaEstaticaIz(1);
 					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				
 				}
-				if(e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {
-					
+				if(e.getExtendedKeyCode()== KeyEvent.VK_RIGHT) {					
 					app.FormaEstaticaDer(1);
 					principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
@@ -296,16 +264,14 @@ public class MonkeyPoobGUI extends JFrame {
 					
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
-					//app.dejarsaltar(1);
-					((single) principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
+					 saltar(app.getJugadorPosY(1));
+					 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				repaint();	
-			}
-				
-			
+			}			
 		});
-		
 	}
+	
 	public void saltar(int y) {
 					timer1=new Timer(300,new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -317,8 +283,8 @@ public class MonkeyPoobGUI extends JFrame {
 						}
 						});
 					timer1.start();
-				
 		       }	
+	
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
 		this.setVisible(false);
@@ -340,9 +306,9 @@ public class MonkeyPoobGUI extends JFrame {
 		File f = new File(fc.getSelectedFile()+".dat");
 		try {
 			app.salvar(f);
-		} catch (MonkeyException e) {
-			//jpanel diciendo ErrorIO
 		}
+		catch (MonkeyException e) {
+			}
 		}
 	}
 }

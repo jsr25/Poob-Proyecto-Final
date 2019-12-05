@@ -2,17 +2,23 @@ package aplicacion;
 
 import java.util.ArrayList;
 
-public class Barril {
-	private int x;
-	private int y;
+public abstract class Barril {
+	protected int x;
+	protected int y;
 	private MonkeyPoob monkey;
 	
-	public Barril(MonkeyPoob monkey) {
+	/**
+	 * 
+	 */
+	public Barril() {
 		this.x=0;
 		this.y=50;
 		this.monkey=MonkeyPoob.getMonkey();
 	}
 	
+	/**
+	 * 
+	 */
 	public void move() {		
 			ArrayList<Plataforma> pT= monkey.getplata();
 			boolean posible=false;
@@ -34,48 +40,40 @@ public class Barril {
 			else {
 				y+=10;
 			}
-			
-				
-		
-			
-			
-		
 	}
 	
-	
-	/*public int movimiento(int x) {
-		ArrayList<Plataforma> plataformas= monkey.getPlataformas();
-		for (Plataforma p: plataformas) {
-			if(p.estaEnRango(x)) {
-				if(y==p.valorY(x)) {
-					if(p.pendienteNegativa()) {
-						x+=1;
-					}
-					else {
-						x-=1;
-					}
-				}
-			}
-		}
-		return x;
-	}*/
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
-
+	
+	/**
+	 * 
+	 * @param posX
+	 * @param posY
+	 * @return
+	 */
 	public boolean colision(int posX, int posY) {
 		return x==posX && y==posY;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getX() {
 		
 		return x;
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void reiniciar() {
 		x=0;
-		y=50;
-		
+		y=50;		
 	}
 }

@@ -19,8 +19,14 @@ public class MonkeyPoob {
 	private ArrayList<Barril> barriles;
 	private boolean cambioP;
 	private int k;
+	
 	//singleton
 	public static MonkeyPoob monkey;
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public static MonkeyPoob getMonkey() {
 		if(monkey==null) {
 			monkey= new MonkeyPoob();
@@ -52,9 +58,15 @@ public class MonkeyPoob {
 	public void agregarJugadores(int posX, int posY, String name) {
 		jugadores.add(new Real(posX,posY,name));
 	}
+	/**
+	 * 
+	 * @param j
+	 * @return
+	 */
 	public String getVidas(int j) {
 		return jugadores.get(j-1).getVidas()+"";
-	}	
+	}
+	
 	/**
 	 * Metodo que permite salvar el proceso
 	 * que se lleva en el juego
@@ -72,7 +84,6 @@ public class MonkeyPoob {
 		}
 		
 	}
-	
 	
 	/**
 	 * Se genera la plataforma en donde
@@ -93,15 +104,12 @@ public class MonkeyPoob {
 	 */
 	public void moverDerecha(int personaje) {
 		Jugador temp=jugadores.get(personaje-1);
-		//System.out.println("Posicion x jugador"+"  "+temp.getPosX());
-		//if(!temp.getInEscalera()) {
 		boolean posibleMov=false;
 		for (int i=0;i<plataformas.size( ) && posibleMov==false ;i++) {
 			if(plataformas.get(i).estaSobre(temp.getPosX(),temp.getPosY())) {
 				posibleMov=true;
 			}
-		}
-		
+		}		
 		if (posibleMov) {
 			temp.avanzar();		
 			beneficio(personaje);	
@@ -109,10 +117,16 @@ public class MonkeyPoob {
 		}
 		
 	}
-	//}
+	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public boolean jugadorMuerto(int i) {
 		return jugadores.get(i-1).getMuerto();
 	}
+	
 	/**
 	 * mueve al personaje a la izquierda
 	 * que envia la señal dependiendo 
@@ -146,6 +160,10 @@ public class MonkeyPoob {
 		escaleras.add(new Escalera(x,plataformas.get(plataforma1-1),plataformas.get(plataforma2-1)));
 	}
 	
+	/**
+	 * 
+	 * @param personaje
+	 */
 	public void subirEscalera(int personaje) {
 		boolean posible=false;
 		Jugador temp=jugadores.get(personaje-1);
@@ -160,10 +178,13 @@ public class MonkeyPoob {
 				}
 			}
 			temp.subir(posible, y);
-
 		}
 		
-	
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
 	private int mindiv(int s) {
 		int res=0;
 		for(int i=2;i<Math.abs(s) && res==0;i++) {
@@ -176,10 +197,15 @@ public class MonkeyPoob {
 	 * Genera un barril en la capa 
 	 * de aplicacion 
 	 */
-	public void generarBarriles() {
-		barriles.add(new Barril(monkey));
+	public void generarBarriles(String bar) {
+		if (bar.equals("Amarillo")) {barriles.add(new Amarillo());}
+		else if(bar.equals("Rojo")) {barriles.add(new Rojo());}		
 	}
 	
+	/**
+	 * 
+	 * @param personaje
+	 */
 	public void bajarEscalera(int personaje) {
 		Jugador temp=jugadores.get(personaje-1);
 		boolean posible=false;
@@ -197,6 +223,10 @@ public class MonkeyPoob {
 		jugadores.get(personaje-1).bajar(posible, y);
 	}
 	
+	/**
+	 * 
+	 * @param j
+	 */
 	public void moverBarril(int j) {
 		Barril b=barriles.get(j-1);
 		b.move();
@@ -209,114 +239,17 @@ public class MonkeyPoob {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * Genera un sorpresa en la capa 
 	 * de aplicacion
 	 * @param posX
 	 * @param posY
 	 */
-	public String generarSorpresa(int posX, int posY) {
-		Cereza cs = new Cereza(posX,posY);
-		sorpresas.add(cs);
-		return cs.getImagen();
+	public void generarSorpresa(int posX, int posY,String tipo) {
+		if(tipo.equals("Cereza")) {sorpresas.add(new Cereza(posX,posY));}
+		else if(tipo.equals("Manzana")) {sorpresas.add(new Manzana(posX,posY));}
+		else if(tipo.equals("Corazon")) {sorpresas.add(new Corazon(posX,posY));}
 	}
-	
-	
-	/**
-	 * Dado el personaje lo mueve a la 
-	 * derecha en la capa de aplicacion
-	 * @param personaje
-	 */
-	
-	/**
-	 * Dado un  jugador retorna el personaje
-	 * @param personaje
-	 * @return
-	 */
-	public Jugador getJugador(int personaje) {
-		return jugadores.get(personaje-1);
-	}
-	/**
-	 * 
-	 * @return
-	 */
-	public ArrayList<Barril> getBarriles(){
-		return barriles;
-	}
-	/**
-	 * 
-	 * @param personaje
-	 */
 	
 	/**
 	 * 
@@ -327,14 +260,7 @@ public class MonkeyPoob {
 		beneficio(personaje);	
 		perderVida(personaje);
 	}
-	/**
 	
-	*/
-	public void  dejarsaltar(int personaje) {
-		(jugadores.get(personaje-1)).dejarSaltar();
-		beneficio(personaje);	
-		perderVida(personaje);
-	}
 	/**
 	 * 
 	 * @param personaje
@@ -343,26 +269,20 @@ public class MonkeyPoob {
 		
 		for(Sorpresa s:sorpresas) {
 			if ((s.getPosX()==jugadores.get(personaje-1).getPosX())&&(s.getPosY()==jugadores.get(personaje-1).getPosY())) 
-			{
-				if (s.getTipo().equals("puntos")) {
-					jugadores.get(personaje-1).setPuntos(s.beneficio());
-					cambioP=true;
-				
-				}
+				{
+					if (s.getTipo().equals("puntos")) {
+						jugadores.get(personaje-1).setPuntos(s.beneficio());
+						cambioP=true;					
+					}
+					else if (s.getTipo().equals("puntos")) {
+						jugadores.get(personaje-1).setPuntos(s.beneficio());
+						cambioP=true;	
+						jugadores.get(personaje-1).setVida();
+					}
 			}
 		}
-		
-		
 	}
-	/**
-	 * 
-	 * @param personaje
-	 * @return
-	 */
-	public boolean estadoPersonaje(int personaje) {				
-		return jugadores.get(personaje-1).getEstado();
-		
-	}
+	
 	/**
 	 * 
 	 * @return
@@ -374,6 +294,7 @@ public class MonkeyPoob {
 		vals[2]=(plataformas.get(cont-1).getX2());
 		return vals;
 	}
+	
 	/**
 	 * 
 	 * @param personaje
@@ -384,22 +305,13 @@ public class MonkeyPoob {
 			herido=barriles.get(i).colision(jugadores.get(personaje-1).getPosX(),jugadores.get(personaje-1).getPosY());
 		}
 		if (herido) {
-			System.out.println("Me hirieron");
 			jugadores.get(personaje-1).resVidas();
-			System.out.println(jugadores.get(personaje-1).getVidas());
 		}
 		else {
 			jugadores.get(personaje-1).setMuerto(false);
 		}
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public ArrayList<Jugador> getJugadores(){
-		
-		return jugadores;
-	}
+	
 	/**
 	 * 
 	 * @param personaje
@@ -408,6 +320,7 @@ public class MonkeyPoob {
 	public String getForma(int personaje) {		
 		return jugadores.get(personaje-1).getForma();
 	}
+	
 	/**
 	 * 
 	 * @param pesonaje
@@ -416,6 +329,7 @@ public class MonkeyPoob {
 	public int getJugadorPosX(int pesonaje) {
 		return jugadores.get(pesonaje-1).getPosX();
 	}
+	
 	/**
 	 * 
 	 * @param pesonaje
@@ -424,6 +338,7 @@ public class MonkeyPoob {
 	public int getJugadorPosY(int pesonaje) {
 		return jugadores.get(pesonaje-1).getPosY();
 	}
+	
 	/**
 	 * 
 	 * @param personaje
@@ -431,6 +346,7 @@ public class MonkeyPoob {
 	public void FormaEstaticaIz(int personaje) {
 		jugadores.get(personaje-1).cambiarforma(4);
 	}
+	
 	/**
 	 * 
 	 * @param personaje
@@ -439,17 +355,18 @@ public class MonkeyPoob {
 		jugadores.get(personaje-1).cambiarforma(1);
 	}
 	
-	
-	
-	
-	public boolean getEnEscalera(int personaje) {
-		return jugadores.get(personaje-1).getInEscalera();
-	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean cambioPuntos() {
 		return cambioP;
 	}
 	
+	/**
+	 * 
+	 * @param personaje
+	 */
 	public void removerSorpresa(int personaje) 
 	{
 		int index=0;
@@ -463,10 +380,19 @@ public class MonkeyPoob {
 		cambioP=false;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getEscaleraIm() {
 		return escaleras.get(0).getImagen();
 	}
-
+	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public int[] getEscalera(int i) {
 		Escalera esc= escaleras.get(i-1);
 		int[] a =new int[3];
@@ -475,8 +401,15 @@ public class MonkeyPoob {
 		a[2]=esc.getY2();
 		return a;
 	}
-
+	
+	
+	/**
+	 * 
+	 * @param j
+	 * @return
+	 */
 	public int[] getBarril(int j) {
+		System.out.println(barriles.size());
 		Barril bar=barriles.get(j-1);
 		System.out.println(bar.getX()+" "+bar.getY());
 		int[] a=new int[2];
@@ -484,23 +417,38 @@ public class MonkeyPoob {
 		a[1]=bar.getY();
 		return a;
 	}
-
-	public ArrayList<Plataforma> getplata() {		
-		return plataformas;
-	}
-
+	
+	/**
+	 * 
+	 * @param j
+	 * @return
+	 */
 	public int getbarx(int j) {
 		return barriles.get(j-1).getX();
 	}
 
+	/**
+	 * 
+	 * @param j
+	 * @return
+	 */
 	public int getbary(int j) {
 		return barriles.get(j-1).getY();
 	}
-
+	
+	/**
+	 * 
+	 * @param j
+	 * @return
+	 */
 	public String getPuntos(int j) {		
 		return jugadores.get(j-1).getPuntos()+"";
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean jugadoresMuertos() {
 		boolean estado=false;
 		for(int i=0;i<jugadores.size() && estado==false;i++) {
@@ -509,10 +457,19 @@ public class MonkeyPoob {
 		}
 		return estado;
 	}
-
+	
+	/**
+	 * 
+	 * @param j
+	 */
 	public void resetBarril(int j) {
 		barriles.get(j-1).reiniciar();
 	}
+	
+	/**
+	 * 
+	 * @param i
+	 */	
 	public void resetJugador(int i) {
 		jugadores.get(i-1).reiniciar();
 		jugadores.get(i-1).setMuerto(false);
@@ -520,31 +477,51 @@ public class MonkeyPoob {
 			b.reiniciar();
 		}
 	}
-
-	public int getPlatSize() {
-		
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getPlatSize() {		
 		return plataformas.size();
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getEscSize() {
 		return escaleras.size();
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getBarSize() {	
 		return barriles.size();
 	}
-
+	
+	/**
+	 * 
+	 * @param j
+	 */
 	public void removerBarril(int j) {
 		barriles.remove(j-1);		
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void moverBarriles() {
 		for(Barril b : barriles) {
 			b.move();			
-		}
-		
+		}		
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int[] getbarsx() {
 		int []a =new int[barriles.size()];
 		for (int i=0;i<barriles.size();i++) {
@@ -552,7 +529,10 @@ public class MonkeyPoob {
 		}
 		return a;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int[] getbarsy() {
 		int []a =new int[barriles.size()];
 		for (int i=0;i<barriles.size();i++) {
@@ -561,9 +541,37 @@ public class MonkeyPoob {
 		return a;	
 		
 	}
+	
+	/**
+	 * 
+	 * @param personaje
+	 * @return
+	 */
+	public boolean estadoPersonaje(int personaje) {				
+		return jugadores.get(personaje-1).getEstado();
+		
+	}
 
-	
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public ArrayList<Plataforma> getplata() {
+		return plataformas;
+	}
+
+	public ArrayList<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+	public ArrayList<Sorpresa> getSorpresas() {
+		return sorpresas;
+	}
+
+	public ArrayList<Escalera> getEscaleras() {
+		
+		return escaleras;
+	}
+
 }
 

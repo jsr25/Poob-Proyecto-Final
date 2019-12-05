@@ -91,11 +91,6 @@ public abstract class Jugador implements movimiento {
 
 	protected abstract boolean getInEscalera();
 
-	protected abstract int getPlat();
-
-
-	protected abstract int getSubPlat();
-
 
 	protected abstract void sumSub();
 
@@ -132,6 +127,9 @@ public abstract class Jugador implements movimiento {
 
 
 	protected abstract void reiniciar();
+
+
+	protected abstract void setVida();
 	
 	
 

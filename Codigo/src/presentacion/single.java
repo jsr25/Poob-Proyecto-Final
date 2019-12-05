@@ -293,9 +293,8 @@ public class single extends JPanel{
 		repaint();
 		
 	}
-	public void removebar(int j) {
-		
-		barriles.remove(j-1).setVisible(false);;
+	public void removebar(int j) {		
+		barriles.get(j-1).setVisible(false);;
 	}
 	public void actualizarbar2(int[] getbarsx, int[] getbarsy) {
 		for(int i=0; i<barriles.size();i++){

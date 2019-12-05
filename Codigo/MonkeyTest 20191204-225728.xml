@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MonkeyTest" project="MonkeyPoob" tests="9" started="9" failures="0" errors="0" ignored="0">
+  <testsuite name="pruebas.MonkeyTest" time="0.01">
+    <testcase name="debreriaCrearManzana" classname="pruebas.MonkeyTest" time="0.0"/>
+    <testcase name="debreriaCrearCorazon" classname="pruebas.MonkeyTest" time="0.0"/>
+    <testcase name="deberiaCrearUnJugador" classname="pruebas.MonkeyTest" time="0.003"/>
+    <testcase name="deberiaCrearPlataforma" classname="pruebas.MonkeyTest" time="0.001"/>
+    <testcase name="deberiaMoverIzquierdaPersonaje" classname="pruebas.MonkeyTest" time="0.001"/>
+    <testcase name="crearBarrilAmarillo" classname="pruebas.MonkeyTest" time="0.001"/>
+    <testcase name="deberiaCrearCereza" classname="pruebas.MonkeyTest" time="0.001"/>
+    <testcase name="deberiaCrearEscaleras" classname="pruebas.MonkeyTest" time="0.001"/>
+    <testcase name="deberiaMoverDerechaPersonaje" classname="pruebas.MonkeyTest" time="0.001"/>
+  </testsuite>
+</testrun>
