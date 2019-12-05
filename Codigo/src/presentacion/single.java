@@ -28,11 +28,13 @@ public class single extends JPanel{
 	private ArrayList<int[]> esca;
 	private String nombre,paulineN,logoN;
 	private int k;
-	Timer timer1,timer2,timer3;
-	ArrayList<ArrayList<JLabel>> plataformas=new ArrayList<ArrayList<JLabel>>();
+	private Timer timer1,timer2,timer3;
+	private ArrayList<ArrayList<JLabel>> plataformas=new ArrayList<ArrayList<JLabel>>();
+	private ArrayList<JLabel> barriles;
 	public  single(){
 		setFocusable(true);
 		esca=new ArrayList<int[]>();
+		barriles=new ArrayList<JLabel> ();
 		k=1;
 		this.setSize(600,600);
 		this.setBackground(Color.black);
@@ -103,10 +105,7 @@ public class single extends JPanel{
 							mono.setIcon(new ImageIcon("data/monoBaila4.png"));
 							monoN="data/monoBaila4.png";
 						}
-						/*else if (monoN=="data/monoBaile2.png") {
-							mono.setIcon(new ImageIcon("data/monoBaila3.png"));
-							monoN="data/monoBaila3.png";
-						}*/
+						
 						else {
 							mono.setIcon(new ImageIcon("data/monoBaile1.png"));
 							monoN="data/monoBaile1.png";
@@ -271,29 +270,37 @@ public class single extends JPanel{
 	}
 	
 	public void crearBarril(int x , int y) {
-		barril=new JLabel();
+		JLabel barril=new JLabel();
 		barril.setIcon(new ImageIcon("data/barrilGirando1.png"));
 		barrilN="data/barrilGirando1.png";
 		barril.setSize(20,20);
 		barril.setBounds(0, 0, 80, 110);
 		barril.setLocation(x,y);
 		add(barril);
+		barriles.add(barril);
 	}
 	public void actualizarbar(int j, int getbarx, int getbary) {
-		barril.setLocation(getbarx, getbary);
+		barriles.get(j-1).setLocation(getbarx, getbary);
 		
 		if(barrilN.equals("data/barrilGirando1.png")) {
-			barril.setIcon(new ImageIcon("data/barrilgirando2.png"));
+			barriles.get(j-1).setIcon(new ImageIcon("data/barrilgirando2.png"));
 			barrilN="data/barrilgirando2.png";
 		}
 		else {
-			barril.setIcon(new ImageIcon("data/barrilGirando1.png"));
+			barriles.get(j-1).setIcon(new ImageIcon("data/barrilGirando1.png"));
 			barrilN="data/barrilGirando1.png";
 		}
 		repaint();
 		
 	}
 	public void removebar(int j) {
-		remove(barril);
+		
+		barriles.remove(j-1).setVisible(false);;
+	}
+	public void actualizarbar2(int[] getbarsx, int[] getbarsy) {
+		for(int i=0; i<barriles.size();i++){
+			barriles.get(i).setLocation(getbarsx[i],getbarsy[i]);			
+		}
+		
 	}
 }

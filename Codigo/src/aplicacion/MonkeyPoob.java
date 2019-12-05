@@ -177,7 +177,7 @@ public class MonkeyPoob {
 	 * de aplicacion 
 	 */
 	public void generarBarriles() {
-		barriles.add(new Barril(this));
+		barriles.add(new Barril(monkey));
 	}
 	
 	public void bajarEscalera(int personaje) {
@@ -262,44 +262,11 @@ public class MonkeyPoob {
 	
 	
 	
-	/**
-	 * Genra un escalera el la capa 
-	 * de aplicacion
-	 * @param x
-	 * @param yIni
-	 * @param yFin
-	 */
-	/*public void generarEscaleras(int x, int plataforma1 , int plataforma2) {
-		/*Plataforma plat1=buscarPlataforma(plataforma1,x);
-		Plataforma plat2=buscarPlataforma(plataforma2,x);
-		escaleras.add(new Escalera(x,plat1,plat2));*/
-		
-	//}
-	/**
-	 * Busca la en una plataforam dada
-	 * la subplataforma en la que 
-	 * 
-	 * @param plat ArrayList de plataformas
-	 * @param x el punto en x donde se va a ubicar  
-	 * @return retorna la plataforma en la que esta ese x 
-	 */
-	/*private Plataforma buscarPlataforma(int plat,int x) {
-		Plataforma f=null;
-		for(int i=0;i<plataformas.get(plat-1).size() && f==null;i++) {
-			if (plataformas.get(plat-1).get(i).rangoX(x)) {
-				f=plataformas.get(plat-1).get(i);
-			}
-		}
-		return f;
-	}*/
+
 	
 	
 	
 	
-	private void getEscalera() {
-		//System.out.println(escaleras.get(2).getY1());
-		//System.out.println(escaleras.get(2).getY2());
-	}
 	
 
 	
@@ -330,21 +297,7 @@ public class MonkeyPoob {
 	 * derecha en la capa de aplicacion
 	 * @param personaje
 	 */
-	/*public void mostrarPlat() {
-		int p=3;
-	//	ArrayList<Plataforma>AS=plataformas.get(p);
-		for (Plataforma pas:AS) 
-		{
-			
-			//System.out.println(pas.getX());
-			//System.out.println(pas.getX2());
-			//System.out.println(pas.getY());
-			//System.out.println(pas.getTipo());
-			
-		}
-	}
 	
-	*/
 	/**
 	 * Dado un  jugador retorna el personaje
 	 * @param personaje
@@ -488,13 +441,6 @@ public class MonkeyPoob {
 	
 	
 	
-	/*private void busSubPlat(int personaje) {
-		int x=jugadores
-		for (int i=0;i<plataforma)
-	}*/
-
-
-	
 	
 	public boolean getEnEscalera(int personaje) {
 		return jugadores.get(personaje-1).getInEscalera();
@@ -551,8 +497,7 @@ public class MonkeyPoob {
 		return barriles.get(j-1).getY();
 	}
 
-	public String getPuntos(int j) {
-		
+	public String getPuntos(int j) {		
 		return jugadores.get(j-1).getPuntos()+"";
 	}
 
@@ -565,12 +510,56 @@ public class MonkeyPoob {
 		return estado;
 	}
 
+	public void resetBarril(int j) {
+		barriles.get(j-1).reiniciar();
+	}
 	public void resetJugador(int i) {
 		jugadores.get(i-1).reiniciar();
 		jugadores.get(i-1).setMuerto(false);
 		for(Barril b : barriles) {
 			b.reiniciar();
 		}
+	}
+
+	public int getPlatSize() {
+		
+		return plataformas.size();
+	}
+
+	public int getEscSize() {
+		return escaleras.size();
+	}
+
+	public int getBarSize() {	
+		return barriles.size();
+	}
+
+	public void removerBarril(int j) {
+		barriles.remove(j-1);		
+	}
+
+	public void moverBarriles() {
+		for(Barril b : barriles) {
+			b.move();			
+		}
+		
+	}
+
+	public int[] getbarsx() {
+		int []a =new int[barriles.size()];
+		for (int i=0;i<barriles.size();i++) {
+			a[i]=barriles.get(i).getX();			
+		}
+		return a;
+	}
+
+	public int[] getbarsy() {
+		int []a =new int[barriles.size()];
+		for (int i=0;i<barriles.size();i++) {
+			a[i]=barriles.get(i).getY();			
+		}
+		return a;	
+		
 	}
 
 	
