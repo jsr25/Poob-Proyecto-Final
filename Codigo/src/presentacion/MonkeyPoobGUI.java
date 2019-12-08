@@ -30,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import aplicacion.MonkeyException;
@@ -52,8 +53,7 @@ public class MonkeyPoobGUI extends JFrame {
 		if (j==1) {
 			principal=new single();
 			this.setContentPane(principal);
-			principal.setVisible(true);
-			
+			principal.setVisible(true);			
 		}
 		setFocusable(true);
 		prepararElementos();
@@ -78,11 +78,14 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setJMenuBar(barra);	
 	}
 	
+	
 	public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI(1);
 		intf.setVisible(true);
 	}
 
+	
+	
 	public void prepararElementos() {
 		i=-1;
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
@@ -131,6 +134,7 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 	
 	public void reiniciar() {
+		Peder();
 		app.resetJugador(1);
 		principal.moverPersonaje(10, 400, app.getForma(1));
 
@@ -146,37 +150,8 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 	
 	public void prepararEstructura() {
-		app.crearPlataforma(0, 412,480,-1);			
-		Random r = new Random();
-		int valor =r.nextInt(3)+2;
-		if(valor%2!=0) {valor+=1;}
-		int k=1;
-		int o=0;
-		int h=412-60;
-		for (int i =1 ; i<=valor;i++) {
-			app.crearPlataforma(o,h,400,k);
-			if(o==0) {o=80;}
-			else {o=0;}
-			k=k*-1;
-			h=h-60;
-		}
-		
-		app.crearPlataforma(0, 62, 400, 1);	
-		app.crearPlataforma(60, 0, 160, 1);	
-		app.generarEscaleras(120, app.getPlatSize()-1,app.getPlatSize());	
-		app.generarEscaleras(140, app.getPlatSize()-1, app.getPlatSize());
-		int lo=100;
-		for (int i=1;i<valor+2;i++) {
-			app.generarEscaleras(lo,i,i+1);
-			if(lo==100) {lo=100+40;}
-			else {lo=100;}
-			
-		}
-		
-	
-		app.generarBarriles("Rojo");		
-		app.generarBarriles("Amarillo");	
-		//app.generarSorpresa(50, 400,Cereza);
+		app.estructuraAleatoria();	
+			//app.generarSorpresa(50, 400,Cereza);
 	
 		
 		/*sorpresa=new JLabel();
@@ -206,21 +181,20 @@ public class MonkeyPoobGUI extends JFrame {
 	}
 		
 	public void prepareAcciones() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				abrirPantallaMenu();
 			}
 		});
+		
 		addKeyListener(new KeyListener() {
-			public void keyTyped(KeyEvent e) {
-				
-			}
+			
 			public void keyPressed(KeyEvent e) {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_UP) {
-					app.subirEscalera(1);
-					 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));			
+					subirEscalera(1);
+					ganar();
 				}
 				if( e.getExtendedKeyCode()== KeyEvent.VK_LEFT) {
 					if (app.getJugadorPosX(1)>0) {
@@ -245,6 +219,12 @@ public class MonkeyPoobGUI extends JFrame {
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
 					
 				}
+				if (e.getExtendedKeyCode()==KeyEvent.VK_W) {}
+				if (e.getExtendedKeyCode()==KeyEvent.VK_S) {}
+				if (e.getExtendedKeyCode()==KeyEvent.VK_A) {}
+				if (e.getExtendedKeyCode()==KeyEvent.VK_D) {}
+				if (e.getExtendedKeyCode()==KeyEvent.VK_P) {}
+				
 			}
 			
 			public void keyReleased(KeyEvent e) {
@@ -268,12 +248,18 @@ public class MonkeyPoobGUI extends JFrame {
 					 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
 				}
 				repaint();	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+				
 			}			
 		});
 	}
 	
 	public void saltar(int y) {
-					timer1=new Timer(300,new ActionListener() {
+					timer1=new Timer(200,new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							app.saltar(1);
 							( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1));
@@ -287,7 +273,10 @@ public class MonkeyPoobGUI extends JFrame {
 	
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
+		this.removeAll();
 		this.setVisible(false);
+		
+		
 		p.setVisible(true);
 		}
 	
@@ -299,16 +288,41 @@ public class MonkeyPoobGUI extends JFrame {
 		} );
 	}
 	
+
 	private void opcioSalvar() {
 		JFileChooser fc = new JFileChooser();
 		int res=fc.showSaveDialog(this);
-		if (fc.APPROVE_OPTION==res) {
+		if (JFileChooser.APPROVE_OPTION==res) {
 		File f = new File(fc.getSelectedFile()+".dat");
 		try {
 			app.salvar(f);
 		}
 		catch (MonkeyException e) {
+			
 			}
 		}
 	}
+	
+	private void subirEscalera(int x ) {
+		app.subirEscalera(x);
+		 principal.moverPersonaje(app.getJugadorPosX(x), app.getJugadorPosY(x), app.getForma(x));
+	}
+	
+	private void Peder() {
+		if(app.getVidas2(1)==0) {
+			JOptionPane.showMessageDialog(this, "PERDISTE!!");
+			abrirPantallaMenu();
+			MonkeyPoob.restar();
+		}
+	}
+	
+	private void ganar() {
+		if(app.getJugadorPosY(1)==-12) {
+			JOptionPane.showMessageDialog(this, "GANASTE!!");
+			abrirPantallaMenu();
+			MonkeyPoob.restar();
+		}
+	}
+	
+	
 }

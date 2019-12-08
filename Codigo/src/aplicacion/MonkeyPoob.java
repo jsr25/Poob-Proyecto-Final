@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.lang.Math;
 /**
  * 
@@ -571,6 +572,49 @@ public class MonkeyPoob {
 	public ArrayList<Escalera> getEscaleras() {
 		
 		return escaleras;
+	}
+	
+	public void estructuraAleatoria() {
+		monkey.crearPlataforma(0, 412,480,-1);			
+		Random r = new Random();
+		int valor =r.nextInt(3)+2;
+		if(valor%2!=0) {valor+=1;}
+		int k=1;
+		int o=0;
+		int h=412-60;
+		for (int i =1 ; i<=valor;i++) {
+			monkey.crearPlataforma(o,h,400,k);
+			if(o==0) {o=80;}
+			else {o=0;}
+			k=k*-1;
+			h=h-60;
+		}
+		
+		monkey.crearPlataforma(0, 62, 400, 1);	
+		monkey.crearPlataforma(60, 0, 160, 1);	
+		monkey.generarEscaleras(120, monkey.getPlatSize()-1,monkey.getPlatSize());	
+		monkey.generarEscaleras(140, monkey.getPlatSize()-1, monkey.getPlatSize());
+		int lo=100;
+		for (int i=1;i<valor+2;i++) {
+			monkey.generarEscaleras(lo,i,i+1);
+			if(lo==100) {lo=100+40;}
+			else {lo=100;}
+			
+		}
+		
+	
+		monkey.generarBarriles("Rojo");		
+		monkey.generarBarriles("Amarillo");	
+	
+	}
+	
+	public int getVidas2(int j) {
+		return jugadores.get(j-1).getVidas();
+	}
+
+	public static void restar() {
+		monkey=new MonkeyPoob();
+		
 	}
 
 }
