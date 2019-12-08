@@ -4,9 +4,9 @@ public class Cereza extends Sorpresa {
 	private int puntos;
 	
 	/**
-	 * 
-	 * @param posX
-	 * @param posY
+	 * contructor de la sorpresa cereza
+	 * @param posX valor en x
+	 * @param posY valor en y
 	 */
 	public Cereza(int posX, int posY) {
 		super(posX,posY);

@@ -8,7 +8,7 @@ public abstract class Barril {
 	private MonkeyPoob monkey;
 	
 	/**
-	 * 
+	 * Contructor de los barriles
 	 */
 	public Barril() {
 		this.x=0;
@@ -17,7 +17,7 @@ public abstract class Barril {
 	}
 	
 	/**
-	 * 
+	 * Realiza el moviemto general del barril normal
 	 */
 	public void move() {		
 			ArrayList<Plataforma> pT= monkey.getplata();
@@ -44,17 +44,17 @@ public abstract class Barril {
 	
 	/**
 	 * 
-	 * @return
+	 * @return valor en y del barril
 	 */
 	public int getY() {
 		return y;
 	}
 	
 	/**
-	 * 
-	 * @param posX
-	 * @param posY
-	 * @return
+	 * retorna la si un barril colisiono
+	 * @param posX valor de x del jugador 
+	 * @param posY  valor de y del jugador
+	 * @return si se colisionan 
 	 */
 	public boolean colision(int posX, int posY) {
 		return x==posX && y==posY;
@@ -62,7 +62,7 @@ public abstract class Barril {
 	
 	/**
 	 * 
-	 * @return
+	 * @return el valor de x del barril 
 	 */
 	public int getX() {
 		
@@ -70,7 +70,7 @@ public abstract class Barril {
 	}
 	
 	/**
-	 * 
+	 * reinicia el barril a las posiciones iniciales
 	 */
 	public void reiniciar() {
 		x=0;
