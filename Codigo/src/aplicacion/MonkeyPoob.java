@@ -54,7 +54,7 @@ public class MonkeyPoob {
 	 * la capa de aplicacion
 	 * @param posX valor en x
 	 * @param posY valor en y
-	 * @param name tipo de muñeco
+	 * @param name tipo de muï¿½eco
 	 */
 	public void agregarJugadores(int posX, int posY, String name) {
 		jugadores.add(new Real(posX,posY,name));
@@ -126,12 +126,18 @@ public class MonkeyPoob {
 	 * @return si esta muerto
 	 */
 	public boolean jugadorMuerto(int i) {
-		return jugadores.get(i-1).getMuerto();
+		boolean s;
+		try {
+		 s=jugadores.get(i-1).getMuerto();}
+		catch(IndexOutOfBoundsException e) {
+			s=false;
+		}
+		return s;
 	}
 	
 	/**
 	 * mueve al personaje a la izquierda
-	 * que envia la señal dependiendo 
+	 * que envia la seï¿½al dependiendo 
 	 * de en que plataforma y 
 	 * subplataforma este
 	 * @param personaje
