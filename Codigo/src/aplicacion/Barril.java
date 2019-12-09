@@ -1,7 +1,11 @@
 package aplicacion;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public abstract class Barril {
 	protected int x;
 	protected int y;

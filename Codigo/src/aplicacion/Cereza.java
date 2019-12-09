@@ -1,6 +1,12 @@
 package aplicacion;
 
-public class Cereza extends Sorpresa {
+import java.io.Serializable;
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
+public class Cereza extends Sorpresa implements Serializable {
 	private int puntos;
 	
 	/**
@@ -16,7 +22,9 @@ public class Cereza extends Sorpresa {
 		
 	}
 	
-	
+	/**
+	 * metodo para la obtencion de puntos
+	 */
 	@Override
 	public int beneficio() {
 		return puntos;

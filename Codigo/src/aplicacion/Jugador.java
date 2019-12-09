@@ -1,8 +1,13 @@
 package aplicacion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
-public abstract class Jugador implements movimiento {
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
+public abstract class Jugador implements movimiento ,Serializable {
 	private ArrayList<String> mario;
 	private ArrayList<String> luigi;
 	protected int posX;
@@ -13,6 +18,12 @@ public abstract class Jugador implements movimiento {
 	protected   boolean muerto;
 	private String personaje;
 	private String forma;
+	/**
+	 * constructor del jugador
+	 * @param posX posicion en x
+	 * @param posY posicion en y
+	 * @param personaje numero del personaje
+	 */
 	public Jugador(int posX, int posY,String personaje) {
 		this.posX=posX;
 		this.posY=posY;
@@ -23,7 +34,9 @@ public abstract class Jugador implements movimiento {
 		
 	}
 
-
+	/**
+	 * prepara el array de los sprites de mario
+	 */
 	private void prepararArrays() {
 		if(personaje.equals("mario")) {
 		mario=new ArrayList<String>();
@@ -43,33 +56,54 @@ public abstract class Jugador implements movimiento {
 		forma=mario.get(0);}
 		
 	}
-	
+	/**
+	 *el nombre del sprite en el que se encuentra el personaje
+	 * @return nombre de la ruta de la imagen
+	 */
 	public String getForma() {
 		return forma;
 	}
-	
+	/**
+	 * cambia el sprite del personaje
+	 * @param a numero del sprite nuevo
+	 */
 	public void cambiarforma(int a) {
 		forma=mario.get(a-1);
 	}
 
 
-	
+	/**
+	 * sprites de mario
+	 * @return los sprites de mario
+	 */
 	public ArrayList<String> getmario(){
 		return mario;
 	}
-	
+	/**
+	 * posicion en y del personaje
+	 * @return posicion en y del personaje
+	 */
 	public int getPosY() {		
 		return posY;
 	}
-
+	/**
+	 * posicion en x del personaje
+	 * @return posicion en x del personaje
+	 */
 	public int getPosX() {		
 		return posX;
 	}
-	
+	/**
+	 * cambia los puntos del peronaje
+	 * @param t cantidad de puntos a sumar
+	 */
 	public void setPuntos(int t) {
 		puntos=puntos+t;
 	}
-	
+	/**
+	 * puntos actuales del personaje 
+	 * @return numero de puntos que tiene
+	 */
 	public int getPuntos() {
 		return puntos;
 	}

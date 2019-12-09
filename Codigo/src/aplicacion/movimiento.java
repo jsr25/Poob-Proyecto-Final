@@ -1,6 +1,12 @@
 package aplicacion;
 
-public interface movimiento {
+import java.io.Serializable;
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
+public interface movimiento  {
 	
 	public abstract void saltar();
 	public abstract void dejarSaltar();

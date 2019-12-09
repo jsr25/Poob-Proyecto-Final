@@ -1,5 +1,9 @@
 package aplicacion;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class Amarillo extends Barril{
 	
 	/**

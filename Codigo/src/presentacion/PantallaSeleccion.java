@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 //import java.util.Timer;
 //import java.util.TimerTask;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,19 +26,21 @@ import javax.swing.border.Border;
  *
  */
 public class PantallaSeleccion extends JDialog {
-	JLabel mario,luigi,items,characters;
-	JButton cereza,corazon,soga,hongo;
-	JButton select1,select2,next,back;
-	Boolean c1,c2;
-	String monoN,marioN;
-	Timer timer1,timer2;
-	Boolean cerezaB,corazonB,sogaB,hongoB;
-	Color n,b;
+	private JLabel mario,luigi,items,characters;
+	private JButton cereza,corazon,soga,hongo;
+	private JButton select1,select2,next,back;
+	private Boolean c1,c2;
+	private String monoN,marioN;
+	private Timer timer1,timer2;
+	private Boolean cerezaB,corazonB,sogaB,hongoB;
+	private Color n,b;
+	private int jugadores;
 	/**
 	 * constructor de la pantalla de selecion
 	 */
-	public PantallaSeleccion() {
+	public PantallaSeleccion(int s) {
 		super();
+		jugadores=s;
 		prepareElementos();
 		prepareElementosMenu();
 		prepareAcciones();
@@ -321,9 +324,25 @@ public class PantallaSeleccion extends JDialog {
 	 * abre el tablero
 	 */
 	public void abraMonkeyPoobGUI() {
-		MonkeyPoobGUI p = new MonkeyPoobGUI(1);
-		this.setVisible(false);
-		p.setVisible(true);
+		ArrayList<String>hs=sorpresa();
+		if (jugadores==1) {
+			String n;		
+			if (c1==true) {n="Mario";}
+			else {n="Luigi";}
+				MonkeyPoobGUI p = new MonkeyPoobGUI(1,n,hs,null);
+				this.setVisible(false);
+				p.setVisible(true);
+			}
+		
+		else {
+			String n;
+			String n2;
+			if (c1==true) {n="Mario"; n2="Luigi";}
+			else {n="Luigi"; n2="Mario";}
+			MonkeyPoobGUI p = new MonkeyPoobGUI(2,n,n2,hs,null);
+			this.setVisible(false);
+			p.setVisible(true);
+			}
 		}
 	
 
@@ -369,9 +388,24 @@ public class PantallaSeleccion extends JDialog {
 					}				
 			});
 		
+	} 
+	private ArrayList<String>  sorpresa()
+	{
+		ArrayList<String> n=new ArrayList<String>();
+		if(sogaB) {
+			n.add("Soga");
+			}
+		if (cerezaB) {
+			n.add("Cereza");
+			}
+		if (corazonB) {
+			n.add("Corazon");
+		}
+		if (hongoB) {
+			n.add("Hongo");
+		}
 		
-
-
-
-}
+		return n;
+	}
+	
 }

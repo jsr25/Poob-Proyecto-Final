@@ -25,8 +25,8 @@ import javax.swing.border.EtchedBorder;
  */
 public class PantallaPlay extends JDialog {
 	private static final long serialVersionUID = 1L;
-	JPanel dificultades,opciones;
-	JButton start,pvp,pve,p,eve,back;
+	private JPanel dificultades,opciones;
+	private JButton start,pvp,pve,p,eve,back;
 	
 	/**
 	 * constructor play
@@ -164,9 +164,15 @@ public class PantallaPlay extends JDialog {
 	private void abra() {
 		JButton b=opcion();
 		if (b!=null) {
-			PantallaSeleccion p = new PantallaSeleccion();
+			if (p.getBackground().equals(Color.RED)) {
+			PantallaSeleccion p = new PantallaSeleccion(1);
 			this.setVisible(false);
-			p.setVisible(true);
+			p.setVisible(true);}
+			else {
+				PantallaSeleccion p = new PantallaSeleccion(2);
+				this.setVisible(false);
+				p.setVisible(true);
+			}
 		}
 		}
 	/**

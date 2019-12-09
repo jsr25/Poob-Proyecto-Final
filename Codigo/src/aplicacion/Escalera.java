@@ -1,6 +1,8 @@
 package aplicacion;
 
-public class Escalera {
+import java.io.Serializable;
+
+public class Escalera implements Serializable {
 	private int x;
 	private int yIni;
 	private int yFin;

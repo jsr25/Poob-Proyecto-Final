@@ -1,14 +1,20 @@
 package aplicacion;
 
-public class Real extends Jugador  {
+import java.io.Serializable;
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
+public class Real extends Jugador  implements Serializable {
 	private int vidas;
 	private boolean estado;
 	
 	/**
-	 * 
-	 * @param posX
-	 * @param posY
-	 * @param personaje
+	 * contructor de Real
+	 * @param posX posicion en x
+	 * @param posY posicion en y
+	 * @param personaje nombre del personaje
 	 */
 	public Real(int posX,int posY,String personaje) {
 		super(posX,posY,personaje);
@@ -24,7 +30,7 @@ public class Real extends Jugador  {
 	
 	/**
 	 * 
-	 * @return
+	 * @return si se encuentra vivo
 	 */
 	public boolean estoyVivo() {
 		if(vidas==0) {
@@ -35,11 +41,14 @@ public class Real extends Jugador  {
 	}
 	
 	/**
-	 * 
+	 * cambia el estado de muerto
 	 */
     public void setMuerto(boolean v) {
     	muerto=v;
     }
+    /**
+     * permite saltar y el cambio de los sprites
+     */
 	@Override
 	public void saltar() {
 		
@@ -66,61 +75,80 @@ public class Real extends Jugador  {
 				
 				
 	}
-
+	/**
+	 * permite avanzar y el cambio de los sprites
+	 */
 	@Override
 	public void avanzar() {
-			posX=posX+10;
-			if(getForma().equals("data/marioDerecha.png")) {
-				cambiarforma(2);
+			if(vidas>0) {
+				posX=posX+10;
+				if(getForma().equals("data/marioDerecha.png")) {
+					cambiarforma(2);
+				}
+				
+				else if (getForma().equals("data/marioPasoDerecha.png")){
+					cambiarforma(3);
+				}
+				
+				else {
+					cambiarforma(1);
+				}
 			}
-			
-			else if (getForma().equals("data/marioPasoDerecha.png")){
-				cambiarforma(3);
-			}
-			
-			else {
-				cambiarforma(1);
-			}
-			
 		}
 
-
+	/**
+	 * permite retroceder y el cambio de los sprites
+	 */
 	@Override
 	public void retroceder() {
-			posX=posX-10;
-			if(getForma().equals("data/marioIzquierda.png")) {
-				cambiarforma(5);
+			if  (vidas>0){
+				posX=posX-10;
+				if(getForma().equals("data/marioIzquierda.png")) {
+					cambiarforma(5);
+				}
+				
+				else if (getForma().equals("data/marioPasoIzquierda.png")){
+					cambiarforma(6);
+				}
+				
+				else {
+					cambiarforma(4);
+				}
+				
 			}
-			
-			else if (getForma().equals("data/marioPasoIzquierda.png")){
-				cambiarforma(6);
-			}
-			
-			else {
-				cambiarforma(4);
-			}
-			
 		}
-
+	/**
+	 * @return  si todavia puede seguir juagndo
+	 */
 	@Override
 	protected boolean getEstado() {		
 		return vidas>0;
 	}
-
+	/**
+	 * @return si se ha colisionado con ciert posicion
+	 * @param x posicion en x
+	 * @param y posicion en y
+	 */
 	@Override
 	protected boolean colision(int x, int y) {
 		
 		return x==posX && y==posY ;
 	}
-
+	/**
+	 * actualiza el estado de las vidas
+	 */
 	@Override
 	protected void perdervida() {
 		vidas=vidas-1;		
 	}
-
+	/**
+	 * permite subir una escalera actualizando los sprites
+	 * @param posible si es posible subir 
+	 * @param y el del jugador
+	 */
 	@Override
 	protected void subir(boolean posible,int y) {
-		if(posible) {
+		if(posible && vidas>0) {
 			posY+=y;
 			if (getForma().equals("data/marioEscalera1.png") ) {
 				cambiarforma(8);
@@ -139,10 +167,14 @@ public class Real extends Jugador  {
 	
 		
 	}
-
+	/**
+	 * permite bajar una escalera y cambiar los sprites 
+	 * @param posible si es posible bajar 
+	 * @param y el del jugador
+	 */
 	@Override
 	protected void bajar(boolean posible, int y) {
-		if(posible) {
+		if(posible && vidas>0) {
 			posY-=y;
 			if (getForma().equals("data/marioEscalera1.png") || getForma().equals("data/marioEscalera3.png") ) {
 				cambiarforma(8);
@@ -162,13 +194,16 @@ public class Real extends Jugador  {
 	}
 	
 
-
+	/**
+	 * @return si se encuentra en una escalera 
+	 */
 	@Override
 	protected boolean getInEscalera() {
-		
 		return false;
 	}
-
+	/**
+	 * si es posiobe saltar y cambia los sprites
+	 */
 	@Override
 	public void dejarSaltar() {
 		if (getForma().equals("data/marioSalto.png")) {
@@ -181,80 +216,112 @@ public class Real extends Jugador  {
 		}
 		
 	}
+	/**
+	 * cambia de subplataforma
+	 */
 	@Override
 	protected void sumSub() {
 		subPlataforma++;
 	}
+	/**
+	 * cambia el y del jugador
+	 */
 	@Override
 	protected void sumY(int tipo) {
 		posY+=tipo;
 		
 	}
-	
+	/**
+	 * cambia de subplataforma
+	 */
 	@Override
 	protected void resSub() {
 		subPlataforma--;
 		
 	}
+	/**
+	 * cambia el y del jugador
+	 */
 	@Override
 	protected void resY(int tipo) {
 		posY-=tipo;
 		
 	}
-	@Override
-	protected void sumY() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * cambia de plataforma 
+	 * @param i numero de la plataforma
+	 */
 	@Override
 	protected void setPlat(int i) {		
 		plataforma=i;	
 	}
+	/**
+	 * cambia de subplataforma
+	 * @param numero de la subplataforma
+	 */
 	@Override
 	protected void setSubPlat(int i) {
 		subPlataforma=i;
 	}
 	@Override
-	protected void setInEscalera(boolean s) {
-	//	inEscalera=s;
-		
+	protected void setInEscalera(boolean s) {	
 	}
+	/**
+	 * Le resta vidas 
+	 */
 	@Override
 	protected void resVidas() {
-		System.out.println("------");
 		muerto=true;
 		vidas-=1;
 		cambiarforma(13);
 	}
+	/**
+	 * @return cantidad de vidas
+	 */
 	@Override
 	protected int getVidas() {		
 		return vidas;
 	}
+	/**
+	 * @return si esta muerto
+	 */
 	protected boolean getMuerto() {
 		return muerto;
 	}
+	/**
+	 * posicion inicial en x del jugador
+	 */
 	@Override
 	protected void setX() {
 		posX=16;
 		
 	}
+	/**
+	 * posicion inicial en y del jugador
+	 */
 	@Override
 	protected void setY() {
 		posY=400;
 		
 	}
+	/**
+	 * reinicia los valores de posicion del jugador 
+	 */
 	@Override
 	protected void reiniciar() {
 		posX=10;
 		posY=400;
 		cambiarforma(1);		
 	}
-
+	/**
+	 * cambia la vidas
+	 */
 	@Override
 	protected void setVida() {
 		vidas+=1;
 	}
+	@Override
+	protected void sumY() {}
 	
 	
 	

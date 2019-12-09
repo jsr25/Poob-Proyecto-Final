@@ -226,4 +226,16 @@ public abstract class TableroJuego extends JPanel {
 	}
 	public void setVidas(String v, String s) {}
 	public void setPuntos(String v, String s) {}
+	
+	public void crearSorpresas(String [] sorpresas,int [][] coor) {
+		for(int i=0;i<sorpresas.length;i++) {
+			JLabel sor=new JLabel();
+			sor.setIcon(new ImageIcon(sorpresas[i]));
+			sor.setSize(8, 7);		
+			sor.setBounds(0, 0, 80, 110);
+			sor.setLocation(coor[i][0], coor[i][1]);
+			add(sor);
+			this.sorpresas.add(sor);
+		}
+	}
 }

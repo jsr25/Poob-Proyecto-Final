@@ -1,9 +1,13 @@
 package aplicacion;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
@@ -12,7 +16,7 @@ import java.lang.Math;
  * @author Juan Ramos-Brayan Jimenez
  *
  */
-public class MonkeyPoob {
+public class MonkeyPoob implements Serializable {
 	private ArrayList<Plataforma> plataformas;
 	private ArrayList<Jugador> jugadores;
 	private	ArrayList<Escalera> escaleras;
@@ -85,6 +89,23 @@ public class MonkeyPoob {
 		}
 		
 	}
+	
+	
+	public void Abrir(File f) throws MonkeyException{
+		try {
+			ObjectInputStream A = new ObjectInputStream(new FileInputStream(f));
+			try {
+				monkey=(MonkeyPoob)A.readObject();
+			} catch (ClassNotFoundException e) {
+				
+			}
+		} catch (FileNotFoundException e) {
+			
+		} catch (IOException e) {
+			
+		}
+	}
+	
 	
 	/**
 	 * se genera la plataforma donde inicia el jugador
@@ -419,9 +440,7 @@ public class MonkeyPoob {
 	 * @return coordenadas de un barril dada
 	 */
 	public int[] getBarril(int j) {
-		System.out.println(barriles.size());
 		Barril bar=barriles.get(j-1);
-		System.out.println(bar.getX()+" "+bar.getY());
 		int[] a=new int[2];
 		a[0]=bar.getX();
 		a[1]=bar.getY();
@@ -477,8 +496,8 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param i
+	 * reinicia los valores de un jugador
+	 * @param i numero del jugador a reiniciar
 	 */	
 	public void resetJugador(int i) {
 		jugadores.get(i-1).reiniciar();
@@ -490,7 +509,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return cantidad de plataformas
 	 */
 	public int getPlatSize() {		
 		return plataformas.size();
@@ -498,7 +517,7 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return cantidad de escaleras
 	 */
 	public int getEscSize() {
 		return escaleras.size();
@@ -506,31 +525,31 @@ public class MonkeyPoob {
 	
 	/**
 	 * 
-	 * @return
+	 * @return cantidad de barriles
 	 */
 	public int getBarSize() {	
 		return barriles.size();
 	}
 	
 	/**
-	 * 
-	 * @param j
+	 *  remueve un barril
+	 * @param j numero del barril
 	 */
 	public void removerBarril(int j) {
 		barriles.remove(j-1);		
 	}
 	
 	/**
-	 * 
+	 * mueve los barriles
 	 */
 	public void moverBarriles() {
 		for(Barril b : barriles) {
 			b.move();			
 		}		
 	}
-	/**
-	 * 
-	 * @return
+	/** 
+	 * busca las coordenadas en x de los barriles
+	 * @return []int de las coordenadas en x de los barriles
 	 */
 	public int[] getbarsx() {
 		int []a =new int[barriles.size()];
@@ -539,9 +558,9 @@ public class MonkeyPoob {
 		}
 		return a;
 	}
-	/**
-	 * 
-	 * @return
+	/** 
+	 * busca las coordenadas en y de los barriles
+	 * @return []int de las coordenadas en y de los barriles
 	 */
 	public int[] getbarsy() {
 		int []a =new int[barriles.size()];
@@ -553,9 +572,9 @@ public class MonkeyPoob {
 	}
 	
 	/**
-	 * 
-	 * @param personaje
-	 * @return
+	 * si el personaje todavia puede jugar
+	 * @param personaje numero del personaje
+	 * @return si todavia puede jugar o no
 	 */
 	public boolean estadoPersonaje(int personaje) {				
 		return jugadores.get(personaje-1).getEstado();
@@ -564,26 +583,64 @@ public class MonkeyPoob {
 
 	/**
 	 * 
-	 * @return
+	 * @return array de las coordenadas de las plataformas
 	 */
 	public ArrayList<Plataforma> getplata() {
 		return plataformas;
 	}
-
+	/**
+	 * 
+	 * @return de las coordenadas de los jugadores
+	 */
 	public ArrayList<Jugador> getJugadores() {
 		return jugadores;
 	}
-
+	/**
+	 * 
+	 * @return de las coordenadas de las sorpresas
+	 */
 	public ArrayList<Sorpresa> getSorpresas() {
 		return sorpresas;
 	}
-
+	/**
+	 * 
+	 * @return de las coordenadas de las escaleras
+	 */
 	public ArrayList<Escalera> getEscaleras() {
 		
 		return escaleras;
 	}
 	
-	public void estructuraAleatoria() {
+	/**
+	 * genera la esctrutura de forma aleatoria
+	 */
+	public void estructuraAleatoria() {		
+		crearPlataformasAl();
+		crearEscalerasAl();			
+	
+		monkey.generarBarriles("Rojo");		
+		monkey.generarBarriles("Amarillo");	
+	
+	}
+	/**
+	 * halla la cantidad de vidas del jugador
+	 * @param j numero del jugador
+	 * @return cantidad de vidas
+	 */
+	public int getVidas2(int j) {
+		return jugadores.get(j-1).getVidas();
+	}
+	/**
+	 * reinicia el tablero
+	 */
+	public static void restar() {
+		monkey=new MonkeyPoob();
+		
+	}
+	/**
+	 * crea todas las plataformas 
+	 */
+	private void crearPlataformasAl() {
 		monkey.crearPlataforma(0, 412,480,-1);			
 		Random r = new Random();
 		int valor =r.nextInt(3)+2;
@@ -601,30 +658,24 @@ public class MonkeyPoob {
 		
 		monkey.crearPlataforma(0, 62, 400, 1);	
 		monkey.crearPlataforma(60, 0, 160, 1);	
+	}
+	/**
+	 * crea las escaleras de forma aletoria
+	 */
+	private void crearEscalerasAl() {
 		monkey.generarEscaleras(120, monkey.getPlatSize()-1,monkey.getPlatSize());	
 		monkey.generarEscaleras(140, monkey.getPlatSize()-1, monkey.getPlatSize());
 		int lo=100;
-		for (int i=1;i<valor+2;i++) {
+		for (int i=1;i<plataformas.size()-1;i++) {
 			monkey.generarEscaleras(lo,i,i+1);
 			if(lo==100) {lo=100+40;}
 			else {lo=100;}
 			
 		}
 		
-	
-		monkey.generarBarriles("Rojo");		
-		monkey.generarBarriles("Amarillo");	
-	
 	}
 	
-	public int getVidas2(int j) {
-		return jugadores.get(j-1).getVidas();
-	}
-
-	public static void restar() {
-		monkey=new MonkeyPoob();
-		
-	}
+	
 
 }
 

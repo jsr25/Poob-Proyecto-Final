@@ -20,6 +20,7 @@ import javax.swing.Timer;
 
 import org.junit.rules.Timeout;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.TimerTask;
 
@@ -56,19 +57,24 @@ public class MonkeyPoobGUI extends JFrame {
 	 * contructoor del MokeyPoobGUI
 	 * @param j cantidad de jugadores
 	 */
-	public MonkeyPoobGUI(int j) {
+	public MonkeyPoobGUI(int j,String s,ArrayList<String> a,ArrayList<String> b) {
 		super("Monkey");	
+		jugadores=j;		
+		principal=new single();
+		this.setContentPane(principal);
+		principal.setVisible(true);			
+		PrepararGUI();	
+	}
+	public MonkeyPoobGUI(int j,String s,String h,ArrayList<String> a,ArrayList<String> b) {
 		jugadores=j;
-		if (j==1) {
-			principal=new single();
-			this.setContentPane(principal);
-			principal.setVisible(true);			
-		}
-		if(j==2) {
-			principal=new doble();
-			this.setContentPane(principal);
-			principal.setVisible(true);	
-		}
+		principal=new doble();
+		this.setContentPane(principal);
+		principal.setVisible(true);	
+		PrepararGUI();
+		
+	}
+	
+	private void PrepararGUI() {
 		setFocusable(true);
 		prepararElementos();
 		prepararPersonajes();
@@ -78,7 +84,7 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setResizable(false);
 		this .getContentPane().setBackground(new Color(0,0,0));
 		prepararEstructura();
-		generarEstructura();	
+		generarEstructura();
 	}
 	/**
 	 * prepara los elementos del menu en el tablero
@@ -98,10 +104,10 @@ public class MonkeyPoobGUI extends JFrame {
 	 * main
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI(2);
 		intf.setVisible(true);
-	}
+	}*/
 
 	
 	/**
@@ -114,7 +120,7 @@ public class MonkeyPoobGUI extends JFrame {
 		setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.WHITE);
-		app= MonkeyPoob.getMonkey();
+		app=MonkeyPoob.getMonkey();
 		
 	}
 	/**
@@ -159,7 +165,7 @@ public class MonkeyPoobGUI extends JFrame {
 							reiniciar(1);
 						}
 						else if (app.jugadorMuerto(2)){
-							(principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1),1);
+							(principal).moverPersonaje(app.getJugadorPosX(2), app.getJugadorPosY(2), app.getForma(2),2);
 							reiniciar(2);
 						}
 						app.moverBarril(j);
@@ -176,11 +182,17 @@ public class MonkeyPoobGUI extends JFrame {
 	public void reiniciar(int j) {
 		Peder();
 		if (jugadores==1)
-		{		app.resetJugador(1);
-		principal.moverPersonaje(10, 400, app.getForma(1),1);}
+		{	app.resetJugador(1);
+			principal.moverPersonaje(10, 400, app.getForma(1),1);}
 		else {
-			app.resetJugador(1);
-			principal.moverPersonaje(10, 400, app.getForma(1),1);
+			if(j==1) {
+				app.resetJugador(1);
+				principal.moverPersonaje(10, 400, app.getForma(1),1);	
+			}
+			else{
+				app.resetJugador(2);
+				principal.moverPersonaje(10, 400, app.getForma(2),2);
+				}
 		}
 
 	}
@@ -194,6 +206,7 @@ public class MonkeyPoobGUI extends JFrame {
 			principal.addPersonaje(0,400,"data/marioDerecha.png");		
 			principal.setVidas(app.getVidas(1));
 			principal.setPuntos(app.getPuntos(1));}
+		
 		else {
 			app.agregarJugadores(0, 400, "mario");
 			app.agregarJugadores(10, 400, "mario");
@@ -376,6 +389,11 @@ public class MonkeyPoobGUI extends JFrame {
 				opcioSalvar();
 			}	
 		} );
+		
+		abrir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				opcionAbrir();			}	
+		} );
 	}
 	
 	/**
@@ -394,6 +412,22 @@ public class MonkeyPoobGUI extends JFrame {
 			}
 		}
 	}
+	
+	private void opcionAbrir() {
+		JFileChooser fc = new JFileChooser();
+		File f=null;
+		int res=fc.showSaveDialog(this);
+		if (JFileChooser.APPROVE_OPTION==res) {
+			f=fc.getSelectedFile();
+		}
+		try {			
+			app.Abrir(f);
+			principal.removeAll();
+			generarEstructura();
+			
+		}
+		catch(Exception e) {}
+	}
 	/**
 	 * permite subir la escalera 
 	 * @param x numero del jugador
@@ -406,20 +440,44 @@ public class MonkeyPoobGUI extends JFrame {
 	 * funcionalidad de perder
 	 */
 	private void Peder() {
-		if(app.getVidas2(1)==0) {
-			JOptionPane.showMessageDialog(this, "PERDISTE!!");
-			abrirPantallaMenu();
-			MonkeyPoob.restar();
+		if (jugadores==1) {
+			if(app.getVidas2(1)==0) {
+				JOptionPane.showMessageDialog(this, "PERDISTE!!");
+				abrirPantallaMenu();
+				MonkeyPoob.restar();
+			}
 		}
+		else {
+			if (app.getVidas2(2)==0 && app.getVidas2(1)==0){
+				JOptionPane.showMessageDialog(this, "PERDIERON!!");
+				abrirPantallaMenu();
+				MonkeyPoob.restar();
+			}
+		}
+		
 	}
 	/**
 	 * funcioalidad de ganar
 	 */
 	private void ganar() {
-		if(app.getJugadorPosY(1)==-12) {
-			JOptionPane.showMessageDialog(this, "GANASTE!!");
-			abrirPantallaMenu();
-			MonkeyPoob.restar();
+		if (jugadores==1) {
+			if(app.getJugadorPosY(1)==-12) {
+				JOptionPane.showMessageDialog(this, "GANASTE!!");
+				abrirPantallaMenu();
+				MonkeyPoob.restar();
+			}
+		}
+		else {
+			if(app.getJugadorPosY(1)==-12) {
+				JOptionPane.showMessageDialog(this, "GANASTE P1!!");
+				abrirPantallaMenu();
+				MonkeyPoob.restar();
+			}
+			else if(app.getJugadorPosY(2)==-12) {
+				JOptionPane.showMessageDialog(this, "GANASTE P2!!");
+				abrirPantallaMenu();
+				MonkeyPoob.restar();
+			}
 		}
 	}
 	

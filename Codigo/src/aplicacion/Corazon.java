@@ -1,6 +1,8 @@
 package aplicacion;
 
-public class Corazon extends Sorpresa{
+import java.io.Serializable;
+
+public class Corazon extends Sorpresa implements Serializable{
 /**
  * contructor de la sorpresa corazon
  * @param posX valor en x
@@ -11,7 +13,9 @@ public class Corazon extends Sorpresa{
 		super.setTipo("cura");
 		
 	}
-
+	/**
+	 * beneficion del corazon
+	 */
 	@Override
 	public int beneficio() {
 		return 0;
