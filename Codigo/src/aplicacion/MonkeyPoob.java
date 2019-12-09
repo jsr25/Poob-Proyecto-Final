@@ -502,9 +502,9 @@ public class MonkeyPoob implements Serializable {
 	public void resetJugador(int i) {
 		jugadores.get(i-1).reiniciar();
 		jugadores.get(i-1).setMuerto(false);
-		for(Barril b : barriles) {
+		/*for(Barril b : barriles) {
 			b.reiniciar();
-		}
+		}*/
 	}
 	
 	/**
@@ -620,6 +620,18 @@ public class MonkeyPoob implements Serializable {
 	
 		monkey.generarBarriles("Rojo");		
 		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
+		monkey.generarBarriles("Amarillo");	
 	
 	}
 	/**
@@ -672,6 +684,9 @@ public class MonkeyPoob implements Serializable {
 			else {lo=100;}
 			
 		}
+		
+	}
+	private void crearBarrilesAl() {
 		
 	}
 	

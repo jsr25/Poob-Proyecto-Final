@@ -85,6 +85,7 @@ public class MonkeyPoobGUI extends JFrame {
 		this .getContentPane().setBackground(new Color(0,0,0));
 		prepararEstructura();
 		generarEstructura();
+		
 	}
 	/**
 	 * prepara los elementos del menu en el tablero
@@ -247,10 +248,10 @@ public class MonkeyPoobGUI extends JFrame {
 		for (int i=0;i<app.getEscSize();i++) {
 			crearEscalera(i+1);
 		}	
-		crearBarril(1);	
-		crearBarril(2);
-		moverBarril(1);	
-		moverBarril(2);	
+		for(int i=1;i<=app.getBarSize();i++) {
+			crearBarril(i);	
+			}
+		moverBarriles();	
 	}
 	/**
 	 * prepara los oyentes necesarios
@@ -481,5 +482,22 @@ public class MonkeyPoobGUI extends JFrame {
 		}
 	}
 	
+	private void moverBarriles() {
+		timer2=new Timer(3000,null);
+		timer2.addActionListener(
+				new ActionListener() {
+					int i=1;
+					public void actionPerformed(ActionEvent e) {
+						if(i==app.getBarSize()+1) {
+							timer2.restart();
+						}
+						else {
+							moverBarril(i);
+							i++;
+						}
+					}
+				});
+		timer2.start();
+	}
 	
 }
