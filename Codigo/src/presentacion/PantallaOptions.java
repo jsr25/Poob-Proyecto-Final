@@ -18,20 +18,27 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class PantallaOptions extends JDialog {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	JButton music,controls,credits,back,next;
 	JPanel options,eleccion;
+	/**
+	 * constructor de las opciones
+	 */
 	public PantallaOptions() {
 		super();
 		prepareElementos();
 		prepareElementosMenu();
 		prepareAcciones();
 	}
+	/**
+	 * prepara los elementos principales
+	 */
 	public void prepareElementos() {
 		this.setLayout(new BorderLayout());
 		Toolkit t = Toolkit.getDefaultToolkit();
@@ -42,11 +49,14 @@ public class PantallaOptions extends JDialog {
 		setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
+	/**
+	 * prepara los  oyentes necesarios
+	 */
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				salga();
+				abrirPantallaMenu();
 			}
 		});
 		back.addActionListener(
@@ -62,6 +72,9 @@ public class PantallaOptions extends JDialog {
 					}
 				});
 	}
+	/**
+	 * prepara los elementos necesarios
+	 */
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		options= new JPanel();
@@ -98,17 +111,20 @@ public class PantallaOptions extends JDialog {
 		this.add(eleccion,BorderLayout.SOUTH);
 		
 	}
+	/**
+	 * abrir pantalla menu
+	 */
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
 		this.setVisible(false);
 		p.setVisible(true);
 		}
+	/**
+	 * abrir pantalla controles
+	 */
 	public void abrirPantallaControls() {
 		PantallaControls p = new PantallaControls();
 		this.setVisible(false);
 		p.setVisible(true);
 		}
-	public void salga() {
-		System.exit(0);
-	}
 }

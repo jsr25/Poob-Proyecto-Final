@@ -18,27 +18,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class PantallaPlay extends JDialog {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	JPanel dificultades,opciones;
 	JButton start,pvp,pve,p,eve,back;
 	
-	
+	/**
+	 * constructor play
+	 */
 	public PantallaPlay() {
 		super();
 		prepararElementos();
 		prepareElementosMenu();
 		prepareAcciones();
 	}
+	/**
+	 * prepara los oyentes necesarios
+	 */
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				salga();
+				abrirPantallaMenu();
 			}
 		});
 	start.addActionListener(
@@ -78,6 +84,9 @@ public class PantallaPlay extends JDialog {
 				}
 			});
 	}
+	/**
+	 * prepara los elementos principales 
+	 */
 	public void prepararElementos(){
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -87,6 +96,9 @@ public class PantallaPlay extends JDialog {
 		setLocationRelativeTo(null);  
 		this.setResizable(false);
 	}
+	/**
+	 * prepara los elementos necesarios
+	 */
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		dificultades=new JPanel();
@@ -126,56 +138,60 @@ public class PantallaPlay extends JDialog {
 		this.add(dificultades,BorderLayout.CENTER);
 		this.add(opciones,BorderLayout.SOUTH);
 	}
-public void salga() {
-		if (JOptionPane.showConfirmDialog(this,"Esta seguro de cerrar")== JOptionPane.OK_OPTION)
-		{
-			System.exit(0);
+	private JButton opcion() {
+		JButton b=null;
+		if (pvp.getBackground().equals(Color.RED)) {
+			b=pvp;
 		}
-	}
-private JButton opcion() {
-	JButton b=null;
-	if (pvp.getBackground().equals(Color.RED)) {
-		b=pvp;
-	}
-	else if (pve.getBackground().equals(Color.RED)){
-		b=pve;
-	}
-	else if (eve.getBackground().equals(Color.RED)){
-		b=eve;
-	}
-	else if (p.getBackground().equals(Color.RED)){
-		b=p;
-	}
-	else {
-		JOptionPane.showMessageDialog(this, "No tiene una opcion seleccionada");
-	}
-	return b;
-	
-}
-private void abra() {
-	JButton b=opcion();
-	if (b!=null) {
-		PantallaSeleccion p = new PantallaSeleccion();
-		this.setVisible(false);
-		p.setVisible(true);
-	}
-	}
-public void abrirPantallaMenu() {
-	Menu p = new Menu();
-	this.setVisible(false);
-	p.setVisible(true);
-	}
-public void select(JButton b) {
-	if (pvp.getBackground().equals(Color.RED) || pve.getBackground().equals(Color.RED) || eve.getBackground().equals(Color.RED) || p.getBackground().equals(Color.RED)) {
-		if (b.getBackground().equals(Color.RED)) {
-			b.setBackground(Color.black);
+		else if (pve.getBackground().equals(Color.RED)){
+			b=pve;
+		}
+		else if (eve.getBackground().equals(Color.RED)){
+			b=eve;
+		}
+		else if (p.getBackground().equals(Color.RED)){
+			b=p;
 		}
 		else {
-			JOptionPane.showMessageDialog(this, "Ya tiene una opcion seleccionada");
+			JOptionPane.showMessageDialog(this, "No tiene una opcion seleccionada");
+		}
+		return b;
+		
+	}
+	/**
+	 * abre la pantalla de seleccion
+	 */
+	private void abra() {
+		JButton b=opcion();
+		if (b!=null) {
+			PantallaSeleccion p = new PantallaSeleccion();
+			this.setVisible(false);
+			p.setVisible(true);
+		}
+		}
+	/**
+	 * abrir pantalla menu
+	 */
+	public void abrirPantallaMenu() {
+		Menu p = new Menu();
+		this.setVisible(false);
+		p.setVisible(true);
+		}
+	/**
+	 * se evita que se selecciones dos botones
+	 * @param b boton
+	 */
+	public void select(JButton b) {
+		if (pvp.getBackground().equals(Color.RED) || pve.getBackground().equals(Color.RED) || eve.getBackground().equals(Color.RED) || p.getBackground().equals(Color.RED)) {
+			if (b.getBackground().equals(Color.RED)) {
+				b.setBackground(Color.black);
+			}
+			else {
+				JOptionPane.showMessageDialog(this, "Ya tiene una opcion seleccionada");
+			}
+		}
+		else {
+			b.setBackground(Color.RED);
 		}
 	}
-	else {
-		b.setBackground(Color.RED);
-	}
-}
 }

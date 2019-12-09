@@ -12,18 +12,28 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class PantallaControls extends JDialog {
 	private static final long serialVersionUID = 1L;
 	JButton back;
 	JLabel w,a,s,d,p,space,up,left,right,down,salto,der,izq;
 	String upN,leftN,rightN,downN,saltoN,derN,izqN,spaceN ;
+	/**
+	 * constructor de la pantalla de los controles
+	 */
 	public PantallaControls() {
 		super();
 		prepareElementos();
 		prepareControles();
 		moverTeclas();
 	}
+	/**
+	 * prepara los elementos principales
+	 */
 	public void prepareElementos() {
 		this.setLayout(null);
 		Toolkit t = Toolkit.getDefaultToolkit();
@@ -36,6 +46,9 @@ public class PantallaControls extends JDialog {
 		this.setResizable(false);
 		
 	}
+	/**
+	 * prepara los elementos necesarios 
+	 */
 	public void prepareControles() {
 		w=new JLabel();
 		a=new JLabel();
@@ -93,6 +106,9 @@ public class PantallaControls extends JDialog {
 		add(izq);*/
 		
 	}
+	/**
+	 * genera los timer de las teclas
+	 */
 	public void moverTeclas() {
 		Timer timer=new Timer();
 		TimerTask tarea=new TimerTask(){

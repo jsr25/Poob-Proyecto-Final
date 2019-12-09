@@ -22,13 +22,22 @@ import javax.swing.Timer;
 
 import aplicacion.MonkeyPoob;
 
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class single extends  TableroJuego{
 	private JLabel score,lifes,puntos,vidas,personaje;
+	/**
+	 * constructor de single
+	 */
 	public  single(){
 		puntajeYVidas();
 	}
-
+	/**
+	 * prepara los puntajes y las vidas de mario
+	 */
 	@Override
 	public void puntajeYVidas() {
 		puntos =new JLabel("--");
@@ -59,18 +68,24 @@ public class single extends  TableroJuego{
 		add(vidas);
 		
 	}
-
+	/**
+	 * cambia las vidas
+	 */
 	@Override
 	public void setVidas(String v) {
 		vidas.setText(v);
 		
 	}
-
+	/**
+	 * cambia los puntos
+	 */
 	@Override
 	public void setPuntos(String v) {
 		puntos.setText(v);
 	}
-
+	/**
+	 * añade los personaje
+	 */
 	@Override
 	public void addPersonaje(int x, int y, String img) {
 		personaje=new JLabel();
@@ -80,7 +95,9 @@ public class single extends  TableroJuego{
 		personaje.setLocation(x,y);
 		add(personaje);		
 	}
-
+	/**
+	 * mueve los personaje
+	 */
 	@Override
 	public void moverPersonaje(int x, int y, String img, int i) {
 		

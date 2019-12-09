@@ -19,7 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.border.Border;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class PantallaSeleccion extends JDialog {
 	JLabel mario,luigi,items,characters;
 	JButton cereza,corazon,soga,hongo;
@@ -29,18 +33,24 @@ public class PantallaSeleccion extends JDialog {
 	Timer timer1,timer2;
 	Boolean cerezaB,corazonB,sogaB,hongoB;
 	Color n,b;
+	/**
+	 * constructor de la pantalla de selecion
+	 */
 	public PantallaSeleccion() {
 		super();
 		prepareElementos();
 		prepareElementosMenu();
 		prepareAcciones();
 
-	}	
+	}
+	/**
+	 * prepara los oyentes necesarios
+	 */
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				salga();
+				abraPantallaPlay();
 			}
 		});
 		select1.addActionListener(
@@ -132,9 +142,17 @@ public class PantallaSeleccion extends JDialog {
 		
 		
 	}
+	/**
+	 * cambia el fondo de un boton
+	 * @param boton
+	 * @param color
+	 */
 	public void  cambiarFondo(JButton boton,Color color) {
 		boton.setBackground(color);
 	}
+	/**
+	 * prepara elementos principales
+	 */
 	public void prepareElementos() {
 		n=Color.black;
 		b=Color.white;
@@ -149,11 +167,13 @@ public class PantallaSeleccion extends JDialog {
 		this.setResizable(false);
 		
 	}
+	/**
+	 * prepara los necesarios
+	 */
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		c1=true;
 		c2=true;
-		
 		next=new JButton("next");
 		back=new JButton("back");
 		mario= new JLabel();
@@ -245,15 +265,18 @@ public class PantallaSeleccion extends JDialog {
 		generarTimer2();
 		
 	}
-	public void salga() {
-		System.exit(0);
-	}
+	/**
+	 * detiene el timer de mario
+	 */
 	public void detener1() {
 		c1=true;
 		mario.setIcon(new ImageIcon("data/marioDerecha.png"));
 		marioN="data/marioDerecha.png";
 		timer1.stop();
 	}
+	/**
+	 * mueve el timer de mario
+	 */
 	public void mover1() {
 		c1=false;
 		if (c1==false && c2==false) {
@@ -264,12 +287,18 @@ public class PantallaSeleccion extends JDialog {
 		timer1.start();
 		}
 	}
+	/**
+	 * detiene el timer de luigi
+	 */
 	public void detener2() {
 		c2=true;
 		luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
 		monoN="data/luigiderecha.png";
 		timer2.stop();
 	}
+	/**
+	 * mueve el timer de luigi
+	 */
 	public void mover2() {
 		c2=false;
 		if (c1==false && c2==false) {
@@ -280,11 +309,17 @@ public class PantallaSeleccion extends JDialog {
 		timer2.start();
 		}
 	}
+	/**
+	 * abre la pantalla play
+	 */
 	public void abraPantallaPlay() {
 		PantallaPlay p = new PantallaPlay();
 		this.setVisible(false);
 		p.setVisible(true);
 		}
+	/**
+	 * abre el tablero
+	 */
 	public void abraMonkeyPoobGUI() {
 		MonkeyPoobGUI p = new MonkeyPoobGUI(1);
 		this.setVisible(false);
@@ -292,7 +327,9 @@ public class PantallaSeleccion extends JDialog {
 		}
 	
 
-
+	/**
+	 * genera el timer de mario
+	 */
 	public void  generarTimer1() {
 		timer1=new Timer(300,new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -310,24 +347,26 @@ public class PantallaSeleccion extends JDialog {
 			
 		});
 	}
-		public void  generarTimer2() {
-			timer2=new Timer(300,new ActionListener() {
-						public void actionPerformed(ActionEvent e) {
-								
-							if (monoN=="data/luigiderecha.png") {
-								luigi.setIcon(new ImageIcon("data/luigiPasoDerecha.png"));
-								monoN="data/luigiPasoDerecha.png";
-							} 
-							else if (monoN=="data/luigiPasoDerecha.png") {
-								luigi.setIcon(new ImageIcon("data/luigiPasoDerecha2.png"));
-								monoN="data/luigiPasoDerecha2.png";
-							}
-							else {
-								luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
-								monoN="data/luigiderecha.png";
-								}
+	/**
+	 * genera el timer de luigi
+	 */
+	public void  generarTimer2() {
+		timer2=new Timer(300,new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+							
+						if (monoN=="data/luigiderecha.png") {
+							luigi.setIcon(new ImageIcon("data/luigiPasoDerecha.png"));
+							monoN="data/luigiPasoDerecha.png";
+						} 
+						else if (monoN=="data/luigiPasoDerecha.png") {
+							luigi.setIcon(new ImageIcon("data/luigiPasoDerecha2.png"));
+							monoN="data/luigiPasoDerecha2.png";
 						}
-				
+						else {
+							luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
+							monoN="data/luigiderecha.png";
+							}
+					}				
 			});
 		
 		

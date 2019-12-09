@@ -32,7 +32,11 @@ import presentacion.PantallaPlay;
 import presentacion.PantallaScore;
 
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 	public class Menu extends JDialog {
 		JPanel principal,menu;
 		JLabel botones,mario,mono;
@@ -43,6 +47,9 @@ import javax.swing.JOptionPane;
 			princi.setVisible(true);
 
 		}
+	/**
+	 * contructor de menu
+	 */
 	public  Menu(){
 			super();
 			prepareElementos();
@@ -52,6 +59,9 @@ import javax.swing.JOptionPane;
 			this.add(mario);
 
 		}
+	/**
+	 * prepara los oyentes necesarios
+	 */
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
@@ -86,7 +96,9 @@ import javax.swing.JOptionPane;
 	}
 		
 		
-
+	/**
+	 * prepara los elementos principales
+	 */
 	public void prepareElementos() {
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -99,7 +111,9 @@ import javax.swing.JOptionPane;
 		this.setResizable(false);
 		
 	}
-
+	/**
+	 * prepara los elementos necesarios
+	 */
 	public void prepareElementosMenu() {
 		botones=new JLabel();
 		play=new JButton("PLAY");
@@ -136,7 +150,9 @@ import javax.swing.JOptionPane;
 		this.add(exit);
 		
 	}
-
+	/**
+	 * prepara los elementos del encabezado
+	 */
 	public void prepararElementosEncabezado() {
 		mario=new JLabel();	
 		mario.setSize(400,400);
@@ -162,22 +178,33 @@ import javax.swing.JOptionPane;
 		timer.schedule(tarea, 0, 500);
 		
 	}
+	/**
+	 * cerrar el programa
+	 */
 	public void salga() {
 		System.exit(0);
 	}
-
+	/**
+	 * abrir pantalla Play
+	 */
 	private void abraPantallaPlay() {
 		PantallaPlay p = new PantallaPlay();
 		this.setVisible(false);
 		p.setVisible(true);
 		
 	}
+	/**
+	 * abrir pantalla score
+	 */
 	private void abraPantallaScore() {
 		PantallaScore p = new PantallaScore();
 		this.setVisible(false);
 		p.setVisible(true);
 		
 	}
+	/**
+	 * abrir pantalla opciones
+	 */
 	private void abraPantallaOptions() {
 		PantallaOptions p = new PantallaOptions();
 		this.setVisible(false);

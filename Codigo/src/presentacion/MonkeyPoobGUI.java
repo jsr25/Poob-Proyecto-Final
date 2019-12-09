@@ -35,7 +35,11 @@ import javax.swing.JPanel;
 
 import aplicacion.MonkeyException;
 import aplicacion.MonkeyPoob;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class MonkeyPoobGUI extends JFrame {
 	private JLabel mario,mono,barril,plataforma,sorpresa,escalera,puntos,pauline;
 	public String monoN,barrilN;
@@ -48,7 +52,10 @@ public class MonkeyPoobGUI extends JFrame {
 	private MonkeyPoob app;
 	private int jugadores;
 	private int i;
-	
+	/**
+	 * contructoor del MokeyPoobGUI
+	 * @param j cantidad de jugadores
+	 */
 	public MonkeyPoobGUI(int j) {
 		super("Monkey");	
 		jugadores=j;
@@ -73,7 +80,9 @@ public class MonkeyPoobGUI extends JFrame {
 		prepararEstructura();
 		generarEstructura();	
 	}
-	
+	/**
+	 * prepara los elementos del menu en el tablero
+	 */
 	private void prepararMenu() {
 		barra=new JMenuBar();
 		menu = new JMenu("Menu");
@@ -85,14 +94,19 @@ public class MonkeyPoobGUI extends JFrame {
 		this.setJMenuBar(barra);	
 	}
 	
-	
+	/**
+	 * main
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		MonkeyPoobGUI intf=new MonkeyPoobGUI(2);
 		intf.setVisible(true);
 	}
 
 	
-	
+	/**
+	 * prepara los elementos principales
+	 */
 	public void prepararElementos() {
 		i=-1;
 		Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
@@ -103,22 +117,34 @@ public class MonkeyPoobGUI extends JFrame {
 		app= MonkeyPoob.getMonkey();
 		
 	}
-	
+	/**
+	 * crea las plataformas
+	 * @param i numero de la plataforma
+	 */
 	public void crearPlataforma(int i) {		
 		int[] pl=app.getPlataformas(i);		
 		principal.addPlataforma(pl[0], pl[1],pl[2], "data/plataforma.png");		
 	}
-	
+	/**
+	 * crea las escaleras
+	 * @param i numero de la escalera
+	 */
 	public void crearEscalera(int i){
 		int[]esc=app.getEscalera(i);
 		principal.crearEscalera(esc[0], esc[1], esc[2]);
 	}
-	
+	/**
+	 * crear barril
+	 * @param j numero del barril
+	 */
 	private void crearBarril(int j) {
 		int [] barr=app.getBarril(j);
 		principal.crearBarril(barr[0],barr[1]);
 	}
-	
+	/**
+	 * mueve un barril
+	 * @param j numero del barril
+	 */
 	private void moverBarril(int j) {	
 		Timer tim=new Timer(100, null);		
 		tim.addActionListener(
@@ -143,7 +169,10 @@ public class MonkeyPoobGUI extends JFrame {
 				});		
 		tim.start();
 	}
-	
+	/**
+	 * reinicia los valores del barril
+	 * @param j numero del barril
+	 */
 	public void reiniciar(int j) {
 		Peder();
 		if (jugadores==1)
@@ -156,7 +185,9 @@ public class MonkeyPoobGUI extends JFrame {
 
 	}
 	
-
+	/**
+	 * prepara los personajes
+	 */
 	public void prepararPersonajes() {
 		if (jugadores==1) {
 			app.agregarJugadores(0, 400, "mario");
@@ -172,7 +203,9 @@ public class MonkeyPoobGUI extends JFrame {
 			principal.setPuntos(app.getPuntos(1),app.getVidas(2));
 		}
 	}
-	
+	/**
+	 * prepara una estructura
+	 */
 	public void prepararEstructura() {
 		app.estructuraAleatoria();	
 		
@@ -190,7 +223,9 @@ public class MonkeyPoobGUI extends JFrame {
 		
 		
 	}
-	
+	/**
+	 * genera la estructura
+	 */
 	public void generarEstructura() {
 		for(int i=0;i<app.getPlatSize();i++) {
 			crearPlataforma(i+1);
@@ -204,7 +239,9 @@ public class MonkeyPoobGUI extends JFrame {
 		moverBarril(1);	
 		moverBarril(2);	
 	}
-		
+	/**
+	 * prepara los oyentes necesarios
+	 */
 	public void prepareAcciones() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//
@@ -305,7 +342,10 @@ public class MonkeyPoobGUI extends JFrame {
 			}			
 		});
 	}
-	
+	/**
+	 * simula el movimiento de saltar de jugador
+	 * @param y numero del jugador
+	 */
 	public void saltar(int y) {
 					timer1=new Timer(200,new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -318,16 +358,18 @@ public class MonkeyPoobGUI extends JFrame {
 						});
 					timer1.start();
 		       }	
-	
+	/**
+	 * abre el menu
+	 */
 	public void abrirPantallaMenu() {
 		Menu p = new Menu();
 		this.removeAll();
 		this.setVisible(false);
-		
-		
 		p.setVisible(true);
 		}
-	
+	/**
+	 * crea el oyente de salvar
+	 */
 	private void prepararAccionesMenu() {
 		salvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -336,7 +378,9 @@ public class MonkeyPoobGUI extends JFrame {
 		} );
 	}
 	
-
+	/**
+	 * realiza la opcion de salvar
+	 */
 	private void opcioSalvar() {
 		JFileChooser fc = new JFileChooser();
 		int res=fc.showSaveDialog(this);
@@ -350,12 +394,17 @@ public class MonkeyPoobGUI extends JFrame {
 			}
 		}
 	}
-	
+	/**
+	 * permite subir la escalera 
+	 * @param x numero del jugador
+	 */
 	private void subirEscalera(int x ) {
 		app.subirEscalera(x);
 		 principal.moverPersonaje(app.getJugadorPosX(x), app.getJugadorPosY(x), app.getForma(x),x);
 	}
-	
+	/**
+	 * funcionalidad de perder
+	 */
 	private void Peder() {
 		if(app.getVidas2(1)==0) {
 			JOptionPane.showMessageDialog(this, "PERDISTE!!");
@@ -363,7 +412,9 @@ public class MonkeyPoobGUI extends JFrame {
 			MonkeyPoob.restar();
 		}
 	}
-	
+	/**
+	 * funcioalidad de ganar
+	 */
 	private void ganar() {
 		if(app.getJugadorPosY(1)==-12) {
 			JOptionPane.showMessageDialog(this, "GANASTE!!");

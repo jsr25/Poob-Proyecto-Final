@@ -4,17 +4,26 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+/**
+ * 
+ * @author BrayanAlexis-JuanRamos
+ *
+ */
 public class doble extends TableroJuego {
 	private JLabel score1,lifes1,score2,lifes2,puntos1,puntos2,vidas1,vidas2,personaje1,personaje2;
-	
+	/**
+	 * contructor del tablero doble
+	 */
 	public doble() {
 		puntajeYVidas();
 		prepararVidas2();
 	}
+	/**
+	 * inicializa los puntajes y las vidas de mario
+	 */
 	@Override
 	public void puntajeYVidas() {
-		puntos1 =new JLabel("--");
+		puntos1 =new JLabel();
 		puntos1.setSize(25,10);
 		puntos1.setBounds(0, 0, 20, 10);
 		puntos1.setLocation(15,15);
@@ -41,7 +50,9 @@ public class doble extends TableroJuego {
 		add(puntos1);
 		add(vidas1);		
 	}
-	
+	/**
+	 * incializa los puntajes y cidas de luigi
+	 */
 	public void prepararVidas2() {
 		puntos2 =new JLabel("--");
 		puntos2.setSize(25,10);
@@ -70,20 +81,26 @@ public class doble extends TableroJuego {
 		add(puntos2);
 		add(vidas2);
 	}
-
+	/**
+	 * modifica las vidas
+	 */
 	@Override
 	public void setVidas(String v,String s) {
 		vidas1.setText(v);
 		vidas2.setText(s);
 		
 	}
-
+	/**
+	 * modifica los puntos
+	 */
 	@Override
 	public void setPuntos(String v,String s) {
 		puntos1.setText(v);
 		puntos2.setText(s);		
 	}
-
+	/**
+	 * añade los personajes
+	 */
 	@Override
 	public void addPersonaje(int x, int y, String img) {
 		if(personaje1==null) {
@@ -105,7 +122,9 @@ public class doble extends TableroJuego {
 		}
 		
 	}
-
+	/**
+	 * permite mover los personajes
+	 */
 	@Override
 	public void moverPersonaje(int x, int y, String img, int i) {
 		if(i==1) {
