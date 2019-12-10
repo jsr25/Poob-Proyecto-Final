@@ -25,7 +25,7 @@ import javax.swing.border.Border;
  */
 public class PantallaOptions extends JDialog {
 	private static final long serialVersionUID = 1L;
-	JButton music,controls,credits,back,next;
+	JButton controls,credits,back,next;
 	JPanel options,eleccion;
 	/**
 	 * constructor de las opciones
@@ -45,7 +45,7 @@ public class PantallaOptions extends JDialog {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		setSize(ancho/2,alto/2);
+		setSize(600,600);
 		setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
@@ -78,33 +78,28 @@ public class PantallaOptions extends JDialog {
 	public void prepareElementosMenu() {
 		Border blueLine = BorderFactory.createLineBorder(Color.BLUE);
 		options= new JPanel();
-		options.setLayout(new GridLayout(3,1));
+		options.setLayout(new GridLayout(2,1));
 		eleccion=new JPanel();
 		eleccion.setLayout(new GridLayout(1,2));
 	    controls= new JButton("controls");
-	    music= new JButton("music");
 	    credits= new JButton("credits");
 	    back= new JButton("back");
 	    next=new JButton("next");
 	    controls.setBackground(Color.black);
-	    music.setBackground(Color.black);
 	    credits.setBackground(Color.black);
 	    back.setBackground(Color.black);
 	    next.setBackground(Color.black);
 	    controls.setForeground(Color.yellow);
 	    credits.setForeground(Color.yellow);
-	    music.setForeground(Color.yellow);
 	    back.setForeground(Color.yellow);
 	    next.setForeground(Color.yellow);
 	    controls.setBorder(blueLine);
-	    music.setBorder(blueLine);
 	    credits.setBorder(blueLine);
 	    back.setBorder(blueLine);
 	    next.setBorder(blueLine);
 	    eleccion.add(back);
 	    eleccion.add(next);
 	    options.add(controls);
-	    options.add(music);
 	    options.add(credits);
 
 		this.add(options,BorderLayout.CENTER);

@@ -42,7 +42,7 @@ public class single extends  TableroJuego{
 	public void puntajeYVidas() {
 		puntos =new JLabel("--");
 		puntos.setSize(25,10);
-		puntos.setBounds(0, 0, 20, 10);
+		puntos.setBounds(0, 0, 30, 10);
 		puntos.setLocation(15,15);
 		puntos.setForeground(Color.white);
 		puntos.setBackground(Color.white);
@@ -105,6 +105,7 @@ public class single extends  TableroJuego{
 		personaje.setIcon(new ImageIcon(img));		
 		
 	}
+
 	
 	
 	

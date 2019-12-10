@@ -40,7 +40,7 @@ import javax.swing.JOptionPane;
 	public class Menu extends JDialog {
 		JPanel principal,menu;
 		JLabel botones,mario,mono;
-		JButton options,scores,exit,play;
+		JButton options,exit,play;
 		String monoN,marioN;
 		public static void main (String [] args){
 			Menu princi= new Menu();
@@ -73,12 +73,6 @@ import javax.swing.JOptionPane;
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						abraPantallaPlay();
-					}	
-				});
-		scores.addActionListener(
-				new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						abraPantallaScore();
 					}	
 				});
 		options.addActionListener(
@@ -118,7 +112,6 @@ import javax.swing.JOptionPane;
 		botones=new JLabel();
 		play=new JButton("PLAY");
 		options=new JButton("OPTIONS");
-		scores=new JButton("SCORES");
 		exit=new JButton("EXIT");
 		play.setFont(new Font("Gill Sans Ultra Bold",1,25));
 		play.setForeground(Color.red);
@@ -126,26 +119,19 @@ import javax.swing.JOptionPane;
 		play.setLocation(175, 300);
 		options.setFont(new Font("Gill Sans Ultra Bold",1,25));
 		options.setForeground(Color.red);
-		options.setBounds(0, 0, 400, 50);
-		options.setLocation(125, 350);
-		scores.setFont(new Font("Gill Sans Ultra Bold",1,25));
-		scores.setForeground(Color.red);
-		scores.setBounds(0, 0, 300, 50);
-		scores.setLocation(175, 400);
+		options.setBounds(0, 0, 350, 50);
+		options.setLocation(150, 350);
 		exit.setFont(new Font("Gill Sans Ultra Bold",1,25));
 		exit.setForeground(Color.red);
 		exit.setBounds(0, 0, 300, 50);
-		exit.setLocation(175, 450);
+		exit.setLocation(175, 400);
 		play.setBackground(Color.black);
 		options.setBackground(Color.black);
-		scores.setBackground(Color.black);
 		exit.setBackground(Color.black);
 		play.setBorder(null);	 
 		options.setBorder(null);
-		scores.setBorder(null);
 		exit.setBorder(null);
 		this.add(play);
-		this.add(scores);
 		this.add(options);
 		this.add(exit);
 		

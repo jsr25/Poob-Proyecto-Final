@@ -20,8 +20,8 @@ import javax.swing.JPanel;
 public class PantallaControls extends JDialog {
 	private static final long serialVersionUID = 1L;
 	JButton back;
-	JLabel w,a,s,d,p,space,up,left,right,down,salto,der,izq;
-	String upN,leftN,rightN,downN,saltoN,derN,izqN,spaceN ;
+	JLabel w,a,s,d,p,space,up,left,right,down,tex1,tex2,tex3,tex4,text5,jugador1,jugador2;
+	String upN,leftN,rightN,downN,saltoN,derN,izqN,spaceN,wN,aN,sN,dN,pN;
 	/**
 	 * constructor de la pantalla de los controles
 	 */
@@ -60,9 +60,6 @@ public class PantallaControls extends JDialog {
 		left=new JLabel();
 		right=new JLabel();
 		down=new JLabel();
-		salto=new JLabel();
-		der=new JLabel();
-		izq=new JLabel();;
 		up.setIcon(new ImageIcon("data/teclaArriba1.png"));
 		up.setBounds(0, 0, 200, 200);
 		up.setLocation(0,0);
@@ -83,28 +80,39 @@ public class PantallaControls extends JDialog {
 		space.setBounds(0, 0, 200, 200);
 		space.setLocation(400,0);
 		spaceN="data/space.png";
-		salto.setIcon(new ImageIcon("data/salto1.png"));
-		salto.setBounds(0, 0, 400, 400);
-		salto.setLocation(0,200);
 		saltoN="data/salto1.png";
-		der.setIcon(new ImageIcon("data/derecha1.png"));
-		der.setBounds(0, 0, 400, 400);
-		der.setLocation(200,100);
 		derN="data/derecha1.png";
-		izq.setIcon(new ImageIcon("data/izquierda1.png"));
-		izq.setBounds(0, 0, 400, 400);
-		izq.setLocation(500,100);
 		izqN ="data/izquierda1.png";
+		w.setIcon(new ImageIcon("data/teclaW1.png"));
+		w.setBounds(0, 0, 400, 500);
+		w.setLocation(0,50);
+		wN ="data/teclaW1.png";
+		p.setIcon(new ImageIcon("data/teclaP1.png"));
+		p.setBounds(0, 0, 400, 500);
+		p.setLocation(430,50);
+		pN ="data/teclaP1.png";
+		a.setIcon(new ImageIcon("data/teclaA1.png"));
+		a.setBounds(0, 0, 400, 500);
+		a.setLocation(100,50);
+		aN ="data/teclaA1.png";
+		s.setIcon(new ImageIcon("data/teclaS1.png"));
+		s.setBounds(0, 0, 400, 500);
+		s.setLocation(300,50);
+		sN ="data/teclaS1.png";
+		d.setIcon(new ImageIcon("data/teclaD1.png"));
+		d.setBounds(0, 0, 400, 500);
+		d.setLocation(200,50);
+		dN ="data/teclaD1.png";
 		add(up);
 		add(left);
 		add(right);
 		add(down);
 		add(space);
-		/*
-		add(salto);
-		add(der);
-		add(izq);*/
-		
+		add(w);
+		add(a);
+		add(s);
+		add(d);
+		add(p);	
 	}
 	/**
 	 * genera los timer de las teclas
@@ -178,18 +186,14 @@ public class PantallaControls extends JDialog {
 		TimerTask tarea5=new TimerTask(){
 			@Override
 			public void run() {	
-				if (saltoN=="data/salto1.png") {
-					salto.setIcon(new ImageIcon("data/salto2.png"));
-					saltoN="data/salto2.png";
-				}
-				else if (saltoN=="data/salto2.png") {
-					salto.setIcon(new ImageIcon("data/salto3.png"));
-					saltoN="data/salto3.png";
+				if (wN=="data/teclaW1.png") {
+					w.setIcon(new ImageIcon("data/teclaW2.png"));
+					wN="data/teclaW2.png";
 				}
 
 				else {
-					salto.setIcon(new ImageIcon("data/salto1.png"));
-					saltoN="data/salto1.png";
+					w.setIcon(new ImageIcon("data/teclaW1.png"));
+					wN="data/teclaW1.png";
 				}
 			}
 		};
@@ -198,22 +202,14 @@ public class PantallaControls extends JDialog {
 		TimerTask tarea6=new TimerTask(){
 			@Override
 			public void run() {	
-				if (derN=="data/derecha1.png") {
-					der.setIcon(new ImageIcon("data/derecha2.png"));
-					derN="data/derecha2.png";
-				}
-				else if (derN=="data/derecha2.png") {
-					der.setIcon(new ImageIcon("data/derecha3.png"));
-					derN="data/derecha3.png";
-				}
-				else if (derN=="data/derecha3.png") {
-					der.setIcon(new ImageIcon("data/derecha4.png"));
-					derN="data/derecha4.png";
+				if (aN=="data/teclaA1.png") {
+					a.setIcon(new ImageIcon("data/teclaA2.png"));
+					aN="data/teclaA2.png";
 				}
 
 				else {
-					der.setIcon(new ImageIcon("data/derecha1.png"));
-					derN="data/derecha1.png";
+					a.setIcon(new ImageIcon("data/teclaA1.png"));
+					aN="data/teclaA1.png";
 				}
 			}
 		};
@@ -222,28 +218,52 @@ public class PantallaControls extends JDialog {
 		TimerTask tarea7=new TimerTask(){
 			@Override
 			public void run() {	
-				if (izqN=="data/izquierda1.png") {
-					izq.setIcon(new ImageIcon("data/izquierda2.png"));
-					izqN="data/izquierda2.png";
-				}
-				else if (izqN=="data/izquierda2.png") {
-					izq.setIcon(new ImageIcon("data/izquierda3.png"));
-					izqN="data/izquierda3.png";
-				}
-				else if (izqN=="data/izquierda3.png") {
-					izq.setIcon(new ImageIcon("data/izquierda4.png"));
-					izqN="data/izquierda4.png";
+				if (sN=="data/teclaS1.png") {
+					s.setIcon(new ImageIcon("data/teclaS2.png"));
+					sN="data/teclaS2.png";
 				}
 
 				else {
-					izq.setIcon(new ImageIcon("data/izquierda1.png"));
-					izqN="data/izquierda1.png";
+					s.setIcon(new ImageIcon("data/teclaS1.png"));
+					sN="data/teclaS1.png";
 				}
 			}
 		};
 		timer7.schedule(tarea7, 0, 500);
 		Timer timer8=new Timer();
 		TimerTask tarea8=new TimerTask(){
+			@Override
+			public void run() {	
+				if (dN=="data/teclaD1.png") {
+					d.setIcon(new ImageIcon("data/teclaD2.png"));
+					dN="data/teclaD2.png";
+				}
+
+				else {
+					d.setIcon(new ImageIcon("data/teclaD1.png"));
+					dN="data/teclaD1.png";
+				}
+			}
+		};
+		timer8.schedule(tarea8, 0, 500);
+		Timer timer9=new Timer();
+		TimerTask tarea9=new TimerTask(){
+			@Override
+			public void run() {	
+				if (pN=="data/teclaP1.png") {
+					p.setIcon(new ImageIcon("data/teclaP2.png"));
+					pN="data/teclaW2.png";
+				}
+
+				else {
+					p.setIcon(new ImageIcon("data/teclaP1.png"));
+					pN="data/teclaP1.png";
+				}
+			}
+		};
+		timer9.schedule(tarea9, 0, 500);
+		Timer timer10=new Timer();
+		TimerTask tarea10=new TimerTask(){
 			@Override
 			public void run() {	
 				if (spaceN=="data/space.png") {
@@ -257,7 +277,7 @@ public class PantallaControls extends JDialog {
 				}
 			}
 		};
-		timer8.schedule(tarea8, 0, 500);
+		timer10.schedule(tarea10, 0, 500);
 	}
 
 }

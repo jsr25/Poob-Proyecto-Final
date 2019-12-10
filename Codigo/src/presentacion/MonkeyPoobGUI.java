@@ -53,6 +53,8 @@ public class MonkeyPoobGUI extends JFrame {
 	private MonkeyPoob app;
 	private int jugadores;
 	private int i;
+	private ArrayList<String> sorpresas;
+	private ArrayList<String> barriles ;
 	/**
 	 * contructoor del MokeyPoobGUI
 	 * @param j cantidad de jugadores
@@ -62,7 +64,9 @@ public class MonkeyPoobGUI extends JFrame {
 		jugadores=j;		
 		principal=new single();
 		this.setContentPane(principal);
-		principal.setVisible(true);			
+		principal.setVisible(true);	
+		sorpresas=a;
+		barriles=b;
 		PrepararGUI();	
 	}
 	public MonkeyPoobGUI(int j,String s,String h,ArrayList<String> a,ArrayList<String> b) {
@@ -70,6 +74,8 @@ public class MonkeyPoobGUI extends JFrame {
 		principal=new doble();
 		this.setContentPane(principal);
 		principal.setVisible(true);	
+		sorpresas=a;
+		barriles=b;
 		PrepararGUI();
 		
 	}
@@ -149,6 +155,14 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.crearBarril(barr[0],barr[1]);
 	}
 	/**
+	 * crea una sorpresa
+	 * @param i numero de la sorpresa
+	 */
+	private void crearSorpresa(int i) {
+		int[] sor=app.getSorpresa(i);
+		principal.crearSorpresas(sor[0], sor[1], app.getSImagen(i));
+	}
+	/**
 	 * mueve un barril
 	 * @param j numero del barril
 	 */
@@ -170,7 +184,12 @@ public class MonkeyPoobGUI extends JFrame {
 							reiniciar(2);
 						}
 						app.moverBarril(j);
-						principal.setVidas(app.getVidas(1));
+						if (jugadores==2) {
+							principal.setVidas(app.getVidas(1),app.getVidas(2));
+						}
+						else {
+							principal.setVidas(app.getVidas(1));
+						}
 						principal.actualizarbar(j,app.getbarx(j),app.getbary(j));
 					}	
 				});		
@@ -181,9 +200,8 @@ public class MonkeyPoobGUI extends JFrame {
 	 * @param j numero del barril
 	 */
 	public void reiniciar(int j) {
-		Peder();
 		if (jugadores==1)
-		{	app.resetJugador(1);
+			{app.resetJugador(1);
 			principal.moverPersonaje(10, 400, app.getForma(1),1);}
 		else {
 			if(j==1) {
@@ -195,6 +213,7 @@ public class MonkeyPoobGUI extends JFrame {
 				principal.moverPersonaje(10, 400, app.getForma(2),2);
 				}
 		}
+		Perder();
 
 	}
 	
@@ -214,14 +233,14 @@ public class MonkeyPoobGUI extends JFrame {
 			principal.addPersonaje(0,400,"data/marioDerecha.png");
 			principal.addPersonaje(10,400,"data/marioDerecha.png");
 			principal.setVidas(app.getVidas(1),app.getVidas(2));
-			principal.setPuntos(app.getPuntos(1),app.getVidas(2));
+			principal.setPuntos(app.getPuntos(1),app.getPuntos(2));
 		}
 	}
 	/**
 	 * prepara una estructura
 	 */
 	public void prepararEstructura() {
-		app.estructuraAleatoria();	
+		app.estructuraAleatoria(sorpresas,barriles);	
 		
 		//app.generarSorpresa(50, 400,Cereza);
 	
@@ -252,6 +271,9 @@ public class MonkeyPoobGUI extends JFrame {
 			crearBarril(i);	
 			}
 		moverBarriles();	
+		for (int i=0;i<app.getSorpresas().size();i++) {
+			crearSorpresa(i+1);
+		}
 	}
 	/**
 	 * prepara los oyentes necesarios
@@ -262,6 +284,7 @@ public class MonkeyPoobGUI extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				abrirPantallaMenu();
+				MonkeyPoob.restar();
 			}
 		});
 		
@@ -285,10 +308,11 @@ public class MonkeyPoobGUI extends JFrame {
 						app.moverDerecha(1);
 						principal.setPuntos(app.getPuntos(1));
 						principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1),1);
-						/*if (app.cambioPuntos()) {
-							app.removerSorpresa(1);
-							remove(sorpresa);
-						}*/
+						if (app.cambioPuntos()) {
+							int s=app.getSorpresaCol();
+							app.removerSorpresa(s);
+							principal.removerSorpresa(s);
+						}
 					}
 				
 				if(e.getExtendedKeyCode()== KeyEvent.VK_DOWN) {
@@ -317,10 +341,11 @@ public class MonkeyPoobGUI extends JFrame {
 					app.moverDerecha(2);
 					principal.setPuntos(app.getPuntos(2));
 					principal.moverPersonaje(app.getJugadorPosX(2), app.getJugadorPosY(2), app.getForma(2),2);
-					/*if (app.cambioPuntos()) {
-						app.removerSorpresa(2);
-						remove(sorpresa);
-					}*/
+					if (app.cambioPuntos()) {
+						int s=app.getSorpresaCol();
+						app.removerSorpresa(s);
+						principal.removerSorpresa(s);
+					}
 				}
 				if (e.getExtendedKeyCode()==KeyEvent.VK_P) {}
 				
@@ -440,7 +465,7 @@ public class MonkeyPoobGUI extends JFrame {
 	/**
 	 * funcionalidad de perder
 	 */
-	private void Peder() {
+	private void Perder() {
 		if (jugadores==1) {
 			if(app.getVidas2(1)==0) {
 				JOptionPane.showMessageDialog(this, "PERDISTE!!");

@@ -398,16 +398,9 @@ public class MonkeyPoob implements Serializable {
 	 * remueve la sorpresa
 	 * @param personaje numero del jugador 
 	 */
-	public void removerSorpresa(int personaje) 
+	public void removerSorpresa(int index) 
 	{
-		int index=0;
-		for(Sorpresa s:sorpresas) {
-			if ((s.getPosX()==jugadores.get(personaje-1).getPosX())&&(s.getPosY()==jugadores.get(personaje-1).getPosY())) 
-			{
-				index=sorpresas.indexOf(s);
-			}
-		}
-		sorpresas.remove(index);
+		sorpresas.remove(index-1);
 		cambioP=false;
 	}
 	
@@ -614,10 +607,9 @@ public class MonkeyPoob implements Serializable {
 	/**
 	 * genera la esctrutura de forma aleatoria
 	 */
-	public void estructuraAleatoria() {		
+	public void estructuraAleatoria(ArrayList<String>so,ArrayList<String>ba) {		
 		crearPlataformasAl();
 		crearEscalerasAl();			
-	
 		monkey.generarBarriles("Rojo");		
 		monkey.generarBarriles("Amarillo");	
 		monkey.generarBarriles("Amarillo");	
@@ -632,6 +624,7 @@ public class MonkeyPoob implements Serializable {
 		monkey.generarBarriles("Amarillo");	
 		monkey.generarBarriles("Amarillo");	
 		monkey.generarBarriles("Amarillo");	
+		crearSorpresasAl(so);
 	
 	}
 	/**
@@ -688,6 +681,40 @@ public class MonkeyPoob implements Serializable {
 	}
 	private void crearBarrilesAl() {
 		
+	}
+	private void crearSorpresasAl(ArrayList<String>so) {
+		for(int i=1;i<plataformas.size()-2;i++) {
+			generarSorpresa(300, plataformas.get(i).getY()-12, "Cereza");
+		}
+	}
+
+	public int[] getSorpresa(int i) {
+		int[] s=new int[2];
+		s[0]=sorpresas.get(i-1).getPosX();
+		s[1]=sorpresas.get(i-1).getPosY();
+		return s;
+	}
+
+	public String getSImagen(int i) {
+		return sorpresas.get(i-1).getImagen();
+	}
+
+	public int getSorpresaCol() {
+		int a=0;
+		for (int i=0;i<sorpresas.size()&& a==0;i++) {
+			if (personajesCol(sorpresas.get(i).getPosX(),sorpresas.get(i).getPosY())) {
+				a=i+1;
+			}
+		}
+		return a;
+	}
+
+	private boolean personajesCol(int x,int y) {
+		boolean b=false;
+		for (int i=0;i<jugadores.size()&& b==false;i++) {
+			b=(jugadores.get(i).getPosX()==x && jugadores.get(i).getPosY()==y);	
+		}
+		return b;
 	}
 	
 	

@@ -32,15 +32,15 @@ public class doble extends TableroJuego {
 		vidas1=new JLabel();
 		vidas1.setSize(50, 10);
 		vidas1.setBounds(0, 0, 10, 10);
-		vidas1.setLocation(110,15);
+		vidas1.setLocation(60,15);
 		vidas1.setForeground(Color.white);
 		vidas1.setBackground(Color.white);
-		lifes1=new JLabel("Lifes");
+		lifes1=new JLabel("Lifes1");
 		lifes1.setForeground(Color.white);
 		lifes1.setSize(20, 20);
 		lifes1.setBounds(0, 0, 80, 10);
-		lifes1.setLocation(100,0);
-		score1=new JLabel("Scores");
+		lifes1.setLocation(50,0);
+		score1=new JLabel("Scores1");
 		score1.setForeground(Color.white);
 		score1.setSize(20, 20);
 		score1.setBounds(0, 0, 80, 10);
@@ -57,25 +57,25 @@ public class doble extends TableroJuego {
 		puntos2 =new JLabel("--");
 		puntos2.setSize(25,10);
 		puntos2.setBounds(0, 0, 20, 10);
-		puntos2.setLocation(15,15);
+		puntos2.setLocation(165,15);
 		puntos2.setForeground(Color.white);
 		puntos2.setBackground(Color.white);
 		vidas2=new JLabel();
 		vidas2.setSize(50, 10);
 		vidas2.setBounds(0, 0, 10, 10);
-		vidas2.setLocation(110,15);
+		vidas2.setLocation(210,15);
 		vidas2.setForeground(Color.white);
 		vidas2.setBackground(Color.white);
-		lifes2=new JLabel("Lifes");
+		lifes2=new JLabel("Lifes2");
 		lifes2.setForeground(Color.white);
 		lifes2.setSize(20, 20);
 		lifes2.setBounds(0, 0, 80, 10);
-		lifes2.setLocation(100,0);
-		score2=new JLabel("Scores");
+		lifes2.setLocation(200,0);
+		score2=new JLabel("Scores2");
 		score2.setForeground(Color.white);
 		score2.setSize(20, 20);
 		score2.setBounds(0, 0, 80, 10);
-		score2.setLocation(0,0);
+		score2.setLocation(150,0);
 		add(score2);
 		add(lifes2);
 		add(puntos2);
@@ -137,5 +137,6 @@ public class doble extends TableroJuego {
 		}
 		
 	}
+
 
 }

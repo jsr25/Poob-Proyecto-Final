@@ -27,12 +27,12 @@ import javax.swing.border.Border;
  */
 public class PantallaSeleccion extends JDialog {
 	private JLabel mario,luigi,items,characters;
-	private JButton cereza,corazon,soga,hongo;
+	private JButton cereza,corazon,manzana;
 	private JButton select1,select2,next,back;
 	private Boolean c1,c2;
 	private String monoN,marioN;
 	private Timer timer1,timer2;
-	private Boolean cerezaB,corazonB,sogaB,hongoB;
+	private Boolean cerezaB,corazonB,manzanaB;
 	private Color n,b;
 	private int jugadores;
 	/**
@@ -103,29 +103,16 @@ public class PantallaSeleccion extends JDialog {
 						}
 					}
 				});
-		hongo.addActionListener(
+		manzana.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if (hongoB==true) {
-							cambiarFondo(hongo,b);
-							hongoB=false;
+						if (manzanaB==true) {
+							cambiarFondo(manzana,b);
+							manzanaB=false;
 						}
 						else {
-							cambiarFondo(hongo,n);
-							hongoB=true;
-						}
-					}
-				});
-		soga.addActionListener(
-				new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						if (sogaB==true) {
-							cambiarFondo(soga,b);
-							sogaB=false;
-						}
-						else {
-							cambiarFondo(soga,n);
-							sogaB=true;
+							cambiarFondo(manzana,n);
+							manzanaB=true;
 						}
 					}
 				});
@@ -161,8 +148,7 @@ public class PantallaSeleccion extends JDialog {
 		b=Color.white;
 		cerezaB=true;
 		corazonB=true;
-		sogaB=true;
-		hongoB=true;
+		manzanaB=true;
 		this.setLayout(null);
 		setSize(600,600);
 		this .getContentPane().setBackground(new Color(0,0,0));
@@ -187,22 +173,17 @@ public class PantallaSeleccion extends JDialog {
 		ImageIcon img1=new ImageIcon("data/cereza.png");
 		cereza.setIcon(img1);
 		cereza.setBounds(0, 0, 20, 20);
-		cereza.setLocation(75,200);
+		cereza.setLocation(150,200);
 		corazon=new JButton();
 		ImageIcon img2=new ImageIcon("data/corazon.png");
 		corazon.setIcon(img2);
 		corazon.setBounds(0, 0, 20, 20);
-		corazon.setLocation(175,200);
-		soga=new JButton();
-		ImageIcon img3=new ImageIcon("data/soga.png");
-		soga.setIcon(img3);
-		soga.setBounds(0, 0, 20, 30);
-		soga.setLocation(275,200);
-		hongo=new JButton();
-		ImageIcon img4=new ImageIcon("data/hongo.png");
-		hongo.setIcon(img4);
-		hongo.setBounds(0, 0, 20, 20);
-		hongo.setLocation(375,200);
+		corazon.setLocation(250,200);
+		manzana=new JButton();
+		ImageIcon img3=new ImageIcon("data/manzana.png");
+		manzana.setIcon(img3);
+		manzana.setBounds(0, 0, 20, 20);
+		manzana.setLocation(350,200);
 		luigi=new JLabel();
 		luigi.setIcon(new ImageIcon("data/luigiderecha.png"));
 		monoN="data/luigiderecha.png";
@@ -237,15 +218,13 @@ public class PantallaSeleccion extends JDialog {
 		select2.setContentAreaFilled(false);
 		select2.setBorderPainted(false);
 		cereza.setBackground(n);
-		soga.setBackground(n);
+		manzana.setBackground(n);
 		corazon.setBackground(n);
-		hongo.setBackground(n);
 		select1.setBorder(null);
 		select2.setBorder(null);
 		cereza.setBorder(null);
 		corazon.setBorder(null);
-		soga.setBorder(null);
-		hongo.setBorder(null);
+		manzana.setBorder(null);
 		next.setBackground(n);
 		back.setBackground(n);
 		next.setBorder(blueLine);
@@ -259,8 +238,7 @@ public class PantallaSeleccion extends JDialog {
 		add(next);
 		add(back);
 		add(corazon);
-		add(soga);
-		add(hongo);
+		add(manzana);
 		add(cereza);
 		add(items);
 		add(characters);
@@ -392,8 +370,8 @@ public class PantallaSeleccion extends JDialog {
 	private ArrayList<String>  sorpresa()
 	{
 		ArrayList<String> n=new ArrayList<String>();
-		if(sogaB) {
-			n.add("Soga");
+		if(manzanaB) {
+			n.add("Manzana");
 			}
 		if (cerezaB) {
 			n.add("Cereza");
@@ -401,11 +379,9 @@ public class PantallaSeleccion extends JDialog {
 		if (corazonB) {
 			n.add("Corazon");
 		}
-		if (hongoB) {
-			n.add("Hongo");
-		}
 		
 		return n;
 	}
+	
 	
 }
