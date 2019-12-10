@@ -15,8 +15,9 @@ public class Manzana extends Sorpresa implements Serializable {
 	 */
 	public Manzana(int posX, int posY) {
 		super(posX, posY);
-		puntos=10;
+		puntos=5;
 		super.setTipo("puntos");
+		imagen="data/manzana.png";
 	}
 	/**
 	 * beneficio de la manzana

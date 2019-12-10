@@ -52,22 +52,22 @@ public class Real extends Jugador  implements Serializable {
 	@Override
 	public void saltar() {
 		
-			if(getForma().equals("data/marioDerecha.png")) {
+			if(getForma().equals(sprites.get(0))) {
 				cambiarforma(11);
 				posY=posY-20;
 				posX=posX+10;
 			}
-			else if (getForma().equals("data/marioIzquierda.png")) {
+			else if (getForma().equals(sprites.get(4))) {
 				cambiarforma(12);
 				posX=posX-10;
 				posY=posY-20;
 			}
-			else if (getForma().equals("data/marioSalto.png")) {
+			else if (getForma().equals(sprites.get(10))) {
 					cambiarforma(1);
 					posY=posY+20;
 					posX=posX+10;
 				}
-				else if (getForma().equals("data/marioSaltoIz.png")) {
+				else if (getForma().equals(sprites.get(11))) {
 					posX=posX-10;
 					cambiarforma(4);
 					posY=posY+20;
@@ -82,11 +82,11 @@ public class Real extends Jugador  implements Serializable {
 	public void avanzar() {
 			if(vidas>0) {
 				posX=posX+10;
-				if(getForma().equals("data/marioDerecha.png")) {
+				if(getForma().equals(sprites.get(0))) {
 					cambiarforma(2);
 				}
 				
-				else if (getForma().equals("data/marioPasoDerecha.png")){
+				else if (getForma().equals(sprites.get(1))){
 					cambiarforma(3);
 				}
 				
@@ -103,11 +103,11 @@ public class Real extends Jugador  implements Serializable {
 	public void retroceder() {
 			if  (vidas>0){
 				posX=posX-10;
-				if(getForma().equals("data/marioIzquierda.png")) {
+				if(getForma().equals(sprites.get(3))) {
 					cambiarforma(5);
 				}
 				
-				else if (getForma().equals("data/marioPasoIzquierda.png")){
+				else if (getForma().equals(sprites.get(4))){
 					cambiarforma(6);
 				}
 				
@@ -150,10 +150,10 @@ public class Real extends Jugador  implements Serializable {
 	protected void subir(boolean posible,int y) {
 		if(posible && vidas>0) {
 			posY+=y;
-			if (getForma().equals("data/marioEscalera1.png") ) {
+			if (getForma().equals(sprites.get(6)) ) {
 				cambiarforma(8);
 			}
-			else if((getForma().equals("data/marioEscalera2.png"))) {
+			else if((getForma().equals(sprites.get(7)))) {
 				cambiarforma(9);
 			}
 			else {
@@ -176,10 +176,10 @@ public class Real extends Jugador  implements Serializable {
 	protected void bajar(boolean posible, int y) {
 		if(posible && vidas>0) {
 			posY-=y;
-			if (getForma().equals("data/marioEscalera1.png") || getForma().equals("data/marioEscalera3.png") ) {
+			if (getForma().equals(sprites.get(6)) || getForma().equals(sprites.get(8)) ) {
 				cambiarforma(8);
 			}
-			else if((getForma().equals("data/marioEscalera2.png"))) {
+			else if((getForma().equals(sprites.get(7)))) {
 				cambiarforma(9);
 			}
 			else {

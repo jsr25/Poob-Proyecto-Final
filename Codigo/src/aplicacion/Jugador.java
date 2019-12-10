@@ -8,8 +8,7 @@ import java.util.ArrayList;
  *
  */
 public abstract class Jugador implements movimiento ,Serializable {
-	private ArrayList<String> mario;
-	private ArrayList<String> luigi;
+	protected  ArrayList<String> sprites;
 	protected int posX;
 	protected int posY;
 	protected int puntos;
@@ -38,22 +37,40 @@ public abstract class Jugador implements movimiento ,Serializable {
 	 * prepara el array de los sprites de mario
 	 */
 	private void prepararArrays() {
+		sprites=new ArrayList<String>();
 		if(personaje.equals("mario")) {
-		mario=new ArrayList<String>();
-		mario.add("data/marioDerecha.png");//1
-		mario.add("data/marioPasoDerecha.png");//2
-		mario.add("data/marioPasoDerecha2.png");//3
-		mario.add("data/marioIzquierda.png");//4
-		mario.add("data/marioPasoIzquierda.png");//5
-		mario.add("data/marioPasoIzquierda2.png");//6
-		mario.add("data/marioEscalera1.png");//7
-		mario.add("data/marioEscalera2.png");//8
-		mario.add("data/marioEscalera3.png");//9
-		mario.add("data/marioEscalera4.png");//10
-		mario.add("data/marioSalto.png");//11
-		mario.add("data/marioSaltoIz.png");//12
-		mario.add("data/marioMuertoDerecha.png");//13
-		forma=mario.get(0);}
+		
+			sprites.add("data/marioDerecha.png");//1
+			sprites.add("data/marioPasoDerecha.png");//2
+			sprites.add("data/marioPasoDerecha2.png");//3
+			sprites.add("data/marioIzquierda.png");//4
+			sprites.add("data/marioPasoIzquierda.png");//5
+			sprites.add("data/marioPasoIzquierda2.png");//6
+			sprites.add("data/marioEscalera1.png");//7
+			sprites.add("data/marioEscalera2.png");//8
+			sprites.add("data/marioEscalera3.png");//9
+			sprites.add("data/marioEscalera4.png");//10
+			sprites.add("data/marioSalto.png");//11
+			sprites.add("data/marioSaltoIz.png");//12
+			sprites.add("data/marioMuertoDerecha.png");//13
+		forma=sprites.get(0);}
+		else {
+			sprites.add("data/luigiderecha.png");//1
+			sprites.add("data/luigiPasoDerecha.png");//2
+			sprites.add("data/luigiPasoDerecha2.png");//3
+			sprites.add("data/luigiIzquierda2.png");//4
+			sprites.add("data/luigiPasoIzquierda.png");//5
+			sprites.add("data/luigiPasoIzquierda2.png");//6
+			sprites.add("data/luigiEscalera1.png");//7
+			sprites.add("data/luigiEscalera2.png");//8
+			sprites.add("data/luigiEscalera3.png");//9
+			sprites.add("data/luigiEscalera4.png");//10
+			sprites.add("data/luigiSalto.png");//11
+			sprites.add("data/luigiSaltoIz.png");//12
+			sprites.add("data/luigiMuertoDerecha.png");//13
+		forma=sprites.get(0);
+			
+		}
 		
 	}
 	/**
@@ -68,7 +85,7 @@ public abstract class Jugador implements movimiento ,Serializable {
 	 * @param a numero del sprite nuevo
 	 */
 	public void cambiarforma(int a) {
-		forma=mario.get(a-1);
+		forma=sprites.get(a-1);
 	}
 
 
@@ -77,7 +94,7 @@ public abstract class Jugador implements movimiento ,Serializable {
 	 * @return los sprites de mario
 	 */
 	public ArrayList<String> getmario(){
-		return mario;
+		return sprites;
 	}
 	/**
 	 * posicion en y del personaje

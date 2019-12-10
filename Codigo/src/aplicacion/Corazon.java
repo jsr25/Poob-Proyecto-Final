@@ -11,6 +11,7 @@ public class Corazon extends Sorpresa implements Serializable{
 	public Corazon(int posX, int posY) {
 		super(posX, posY);
 		super.setTipo("cura");
+		imagen="data/corazon.png";
 		
 	}
 	/**

@@ -305,8 +305,8 @@ public class PantallaSeleccion extends JDialog {
 		ArrayList<String>hs=sorpresa();
 		if (jugadores==1) {
 			String n;		
-			if (c1==true) {n="Mario";}
-			else {n="Luigi";}
+			if (c1==false) {n="mario";}
+			else {n="luigi";}
 				MonkeyPoobGUI p = new MonkeyPoobGUI(1,n,hs,null);
 				this.setVisible(false);
 				p.setVisible(true);
@@ -315,8 +315,8 @@ public class PantallaSeleccion extends JDialog {
 		else {
 			String n;
 			String n2;
-			if (c1==true) {n="Mario"; n2="Luigi";}
-			else {n="Luigi"; n2="Mario";}
+			if (c1==false) {n="mario"; n2="luigi";}
+			else {n="luigi"; n2="mario";}
 			MonkeyPoobGUI p = new MonkeyPoobGUI(2,n,n2,hs,null);
 			this.setVisible(false);
 			p.setVisible(true);
@@ -370,13 +370,13 @@ public class PantallaSeleccion extends JDialog {
 	private ArrayList<String>  sorpresa()
 	{
 		ArrayList<String> n=new ArrayList<String>();
-		if(manzanaB) {
+		if(!manzanaB) {
 			n.add("Manzana");
 			}
-		if (cerezaB) {
+		if (!cerezaB) {
 			n.add("Cereza");
 			}
-		if (corazonB) {
+		if (!corazonB) {
 			n.add("Corazon");
 		}
 		

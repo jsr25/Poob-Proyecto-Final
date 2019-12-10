@@ -55,6 +55,8 @@ public class MonkeyPoobGUI extends JFrame {
 	private int i;
 	private ArrayList<String> sorpresas;
 	private ArrayList<String> barriles ;
+	private String sprite1;
+	private String sprite2;
 	/**
 	 * contructoor del MokeyPoobGUI
 	 * @param j cantidad de jugadores
@@ -67,6 +69,9 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.setVisible(true);	
 		sorpresas=a;
 		barriles=b;
+		
+		sprite1=s;
+		System.out.println(sprite1);
 		PrepararGUI();	
 	}
 	public MonkeyPoobGUI(int j,String s,String h,ArrayList<String> a,ArrayList<String> b) {
@@ -76,6 +81,11 @@ public class MonkeyPoobGUI extends JFrame {
 		principal.setVisible(true);	
 		sorpresas=a;
 		barriles=b;
+		
+		sprite1=s;
+		sprite2=h;
+		System.out.println(sprite1);
+		System.out.println(sprite2);
 		PrepararGUI();
 		
 	}
@@ -106,16 +116,6 @@ public class MonkeyPoobGUI extends JFrame {
 		barra.add(menu);		
 		this.setJMenuBar(barra);	
 	}
-	
-	/**
-	 * main
-	 * @param args
-	 */
-	/*public static void main(String[] args) {
-		MonkeyPoobGUI intf=new MonkeyPoobGUI(2);
-		intf.setVisible(true);
-	}*/
-
 	
 	/**
 	 * prepara los elementos principales
@@ -222,16 +222,16 @@ public class MonkeyPoobGUI extends JFrame {
 	 */
 	public void prepararPersonajes() {
 		if (jugadores==1) {
-			app.agregarJugadores(0, 400, "mario");
-			principal.addPersonaje(0,400,"data/marioDerecha.png");		
+			app.agregarJugadores(0, 400, sprite1);
+			principal.addPersonaje(0,400,app.getForma(1));		
 			principal.setVidas(app.getVidas(1));
 			principal.setPuntos(app.getPuntos(1));}
 		
 		else {
-			app.agregarJugadores(0, 400, "mario");
-			app.agregarJugadores(10, 400, "mario");
-			principal.addPersonaje(0,400,"data/marioDerecha.png");
-			principal.addPersonaje(10,400,"data/marioDerecha.png");
+			app.agregarJugadores(0, 400, sprite1);
+			app.agregarJugadores(10, 400, sprite2);
+			principal.addPersonaje(0,400,app.getForma(1));
+			principal.addPersonaje(10,400,app.getForma(2));
 			principal.setVidas(app.getVidas(1),app.getVidas(2));
 			principal.setPuntos(app.getPuntos(1),app.getPuntos(2));
 		}
@@ -368,8 +368,12 @@ public class MonkeyPoobGUI extends JFrame {
 					
 				}
 				if(e.getExtendedKeyCode()== KeyEvent.VK_SPACE) {
-					 saltar(app.getJugadorPosY(1));
+					 saltar(app.getJugadorPosY(1),1);
 					 principal.moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1),1);
+				}
+				if (e.getExtendedKeyCode()== KeyEvent.VK_P) {
+					saltar(app.getJugadorPosY(2),2);
+					 principal.moverPersonaje(app.getJugadorPosX(2), app.getJugadorPosY(2), app.getForma(2),2);
 				}
 				repaint();	
 			}
@@ -385,12 +389,12 @@ public class MonkeyPoobGUI extends JFrame {
 	 * simula el movimiento de saltar de jugador
 	 * @param y numero del jugador
 	 */
-	public void saltar(int y) {
+	public void saltar(int y,int j) {
 					timer1=new Timer(200,new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							app.saltar(1);
-							( principal).moverPersonaje(app.getJugadorPosX(1), app.getJugadorPosY(1), app.getForma(1),1);
-							if (app.getJugadorPosY(1)==y) {
+							app.saltar(j);
+							( principal).moverPersonaje(app.getJugadorPosX(j), app.getJugadorPosY(j), app.getForma(j),j);
+							if (app.getJugadorPosY(j)==y) {
 								timer1.stop();
 							}
 						}

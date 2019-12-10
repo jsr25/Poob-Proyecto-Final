@@ -305,7 +305,7 @@ public class MonkeyPoob implements Serializable {
 						jugadores.get(personaje-1).setPuntos(s.beneficio());
 						cambioP=true;					
 					}
-					else if (s.getTipo().equals("puntos")) {
+					else if (s.getTipo().equals("cura")) {
 						jugadores.get(personaje-1).setPuntos(s.beneficio());
 						cambioP=true;	
 						jugadores.get(personaje-1).setVida();
@@ -610,20 +610,7 @@ public class MonkeyPoob implements Serializable {
 	public void estructuraAleatoria(ArrayList<String>so,ArrayList<String>ba) {		
 		crearPlataformasAl();
 		crearEscalerasAl();			
-		monkey.generarBarriles("Rojo");		
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
-		monkey.generarBarriles("Amarillo");	
+		crearBarrilesAl();
 		crearSorpresasAl(so);
 	
 	}
@@ -680,11 +667,26 @@ public class MonkeyPoob implements Serializable {
 		
 	}
 	private void crearBarrilesAl() {
-		
+		Random r = new Random();
+		int valor =-1;
+		for(int i=0;i<100;i++) {
+			valor=r.nextInt(2);
+			if(valor==0) {generarBarriles("Amarillo");}
+			else {generarBarriles("Rojo");}
+			
+		}
 	}
 	private void crearSorpresasAl(ArrayList<String>so) {
+		Random r = new Random();
+		int valor =-1;
 		for(int i=1;i<plataformas.size()-2;i++) {
-			generarSorpresa(300, plataformas.get(i).getY()-12, "Cereza");
+			if(so.size()>0) {
+			valor=r.nextInt(so.size());
+			generarSorpresa(300, plataformas.get(i).getY()-12, so.get(valor));
+			}
+			else {
+				generarSorpresa(300, plataformas.get(i).getY()-12, "Cereza");
+			}
 		}
 	}
 
@@ -701,6 +703,7 @@ public class MonkeyPoob implements Serializable {
 
 	public int getSorpresaCol() {
 		int a=0;
+		
 		for (int i=0;i<sorpresas.size()&& a==0;i++) {
 			if (personajesCol(sorpresas.get(i).getPosX(),sorpresas.get(i).getPosY())) {
 				a=i+1;
